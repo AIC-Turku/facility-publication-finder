@@ -63,4 +63,26 @@ said it is out of budget is not asked again during the run).
 * A new false match: a regression test in `tests/test_screen.py` first (synthetic text), then the
   pattern in `facilities/<facility>/facility.yaml`.
 * Facility-specific values belong in `facility.yaml`, never in code.
-* Never edit `papers/*.yaml` by hand: paste DOIs into `inbox.txt` (the *add papers* Action files them).
+* Never edit `papers/*.yaml` by hand: file papers with `facility-pubs add-papers` (below, or
+  the inbox and its Action).
+
+## Filing papers from an issue
+
+An *Add papers* issue (`.github/ISSUE_TEMPLATE/add-papers.yml`) holds DOIs the facility staff
+have already reviewed and confirmed. When asked to file them (`@claude file these`):
+
+1. Copy the issue's *DOIs* field into a file outside the repository (e.g. `/tmp/issue-<n>.txt`).
+   The *Facility* field names the folder under `facilities/`.
+2. `facility-pubs add-papers --facility <facility> --from /tmp/issue-<n>.txt` (it fetches the
+   public metadata and files each paper by year, `source: staff-reviewed`; it prints what was
+   added, already filed, and any DOI it could not resolve).
+3. Commit only `facilities/<facility>/papers/*.yaml` on a new branch and open a pull request
+   titled `Add <N> staff-reviewed papers`, with `Closes #<n>` and the list of DOIs, years and
+   titles. The *check papers* check then confirms every new DOI resolves; a person merges it.
+4. Reply on the issue: added (with years), already filed, and DOIs that did not resolve (ask for
+   a corrected DOI; do not guess one).
+
+Do not judge the papers: the staff already did. Never write, in the files, the pull request or
+the issue, whether or how a paper acknowledges the facility, or any note, name or e-mail address;
+do not open the papers' full text. If the issue holds anything but DOIs and years (a name, an
+address, a remark), do not repeat it, and ask the author to edit it out.

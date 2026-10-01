@@ -100,13 +100,33 @@ def cmd_sheet(a) -> None:
 
 
 def cmd_add_papers(a) -> None:
-    from .papers import inbox_path, process_inbox
-    s = process_inbox(source=a.source)
-    print(f"{inbox_path()}: {len(s['added'])} added, {len(s['moved'])} moved to another year, "
-          f"{len(s['already_filed'])} already filed, {s['left_in_inbox']} left in the inbox, "
+    from pathlib import Path
+    from .papers import add_papers, inbox_path, process_inbox
+    if a.from_file:                       # e.g. the DOIs of an "Add papers" issue; the inbox is untouched
+        s, left = add_papers(Path(a.from_file).read_text(encoding="utf-8"), source=a.source)
+        where, kept = a.from_file, "not filed"
+    else:
+        s, left = process_inbox(source=a.source), []
+        where, kept = inbox_path(), "left in the inbox"
+    print(f"{where}: {len(s['added'])} added, {len(s['moved'])} moved to another year, "
+          f"{len(s['already_filed'])} already filed, {s['left_in_inbox']} {kept}, "
           f"{s['dropped_lines']} lines without a DOI dropped; {s['total']} confirmed papers")
     for d in s["added"]:
         print(f"  + {d}")
+    for line in left:
+        print(f"  ! {line}")
+
+
+def cmd_check_papers(a) -> None:
+    from .papers import check_papers, load_papers
+    base = {p["doi"] for p in load_papers(a.base)} if a.base else set()
+    new, problems = check_papers(base)
+    print(f"{len(new)} new papers")
+    for e in new:
+        print(f"  + {e['doi']}  {e['year']}  {e.get('source', '')}  {e.get('title', '')}")
+    if problems:
+        sys.exit("problems:\n" + "\n".join(f"  - {p}" for p in problems))
+    print("every new DOI resolves; the files are well formed")
 
 
 def cmd_import_website(a) -> None:
@@ -158,8 +178,11 @@ def parser() -> argparse.ArgumentParser:
     p = add("sheet", cmd_sheet, "the validation workbook of a year as CSV (the notebook writes a Google Sheet)")
     p.add_argument("--year", type=int, required=True)
     p.add_argument("--top", type=int, default=100, help="check-list papers to include (default 100)")
-    add("add-papers", cmd_add_papers, "file the DOIs pasted into the facility's inbox.txt").add_argument(
-        "--source", default="validated", help="how they were confirmed (default: validated)")
+    p = add("add-papers", cmd_add_papers, "file the DOIs pasted into the facility's inbox.txt (or --from a file)")
+    p.add_argument("--from", dest="from_file", help="read the DOIs from this file instead of the inbox")
+    p.add_argument("--source", default="staff-reviewed", help="how they were confirmed (default: staff-reviewed)")
+    add("check-papers", cmd_check_papers, "pull-request check of papers/*.yaml (new DOIs resolve)").add_argument(
+        "--base", help="the facility folder before the change (its DOIs are not re-checked)")
     add("import-website", cmd_import_website, "add the facility website's publication lists (AIC)")
     add("import-openiris", cmd_import_openiris, "private OpenIRIS admin export -> bookings").add_argument(
         "--xlsx", required=True)

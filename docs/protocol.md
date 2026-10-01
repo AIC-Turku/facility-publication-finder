@@ -29,7 +29,7 @@ anything private.
 * **Never in the repository**: full text, text excerpts, e-mail addresses, author names of
   candidate papers, private inputs, rejected candidates, or which papers did not acknowledge
   the facility. Tests and code comments use synthetic text and synthetic DOIs (only confirmed
-  papers may be named). The inbox keeps only DOIs and years.
+  papers may be named). The inbox and the *Add papers* issues keep only DOIs and years.
 * **Contacts, minimally**: corresponding authors and e-mail addresses are looked up only for
   confirmed and validated papers, and exist only in the facility's Sheet, for writing to the
   authors about their own paper (thanks, acknowledgement reminders). The addresses were not given
@@ -59,7 +59,7 @@ anything private.
 | 3. rank + Sheet | notebook 2 | `workflow.prepare_sheet` | the year's Google Sheet: Validate, Facility papers, Search misses |
 | 4. validate | the Sheet | staff fill `verdict`: yes (filed), likely (not filed; ask the authors, then yes), no | verdicts |
 | 5. collect | notebook 2 | `workflow.collect` | refreshed Sheet + the new "yes" DOIs |
-| 6. file | GitHub | paste into `facilities/<facility>/inbox.txt`, commit | the Action runs `facility-pubs add-papers` → `papers/<year>.yaml` |
+| 6. file | GitHub | an *Add papers* issue with the DOIs (link printed by step 5), comment `@claude file these`; merge the pull request once *check papers* is green (no agent: paste into `inbox.txt`, commit) | `papers/<year>.yaml`, `source: staff-reviewed` |
 | 7. learn | notebook 2 | `workflow.learn`: re-rank the other years | better check lists everywhere |
 | 8. improve the rules | developer | "no" verdicts → a test + a pattern fix in `facility.yaml`; misses → why | next year's run |
 
@@ -98,7 +98,11 @@ corresponding author, e-mail, and whether the facility and the grant are acknowl
 7. **Confirmed papers** (`papers.py`): `add-papers` parses pasted DOIs (links, years, junk lines
    tolerated), fetches metadata (Crossref, Europe PMC), files by year (a year given after the
    DOI wins; it also moves an already-filed paper), merges duplicates, sorts, empties the inbox;
-   unresolved lines stay with a note.
+   unresolved lines stay with a note (`--from <file>` reads an issue's DOIs instead and leaves
+   the inbox alone). `check-papers` is the pull-request check: files well formed, only the public
+   fields (nothing about whether a paper acknowledged the facility, no notes, no e-mail
+   addresses), every new DOI resolves in Crossref. A filed paper says only that the staff
+   reviewed it (`source: staff-reviewed`).
 
 Every sheet carries `rules_version` (config sha256 + code commit). `validate` prints recall with
 a 95 % Wilson interval.

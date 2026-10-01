@@ -18,7 +18,7 @@ def test_the_two_notebooks_run_the_canonical_steps():
     one, two = (_source(p) for p in NOTEBOOKS)
     assert "facility-pubs sweep --year {y}" in one and "facility-pubs embed --years {SWEPT_ARG}" in one
     assert "facility-pubs rescreen --year {YEAR}" in two and "workflow.prepare_sheet(gc, YEAR" in two
-    assert "workflow.collect(gc, YEAR" in two and "workflow.learn(gc, YEAR" in two and "inbox.txt" in two
+    assert "workflow.collect(gc, YEAR" in two and "workflow.learn(gc, YEAR" in two and "workflow.issue_link(REPO, FACILITY" in two
 
 
 def test_notebooks_hold_no_algorithms():

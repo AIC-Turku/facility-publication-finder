@@ -4,11 +4,13 @@ The public record of the project and the seed set of the embedding check list. O
 per year, one entry per DOI, sorted, with public metadata only (Crossref / Europe PMC):
 no full text, abstracts, author names or e-mail addresses.
 
-New papers are pasted into facilities/<facility>/inbox.txt (one DOI per line, optionally
-followed by the reporting year; DOI URLs and surrounding text are fine) and filed by
-`facility-pubs add-papers`, which a GitHub Action runs on every change to an inbox:
-metadata is fetched, each paper goes to its year file, duplicates are merged, files are
-sorted, and the inbox is emptied (lines it could not resolve stay, with a note).
+New papers come from an "Add papers" issue (an agent files them with `facility-pubs
+add-papers --from <file>` and opens a pull request) or from facilities/<facility>/inbox.txt
+(a GitHub Action files them on every change to an inbox). Either way: DOIs (DOI URLs and
+surrounding text are fine, optionally followed by the reporting year) get their metadata,
+each paper goes to its year file, duplicates are merged and files are sorted.
+`check_papers` is the pull-request check: well-formed files, nothing but public metadata,
+every new DOI resolves.
 """
 from collections.abc import Callable, Iterable
 from pathlib import Path
@@ -136,8 +138,8 @@ def metadata(dois: Iterable[str]) -> dict[str, dict]:
     return out
 
 
-def add_papers(lines: str, source: str = "validated", facility: str | None = None,
-               fetch: Callable[[set[str]], dict[str, dict]] = metadata, today: str | None = None,
+def add_papers(lines: str, source: str = "staff-reviewed", facility: str | None = None,
+               fetch: Callable[[set[str]], dict[str, dict]] | None = None, today: str | None = None,
                allow_moves: bool = True) -> tuple[dict, list[str]]:
     """File new confirmed papers. `lines`: inbox text. Returns (summary, leftover lines).
 
@@ -146,6 +148,7 @@ def add_papers(lines: str, source: str = "validated", facility: str | None = Non
     note. Lines without a DOI are dropped (only DOIs and years are ever kept in the inbox,
     which is public)."""
     today = today or datetime.date.today().isoformat()
+    fetch = fetch or metadata
     papers = {p["doi"]: p for p in load_papers(facility)}
     parsed = parse_inbox(lines)
     todo = {d for _, d, _ in parsed if d and d not in papers}
@@ -180,11 +183,66 @@ def add_papers(lines: str, source: str = "validated", facility: str | None = Non
     return summary, leftover
 
 
-def process_inbox(facility: str | None = None, source: str = "validated",
-                  fetch: Callable[[set[str]], dict[str, dict]] = metadata) -> dict:
+def process_inbox(facility: str | None = None, source: str = "staff-reviewed",
+                  fetch: Callable[[set[str]], dict[str, dict]] | None = None) -> dict:
     """Run add_papers on the facility's inbox and rewrite it (header + unresolved lines)."""
     path = inbox_path(facility)
     text = path.read_text(encoding="utf-8") if path.exists() else ""
     summary, leftover = add_papers(text, source=source, facility=facility, fetch=fetch)
     path.write_text(INBOX_HEADER + "".join(f"{l}\n" for l in leftover), encoding="utf-8")
     return summary
+
+
+_EMAIL = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")
+
+
+def check_papers(base: set[str], facility: str | None = None,
+                 resolves: Callable[[str], bool] | None = None) -> tuple[list[dict], list[str]]:
+    """The pull-request check of papers/<year>.yaml: (new papers, problems).
+
+    `base`: the DOIs filed before the change. Every file must be a sorted list of entries with
+    normalised, unique DOIs and only the public fields (FIELDS: nothing about how a paper
+    acknowledged the facility, no notes, no e-mail addresses); every DOI not in `base` must
+    resolve (`resolves`, default: Crossref knows it) and say how it was confirmed (`source`)."""
+    if resolves is None:
+        from .sources import crossref_work
+
+        def resolves(doi: str) -> bool:
+            return bool(crossref_work(doi))
+    folder = papers_dir(facility)
+    problems, seen, new = [], {}, []
+    for path in sorted(folder.glob("*.yaml")) if folder.exists() else []:
+        if not path.stem.isdigit():
+            problems.append(f"{path.name}: year files are named <year>.yaml")
+            continue
+        try:
+            entries = yaml.safe_load(path.read_text(encoding="utf-8")) or []
+        except yaml.YAMLError as e:
+            problems.append(f"{path.name}: not valid YAML ({e.__class__.__name__})")
+            continue
+        if not isinstance(entries, list) or not all(isinstance(e, dict) for e in entries):
+            problems.append(f"{path.name}: must be a list of entries (- doi: ...)")
+            continue
+        dois = [str(e.get("doi") or "") for e in entries]
+        if dois != sorted(dois):
+            problems.append(f"{path.name}: entries are not sorted by DOI")
+        for e, doi in zip(entries, dois):
+            if not doi or _norm_doi(doi) != doi:
+                problems.append(f"{path.name}: {doi or 'an entry'} is not a normalised DOI (lower case, no link)")
+                continue
+            if doi in seen:
+                problems.append(f"{doi}: filed twice ({seen[doi]} and {path.stem})")
+            seen[doi] = path.stem
+            extra = sorted(set(e) - set(FIELDS))
+            if extra:
+                problems.append(f"{doi}: only public metadata may be filed, not {', '.join(extra)}")
+            if any(_EMAIL.search(str(v)) for v in e.values()):
+                problems.append(f"{doi}: looks like it holds an e-mail address")
+            if doi not in base:
+                new.append({**e, "year": int(path.stem)})
+    for e in new:
+        if not e.get("source"):
+            problems.append(f"{e['doi']}: new paper without a source (how it was confirmed)")
+        if not resolves(e["doi"]):
+            problems.append(f"{e['doi']}: does not resolve in Crossref")
+    return new, problems

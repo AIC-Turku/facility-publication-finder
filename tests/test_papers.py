@@ -31,7 +31,7 @@ def test_add_papers_files_by_year_dedupes_sorts_and_keeps_unresolved_lines(empty
     assert summary["dropped_lines"] == 1                 # "nothing": no DOI, not kept
     y24 = yaml.safe_load((empty_confirmed_papers / "2024.yaml").read_text())
     assert y24 == [{"doi": "10.1000/a", "title": "Paper A", "journal": "J", "published": "2024-05-01",
-                    "type": "journal-article", "pmcid": "PMC1", "source": "validated", "added": "2026-10-01"}]
+                    "type": "journal-article", "pmcid": "PMC1", "source": "staff-reviewed", "added": "2026-10-01"}]
     assert (empty_confirmed_papers / "2025.yaml").read_text().startswith("# ")   # header comment
 
 
@@ -101,7 +101,7 @@ def test_hand_edits_are_normalised_and_extra_keys_kept(empty_confirmed_papers):
 
 
 def test_website_import_never_moves_a_filed_paper(empty_confirmed_papers):
-    papers.add_papers("10.1000/a 2023", fetch=fake_fetch, source="validated")
+    papers.add_papers("10.1000/a 2023", fetch=fake_fetch, source="staff-reviewed")
     s, _ = papers.add_papers("10.1000/a 2024", fetch=fake_fetch, source="website", allow_moves=False)
     assert s["moved"] == [] and papers.load_papers()[0]["year"] == 2023
 
@@ -121,3 +121,38 @@ def test_facility_yaml_errors_name_the_problem(tmp_path):
         path.write_text(broken)
         with pytest.raises(ValueError, match=message):
             load(path)
+
+
+def test_check_papers_reports_new_dois_and_whether_they_resolve(empty_confirmed_papers):
+    papers.add_papers("10.1000/a\n10.1000/b", fetch=fake_fetch)
+    new, problems = papers.check_papers({"10.1000/a"}, resolves=lambda d: d != "10.1000/b")
+    assert [e["doi"] for e in new] == ["10.1000/b"] and new[0]["source"] == "staff-reviewed"
+    assert problems == ["10.1000/b: does not resolve in Crossref"]
+    assert papers.check_papers({"10.1000/a"}, resolves=lambda d: True) == (new, [])
+
+
+def test_check_papers_refuses_anything_but_public_metadata(empty_confirmed_papers):
+    (empty_confirmed_papers / "2024.yaml").write_text(
+        "- doi: 10.1000/z\n  acknowledges: no\n- doi: https://doi.org/10.1000/B\n"
+        "- doi: 10.1000/c\n  title: write to x.y@uni.example.org\n  source: staff-reviewed\n")
+    (empty_confirmed_papers / "2025.yaml").write_text("- doi: 10.1000/c\n  source: staff-reviewed\n")
+    _, problems = papers.check_papers(set(), resolves=lambda d: True)
+    text = "\n".join(problems)
+    assert "not sorted" in text and "10.1000/z: only public metadata may be filed, not acknowledges" in text
+    assert "https://doi.org/10.1000/B is not a normalised DOI" in text
+    assert "10.1000/c: looks like it holds an e-mail address" in text
+    assert "10.1000/c: filed twice (2024 and 2025)" in text
+    assert "10.1000/z: new paper without a source (how it was confirmed)" in text
+
+
+def test_add_papers_from_a_file_leaves_the_inbox_alone(empty_confirmed_papers, tmp_path, monkeypatch, capsys):
+    from facility_pubs import cli
+    monkeypatch.setattr(papers, "metadata", fake_fetch)
+    papers.inbox_path().write_text(papers.INBOX_HEADER + "10.1000/a\n")
+    issue = tmp_path / "issue.txt"
+    issue.write_text("Reviewed by staff:\nhttps://doi.org/10.1000/b\n10.1000/zzz\n")
+    cli.main(["add-papers", "--from", str(issue)])
+    out = capsys.readouterr().out
+    assert "+ 10.1000/b" in out and "! 10.1000/zzz    # not found in Crossref" in out
+    assert [p["doi"] for p in papers.load_papers()] == ["10.1000/b"]
+    assert papers.inbox_path().read_text().endswith("10.1000/a\n")

@@ -1,0 +1,32 @@
+name: Add papers
+description: File papers the facility staff have reviewed (their DOIs go into papers/<year>.yaml)
+title: "Add papers"
+labels: ["add-papers"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Paste the DOIs of papers the staff have reviewed and confirmed. Then comment `@claude file these`:
+        the agent checks every DOI, files them and opens a pull request. The pull request's check confirms
+        that every DOI resolves; merge it and this issue closes.
+
+        **This issue is public.** Paste DOIs only (optionally followed by the reporting year).
+        No names, e-mail addresses or remarks about a paper.
+  - type: input
+    id: facility
+    attributes:
+      label: Facility
+      description: the folder under facilities/
+      value: aic-turku
+    validations:
+      required: true
+  - type: textarea
+    id: dois
+    attributes:
+      label: DOIs
+      description: one or more per line; DOI links are fine; a year right after a DOI sets its reporting year
+      placeholder: |
+        10.1000/example-1
+        https://doi.org/10.1000/example-2 2025
+    validations:
+      required: true

@@ -33,10 +33,14 @@ Google Sheet, and the confirmed DOIs are filed in this repository.
    * **Search misses**: confirmed papers the search did not flag, and why.
 3. **Staff validate** in the Sheet: **yes** = filed; **likely** = not filed, e-mail the authors
    and change to yes when they confirm; **no** = not facility use (the note helps the rules).
-4. **Notebook 2, section 4** refreshes the Sheet and prints the new confirmed DOIs. **Paste them
-   into `facilities/<facility>/inbox.txt`** on GitHub and commit: the *add papers* Action fetches
-   their metadata and files them under `papers/<year>.yaml` (duplicates merged, sorted). The other
-   years are re-ranked with what was just confirmed.
+4. **Notebook 2, section 4** refreshes the Sheet and prints a link to a new **Add papers** issue
+   with the new confirmed DOIs filled in (you can also open one by hand: *Issues → New issue →
+   Add papers*, and paste DOIs). Submit it and comment **`@claude file these`**: the agent files
+   them under `papers/<year>.yaml` with their public metadata, marked `source: staff-reviewed`,
+   and opens a pull request. Its **check papers** check confirms every new DOI resolves (and the
+   files hold nothing but public metadata); **merge it** and the issue closes. The other years are
+   re-ranked with what was just confirmed. (Without the agent: paste the DOIs into
+   `facilities/<facility>/inbox.txt` and commit; the *add papers* Action files them directly.)
 5. A developer turns "no" verdicts and misses into rule fixes (a test, then a pattern).
 
 ## What is where
@@ -77,7 +81,8 @@ facility-pubs check-facility              # what facility.yaml loads
 facility-pubs sweep    --year 2024        # candidates, full text, screening (resumable)
 facility-pubs embed    --years 2024 2025  # check list (rank with other swept years)
 facility-pubs sheet    --year 2024        # the workbook as CSV (the notebook writes a Google Sheet)
-facility-pubs add-papers                  # file the DOIs pasted into the inbox
+facility-pubs add-papers                  # file the DOIs pasted into the inbox (or --from a file)
+facility-pubs check-papers --base <dir>   # the pull-request check: new DOIs resolve, public metadata only
 facility-pubs rescreen --year 2024        # after a rule change
 facility-pubs validate --years 2024       # recall against the confirmed papers, with a 95 % interval
 facility-pubs coverage                    # rules still cover every instrument in the instrument database?
@@ -86,7 +91,11 @@ facility-pubs coverage                    # rules still cover every instrument i
 ## Adapting to another facility
 
 1. Fork this repository; in the fork enable Actions and give workflows *Read and write*
-   permission (*Settings → Actions → General*), so the inbox Action can file papers.
+   permission (*Settings → Actions → General*), so the inbox Action can file papers. For the
+   issue route, install the [Claude GitHub App](https://github.com/apps/claude) on the fork and
+   add one repository secret (*Settings → Secrets and variables → Actions*):
+   `ANTHROPIC_API_KEY` (API, paid per run) or `CLAUDE_CODE_OAUTH_TOKEN` (a Claude subscription:
+   `claude setup-token`). Set the facility's default in `.github/ISSUE_TEMPLATE/add-papers.yml`.
 2. Create `facilities/<your-facility>/facility.yaml` from `facilities/template/facility.yaml` (fill
    in the `FILL IN` parts; `facilities/aic-turku/` is a complete example) and an empty `inbox.txt`.
 3. `facility-pubs check-facility --facility <your-facility>` (warns about placeholders left).

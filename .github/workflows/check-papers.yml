@@ -1,0 +1,40 @@
+name: check papers
+
+# Pull-request check of facilities/*/papers/*.yaml: the files are well formed and hold only public
+# metadata, and every DOI the pull request adds resolves in Crossref. Lists the new papers.
+on:
+  pull_request:
+    paths: ["facilities/*/papers/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.base_ref }}
+          path: base
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install
+        run: pip install -e .
+      - name: Check
+        run: |
+          status=0
+          for dir in facilities/*/; do
+            name=$(basename "$dir")
+            [ -d "$dir/papers" ] || continue
+            base=()
+            [ -d "base/facilities/$name" ] && base=(--base "base/facilities/$name")
+            echo "### $name" | tee -a "$GITHUB_STEP_SUMMARY"
+            if ! facility-pubs check-papers --facility "facilities/$name" "${base[@]}" 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"; then
+              status=1
+            fi
+          done
+          exit $status

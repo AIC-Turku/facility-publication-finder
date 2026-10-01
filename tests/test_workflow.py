@@ -31,3 +31,12 @@ def test_learn_refreshes_only_the_other_years_with_a_sheet(monkeypatch, isolated
     monkeypatch.setattr(workflow.gsheets, "sync", lambda gc, y, top_n=100: (f"url{y}", ""))
     assert workflow.learn(object(), 2024) == {2023: "url2023"}
     assert calls == [[2023, 2024, 2025]]
+
+
+def test_issue_link_opens_the_add_papers_form_with_the_dois_filled_in():
+    import urllib.parse
+    link = workflow.issue_link("https://github.com/org/repo.git", "my-core", "10.1000/a\n10.1000/b 2025")
+    base, query = link.split("?")
+    assert base == "https://github.com/org/repo/issues/new"
+    assert urllib.parse.parse_qs(query) == {"template": ["add-papers.yml"], "facility": ["my-core"],
+                                            "dois": ["10.1000/a\n10.1000/b 2025"]}

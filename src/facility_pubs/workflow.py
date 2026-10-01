@@ -3,6 +3,7 @@
 `gc` is an authorised gspread client (Colab: `gspread.authorize(google.auth.default()[0])`).
 """
 import os
+import urllib.parse
 from collections.abc import Callable
 from pathlib import Path
 
@@ -44,6 +45,13 @@ def prepare_sheet(gc, year: int, top_n: int = 100, folder_id: str | None = None,
 def collect(gc, year: int, top_n: int = 100) -> tuple[str, str]:
     """After validating: refresh the Sheet; returns (URL, the new "yes" DOIs for the inbox)."""
     return gsheets.sync(gc, year, top_n=top_n)
+
+
+def issue_link(repo: str, facility: str, dois: str) -> str:
+    """A link that opens a new "Add papers" issue (.github/ISSUE_TEMPLATE/add-papers.yml) with
+    the facility and the DOIs filled in."""
+    query = urllib.parse.urlencode({"template": "add-papers.yml", "facility": facility, "dois": dois})
+    return f"{repo.removesuffix('.git').rstrip('/')}/issues/new?{query}"
 
 
 def learn(gc, year: int, top_n: int = 100, progress: Callable[[str], None] = lambda _: None) -> dict[int, str]:
