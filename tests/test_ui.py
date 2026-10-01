@@ -132,3 +132,18 @@ def test_offline_uses_the_last_download_or_explains(tmp_path, capsys):
     (tmp_path / "c" / "facilities" / "my-core").mkdir(parents=True)
     got = ui.facilities_folder(tmp_path / "site", "https://github.com/o/repo", cache=tmp_path / "c", fetch=offline)
     assert got == tmp_path / "c" / "facilities" and "using" in capsys.readouterr().out
+
+
+def test_version_status_and_check_never_fail():
+    versions = {"nb": {"nb": "1.1.0"}}
+    assert "up to date" in ui.version_status("nb", "1.1.0", versions)
+    assert "1.1.0 is available" in ui.version_status("nb", "1.0.0", versions)
+    assert "not listed" in ui.version_status("other", "1.0.0", versions)
+    asked = []
+    text = ui.check_version("https://github.com/o/repo.git", "nb", "1.1.0",
+                            fetch=lambda u: asked.append(u) or b'"nb":\n  "nb": "1.1.0"\n')
+    assert "up to date" in text and asked == ["https://raw.githubusercontent.com/o/repo/main/notebooks/notebook_latest_versions.yaml"]
+
+    def offline(u):
+        raise OSError("no network")
+    assert "could not be checked" in ui.check_version("https://github.com/o/repo", "nb", "1.0.0", fetch=offline)

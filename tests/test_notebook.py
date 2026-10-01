@@ -116,3 +116,25 @@ def test_each_notebook_folder_has_a_labconstrictor_changelog():
     for p in NOTEBOOKS:
         text = (p.parent / "CHANGELOG.md").read_text()
         assert text.startswith(f"# Changelog - {p.stem}\n") and re.search(r"^## \[\d+\.\d+\.\d+\] - \d{4}-\d\d-\d\d$", text, re.M)
+
+
+def _current_version(path):
+    """As LabConstrictor reads it: a top-level `current_version = "..."` in a code cell."""
+    for cell in _nb(path)["cells"]:
+        if cell["cell_type"] != "code":
+            continue
+        lines = [line[: len(line) - len(line.lstrip())] + "pass" if line.lstrip().startswith(("!", "%")) else line
+                 for line in "".join(cell["source"]).splitlines()]
+        for node in ast.parse("\n".join(lines)).body:
+            if isinstance(node, ast.Assign) and any(getattr(t, "id", "") == "current_version" for t in node.targets):
+                return node.value.value
+
+
+def test_versions_agree_in_the_notebook_its_changelog_and_the_version_file():
+    import yaml
+    latest = yaml.safe_load(Path("notebooks/notebook_latest_versions.yaml").read_text())
+    for p in NOTEBOOKS:
+        version = _current_version(p)
+        top = re.search(r"^## \[(\d+\.\d+\.\d+)\]", (p.parent / "CHANGELOG.md").read_text(), re.M).group(1)
+        assert version == top == latest[p.parent.name][p.stem], p
+        assert f"notebook_name = '{p.stem}'" in _source(p)

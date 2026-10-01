@@ -69,6 +69,39 @@ def facilities_folder(code: Path, repo: str, cache: Path | None = None, branch: 
     return target
 
 
+def version_status(name: str, current: str, latest_versions: dict | None) -> str:
+    """One line comparing the notebook's version with notebooks/notebook_latest_versions.yaml
+    (LabConstrictor's format: {folder: {notebook: version}}); latest_versions None: not fetched."""
+    if latest_versions is None:
+        return f"Notebook version {current} (the latest version could not be checked)."
+    latest = (latest_versions.get(name) or {}).get(name)
+    if not latest:
+        return f"Notebook version {current} (⚠️ this notebook is not listed in the version file)."
+    if latest == current:
+        return f"Notebook version {current}: ✅ up to date."
+    return (f"Notebook version {current}: ⚠️ version {latest} is available (Colab: reopen the notebook from "
+            f"the repository; app: update it).")
+
+
+def check_version(repo: str, name: str, current: str, branch: str = "main",
+                  fetch: Callable[[str], bytes] | None = None) -> str:
+    """version_status() with the version file read from GitHub; never fails (offline: says so)."""
+    import yaml
+    path = repo.removesuffix(".git").rstrip("/").replace("https://github.com/", "https://raw.githubusercontent.com/")
+    url = f"{path}/{branch}/notebooks/notebook_latest_versions.yaml"
+    if fetch is None:
+        import urllib.request
+
+        def fetch(u):
+            with urllib.request.urlopen(u, timeout=20) as r:
+                return r.read()
+    try:
+        latest = yaml.safe_load(fetch(url)) or {}
+    except Exception:  # noqa: BLE001 - offline or GitHub unreachable: only the check is skipped
+        latest = None
+    return version_status(name, current, latest)
+
+
 def _widgets():
     try:
         import ipywidgets

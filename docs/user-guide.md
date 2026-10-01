@@ -124,7 +124,8 @@ about an hour per year; it can be interrupted and continued.
    * The first time, Colab may say **Warning: This notebook was not authored by Google** → click
      **Run anyway**.
    * It downloads the code, the rules and the confirmed papers, and installs them: about a
-     minute. It ends with `✅ Code ready: /content/code`.
+     minute. It ends with `✅ Code ready: /content/code` and the notebook's version
+     (`Notebook version 1.0.0: ✅ up to date`, or which newer version is available).
    * If Colab shows a **Restart session** button or message, click it, then run step 1 again.
 
 ### B3. Step 2 · Connect your Google Drive
