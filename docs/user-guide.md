@@ -70,6 +70,10 @@ run on your own computer in JupyterLab (see [Running locally](#running-locally))
    nothing (no Google Drive), and in step 3 you choose a folder on your computer. To update the
    code later: `git pull` in the repository folder.
 
+An **installed app** (e.g. packaged with LabConstrictor) needs no clone: step 1 downloads the
+latest rules and confirmed papers from GitHub into `~/.facility_pubs/` every time (offline, it
+uses the last download). Private inputs then go to `~/.facility_pubs/private/`.
+
 ---
 
 ## Part A · One-time setup

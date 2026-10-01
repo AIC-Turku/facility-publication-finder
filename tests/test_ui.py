@@ -9,6 +9,15 @@ from facility_pubs import ui  # noqa: E402
 TODAY = datetime.date(2026, 10, 1)
 
 
+@pytest.fixture(autouse=True)
+def _restore_facility(monkeypatch):
+    """Settings.confirm sets the environment; monkeypatch restores it after each test."""
+    for name in ("PUBS_FACILITY", "PUBS_DATA", "PUBS_PRIVATE"):
+        monkeypatch.setenv(name, os.environ.get(name, ""))
+        if not os.environ[name]:
+            monkeypatch.delenv(name)
+
+
 def _facilities(tmp_path):
     root = tmp_path / "facilities"
     for name in ("my-core", "template"):
@@ -41,7 +50,6 @@ def test_folder_picker_opens_goes_up_and_creates_folders(tmp_path):
 
 
 def test_build_settings_choose_years_and_set_the_environment(tmp_path, monkeypatch):
-    monkeypatch.delenv("PUBS_FACILITY", raising=False)
     data = tmp_path / "data"
     data.mkdir()
     s = ui.Settings(_facilities(tmp_path), kind="build", colab=False, start=data, today=TODAY)
@@ -54,6 +62,7 @@ def test_build_settings_choose_years_and_set_the_environment(tmp_path, monkeypat
     assert values["years"] == [2025, 2024, 2023, 2022] and s.require() is values
     assert os.environ["PUBS_DATA"] == str(data.resolve())
     assert os.environ["PUBS_FACILITY"] == str(tmp_path / "facilities" / "my-core")
+    assert os.environ["PUBS_PRIVATE"] == str(tmp_path / "private") and values["private"].is_dir()
     s.picker.go(tmp_path)                                       # another folder: confirm again
     with pytest.raises(SystemExit):
         s.require()
@@ -85,3 +94,41 @@ def test_a_colab_folder_outside_drive_is_allowed_with_a_warning(tmp_path, monkey
 def test_check_data_folder_refuses_missing_folders(tmp_path):
     errors, _ = ui.check_data_folder(tmp_path / "nope", colab=False)
     assert errors and "not an existing folder" in errors[0]
+
+
+def _zip(files):
+    import io
+    import zipfile
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as z:
+        for name, text in files.items():
+            z.writestr(name, text)
+    return buf.getvalue()
+
+
+def test_facilities_come_from_the_clone_when_there_is_one(tmp_path):
+    (tmp_path / "facilities").mkdir()
+    assert ui.facilities_folder(tmp_path, "https://x", fetch=lambda u: 1 / 0) == tmp_path / "facilities"
+
+
+def test_an_installed_app_downloads_the_facilities_and_keeps_them_fresh(tmp_path):
+    asked = []
+    files = {"repo-main/facilities/my-core/facility.yaml": "v: 1\n", "repo-main/src/x.py": "",
+             "repo-main/facilities/my-core/papers/2025.yaml": "[]\n"}
+    got = ui.facilities_folder(tmp_path / "site", "https://github.com/o/repo.git", cache=tmp_path / "c",
+                               fetch=lambda u: asked.append(u) or _zip(files))
+    assert asked == ["https://github.com/o/repo/archive/refs/heads/main.zip"]
+    assert (got / "my-core" / "facility.yaml").read_text() == "v: 1\n" and not (got.parent / "src").exists()
+    files["repo-main/facilities/my-core/facility.yaml"] = "v: 2\n"           # next run: the new version
+    ui.facilities_folder(tmp_path / "site", "https://github.com/o/repo", cache=tmp_path / "c", fetch=lambda u: _zip(files))
+    assert (got / "my-core" / "facility.yaml").read_text() == "v: 2\n"
+
+
+def test_offline_uses_the_last_download_or_explains(tmp_path, capsys):
+    def offline(u):
+        raise OSError("no network")
+    with pytest.raises(SystemExit, match="cannot download the facilities"):
+        ui.facilities_folder(tmp_path / "site", "https://github.com/o/repo", cache=tmp_path / "c", fetch=offline)
+    (tmp_path / "c" / "facilities" / "my-core").mkdir(parents=True)
+    got = ui.facilities_folder(tmp_path / "site", "https://github.com/o/repo", cache=tmp_path / "c", fetch=offline)
+    assert got == tmp_path / "c" / "facilities" and "using" in capsys.readouterr().out

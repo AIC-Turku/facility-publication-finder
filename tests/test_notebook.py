@@ -17,8 +17,8 @@ def _source(path):
 def test_the_two_notebooks_run_the_canonical_steps():
     one, two = (_source(p) for p in NOTEBOOKS)
     assert "cli.main(['sweep', '--year', str(y)])" in one and "cli.main(['embed', '--years'" in one
-    assert "ui.Settings(CODE / 'facilities', kind='build')" in one
-    assert "ui.Settings(CODE / 'facilities', kind='review')" in two
+    assert "ui.Settings(FACILITIES, kind='build')" in one
+    assert "ui.Settings(FACILITIES, kind='review')" in two
     assert "cli.main(['rescreen', '--year', str(cfg['year'])])" in two and "workflow.prepare(cfg['year']" in two
     assert "review.start(cfg['year'], at_once=cfg['at_once'], revisit=cfg['revisit'])" in two
     assert "workflow.collect(cfg['year']" in two and "workflow.learn(cfg['year']" in two
@@ -92,8 +92,8 @@ def test_variables_are_defined_before_use():
     for p in NOTEBOOKS:
         code = ["".join(c["source"]) for c in _nb(p)["cells"] if c["cell_type"] == "code"]
         src = "\n".join(re.sub(r"#.*", "", line) for cell in code for line in cell.splitlines())
-        for name in {NOTEBOOKS[0]: ("settings", "cfg", "ui", "cli", "CODE"),
-                     NOTEBOOKS[1]: ("settings", "cfg", "ui", "cli", "review", "workflow", "CODE", "REPO")}[p]:
+        for name in {NOTEBOOKS[0]: ("settings", "cfg", "ui", "cli", "CODE", "FACILITIES"),
+                     NOTEBOOKS[1]: ("settings", "cfg", "ui", "cli", "review", "workflow", "CODE", "REPO", "FACILITIES")}[p]:
             uses = [m.start() for m in re.finditer(rf"\b{name}\b", src)]
             defs = [m.start() for m in re.finditer(rf"\b{name}\s*=|import [\w, ]*\b{name}\b", src)]
             if uses:
