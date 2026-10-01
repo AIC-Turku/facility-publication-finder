@@ -110,3 +110,9 @@ def test_each_notebook_folder_has_its_labconstrictor_requirements():
         assert names == needed | extra, p
         assert all("==" in d for d in req["dependencies"]), "pinned versions only"
         assert p.parent.name == p.stem                       # LabConstrictor: notebooks/<name>/<name>.ipynb
+
+
+def test_each_notebook_folder_has_a_labconstrictor_changelog():
+    for p in NOTEBOOKS:
+        text = (p.parent / "CHANGELOG.md").read_text()
+        assert text.startswith(f"# Changelog - {p.stem}\n") and re.search(r"^## \[\d+\.\d+\.\d+\] - \d{4}-\d\d-\d\d$", text, re.M)
