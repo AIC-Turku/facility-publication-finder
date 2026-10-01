@@ -1,0 +1,40 @@
+__pycache__/
+*.egg-info/
+.venv/
+.ipynb_checkpoints/
+# private inputs never belong in the repo
+users*.csv
+private/
+# full-text cache (copyrighted text; rebuilt by `aic-pubs sweep`)
+data/cache/
+
+# experiment outputs may encode private user-derived annotations; keep local
+data/*/experiments/
+
+# private inputs and anything derived from them
+data/*/private/
+bookings*.csv
+staff*.csv
+*.xlsx
+*.xls
+.env
+**/cache/
+data/*/llm_review.json
+
+# earlier years are run locally for validation only (repository holds 2025 only)
+data/20[0-1][0-9]/
+data/202[0-4]/
+
+# embeddings are derived from full text
+data/embeddings/
+
+# backups the Colab notebook makes before updating the code
+data_backup/
+
+# validation sheets carry corresponding-author e-mail addresses: never in the repository
+data/*/sheet_*.csv
+data/*/sheet.json
+
+# public repository: working data never belongs here
+data/
+notes/

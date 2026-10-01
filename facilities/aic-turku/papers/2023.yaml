@@ -1,0 +1,305 @@
+# Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2023 (36).
+# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.
+- doi: 10.1002/1878-0261.13488
+  title: PP2A ‐based triple‐strike therapy overcomes mitochondrial apoptosis resistance in brain cancer cells
+  journal: Molecular Oncology
+  published: '2023-07-26'
+  type: journal-article
+  pmid: '37458534'
+  pmcid: PMC10483611
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/adhm.202203243
+  title: Aqueous Two‐Phase Emulsion Bioresin for Facile One‐Step 3D Microgel‐Based Bioprinting
+  journal: Advanced Healthcare Materials
+  published: '2023-03-28'
+  type: journal-article
+  pmid: '36929700'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/smmd.20230012
+  title: Monitoring silica core@shell nanoparticle‐bacterial film interactions using the multi‐parametric surface plasmon resonance technique
+  journal: Smart Medicine
+  published: '2023-06-26'
+  type: journal-article
+  pmid: '39188349'
+  pmcid: PMC11236032
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/smtd.202300719
+  title: Dynamic Micropatterning Reveals Substrate‐Dependent Differences in the Geometric Control of Cell Polarization and Migration
+  journal: Small Methods
+  published: '2023-11-05'
+  type: journal-article
+  pmid: '37926786'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.celrep.2023.113469
+  title: PIM kinases regulate early human Th17 cell differentiation
+  journal: Cell Reports
+  published: 2023-12
+  type: journal-article
+  pmid: '38039135'
+  pmcid: PMC10765319
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.ejcb.2023.151314
+  title: Detection of Ras nanoclustering-dependent homo-FRET using fluorescence anisotropy measurements
+  journal: European Journal of Cell Biology
+  published: 2023-06
+  type: journal-article
+  pmid: '37058825'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.imlet.2023.09.001
+  title: 'HIC1 interacts with FOXP3 multi protein complex: Novel pleiotropic mechanisms to regulate human regulatory T cell differentiation and function'
+  journal: Immunology Letters
+  published: 2023-11
+  type: journal-article
+  pmid: '37838026'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.it.2022.10.010
+  title: Lymph node lymphatic endothelial cells as multifaceted gatekeepers in the immune system
+  journal: Trends in Immunology
+  published: 2023-01
+  type: journal-article
+  pmid: '36463086'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.jaut.2023.103090
+  title: Gut dysbiosis promotes islet-autoimmunity by increasing T-cell attraction in islets via CXCL10 chemokine
+  journal: Journal of Autoimmunity
+  published: 2023-11
+  type: journal-article
+  pmid: '37572540'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.jbc.2023.104607
+  title: Glycolipid transfer protein knockout disrupts vesicle trafficking to the plasma membrane
+  journal: Journal of Biological Chemistry
+  published: 2023-04
+  type: journal-article
+  pmid: '36924944'
+  pmcid: PMC10140181
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.mtbio.2023.100865
+  title: Directing cellular responses in a nanocomposite 3D matrix for tissue regeneration with nanoparticle-mediated drug delivery
+  journal: Materials Today Bio
+  published: 2023-12
+  type: journal-article
+  pmid: '38054034'
+  pmcid: PMC10694759
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41388-023-02863-8
+  title: Inhibition of TGF-β signaling, invasion, and growth of cutaneous squamous cell carcinoma by PLX8394
+  journal: Oncogene
+  published: '2023-10-20'
+  type: journal-article
+  pmid: '37864034'
+  pmcid: PMC10691969
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41389-023-00485-z
+  title: Glucocorticoid receptor-induced non-muscle caldesmon regulates metastasis in castration-resistant prostate cancer
+  journal: Oncogenesis
+  published: '2023-08-12'
+  type: journal-article
+  pmid: '37573448'
+  pmcid: PMC10423232
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41467-023-36693-9
+  title: Structural mechanism for inhibition of PP2A-B56α and oncogenicity by CIP2A
+  journal: Nature Communications
+  published: '2023-02-28'
+  type: journal-article
+  pmid: '36854761'
+  pmcid: PMC9974998
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41598-023-31576-x
+  title: The oncogenic properties of the EWSR1::CREM fusion gene are associated with polyamine metabolism
+  journal: Scientific Reports
+  published: '2023-03-25'
+  type: journal-article
+  pmid: '36966162'
+  pmcid: PMC10039922
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41598-023-39066-w
+  title: 'Keratin 7 expression in different anatomical parts of colonic epithelium in inflammatory bowel diseases and its prognostic value: a 3-year follow-up study'
+  journal: Scientific Reports
+  published: '2023-07-24'
+  type: journal-article
+  pmid: '37488244'
+  pmcid: PMC10366087
+  source: website
+  added: '2026-09-30'
+- doi: 10.1073/pnas.2304288120
+  title: Defined extracellular matrix compositions support stiffness-insensitive cell spreading and adhesion signaling
+  journal: Proceedings of the National Academy of Sciences
+  published: '2023-10-16'
+  type: journal-article
+  pmid: '37844244'
+  pmcid: PMC10614832
+  source: website
+  added: '2026-09-30'
+- doi: 10.1101/2023.03.12.532249
+  title: Volumetric analysis of the terminal ductal lobular unit architecture and cell phenotypes in the human breast
+  type: posted-content
+  europepmc_id: PPR629038
+  source: website
+  added: '2026-09-30'
+- doi: 10.1101/2023.09.29.559344
+  title: TLNRD1 is a CCM complex component and regulates endothelial barrier integrity
+  type: posted-content
+  europepmc_id: PPR733682
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/andr.13361
+  title: Intermitochondrial cement (IMC) harbors piRNA biogenesis machinery and exonuclease domain‐containing proteins EXD1 and EXD2 in mouse spermatocytes
+  journal: Andrology
+  published: '2023-01-09'
+  type: journal-article
+  pmid: '36624638'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/cid.13195
+  title: Focal adhesion formation of primary human gingival fibroblast on hydrothermally and in‐sol‐made TiO2‐coated titanium
+  journal: Clinical Implant Dentistry and Related Research
+  published: '2023-02-23'
+  type: journal-article
+  pmid: '36815407'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1126/sciadv.adg1840
+  title: IGFBP2 secretion by mammary adipocytes limits breast cancer invasion
+  journal: Science Advances
+  published: '2023-07-14'
+  type: journal-article
+  pmid: '37436978'
+  pmcid: PMC10337915
+  source: website
+  added: '2026-09-30'
+- doi: 10.1158/2326-6066.cir-23-0350
+  title: Bexmarilimab Activates Human Tumor-Associated Macrophages to Support Adaptive Immune Responses in Interferon-Poor Immune Microenvironments
+  journal: Cancer Immunology Research
+  published: '2023-12-01'
+  type: journal-article
+  pmid: '37922365'
+  pmcid: PMC10762336
+  source: website
+  added: '2026-09-30'
+- doi: 10.1242/bio.059622
+  title: Impaired fin regeneration and angiogenesis in aged zebrafish and turquoise killifish
+  journal: Biology Open
+  published: '2023-04-07'
+  type: journal-article
+  pmid: '36919760'
+  pmcid: PMC10120072
+  source: website
+  added: '2026-09-30'
+- doi: 10.1242/jcs.261119
+  title: B cell receptor-induced protein dynamics and the emerging role of SUMOylation revealed by proximity proteomics
+  journal: Journal of Cell Science
+  published: '2023-08-08'
+  type: journal-article
+  pmid: '37417469'
+  pmcid: PMC10445728
+  source: website
+  added: '2026-09-30'
+- doi: 10.1530/rep-22-0240
+  title: Chromatin remodelers HELLS, WDHD1 and BAZ1A are dynamically expressed during mouse spermatogenesis
+  journal: Reproduction
+  published: '2022-12-02'
+  type: journal-article
+  pmid: '36194437'
+  pmcid: PMC9782464
+  source: website
+  added: '2026-09-30'
+- doi: 10.21203/rs.3.rs-2568092/v1
+  title: Trans-activating mutations of the pseudokinase ERBB3
+  type: posted-content
+  europepmc_id: PPR617321
+  source: website
+  added: '2026-09-30'
+- doi: 10.2139/ssrn.4619402
+  title: Mannose Receptor Independent Uptake of Transmembrane Glycocluster Immunostimulant TADM by Macrophages
+  type: posted-content
+  source: website
+  added: '2026-09-30'
+- doi: 10.3389/fimmu.2023.1179022
+  title: CD73 regulates zoledronate-induced lymphocyte infiltration in triple-negative breast cancer tumors and lung metastases
+  journal: Frontiers in Immunology
+  published: '2023-07-18'
+  type: journal-article
+  pmid: '37533856'
+  pmcid: PMC10390692
+  source: website
+  added: '2026-09-30'
+- doi: 10.3389/fimmu.2023.1268686
+  title: Automated EuroFlow approach for standardized in-depth dissection of human circulating B-cells and plasma cells
+  journal: Frontiers in Immunology
+  published: '2023-10-17'
+  type: journal-article
+  pmid: '37915569'
+  pmcid: PMC10616957
+  source: website
+  added: '2026-09-30'
+- doi: 10.3389/fphys.2022.1078512
+  title: Acute exercise mobilizes CD8+ cytotoxic T cells and NK cells in lymphoma patients
+  journal: Frontiers in Physiology
+  published: '2023-01-11'
+  type: journal-article
+  pmid: '36714311'
+  pmcid: PMC9873989
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/cells12212566
+  title: The Small GTPase Rab7 Regulates Antigen Processing in B Cells in a Possible Interplay with Autophagy Machinery
+  journal: Cells
+  published: '2023-11-02'
+  type: journal-article
+  pmid: '37947644'
+  pmcid: PMC10649364
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/ijms24021052
+  title: Transcripts of the Prostate Cancer-Associated Gene ANO7 Are Retained in the Nuclei of Prostatic Epithelial Cells
+  journal: International Journal of Molecular Sciences
+  published: '2023-01-05'
+  type: journal-article
+  pmid: '36674564'
+  pmcid: PMC9865797
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/jof9111043
+  title: Nuclear-Localized Fluorescent Proteins Enable Visualization of Nuclear Behavior in the Basidiomycete Schizophyllum commune Early Mating Interactions
+  journal: Journal of Fungi
+  published: '2023-10-24'
+  type: journal-article
+  pmid: '37998849'
+  pmcid: PMC10671879
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/ma16062533
+  title: 'Influence of Surface Characteristics of TiO2 Coatings on the Response of Gingival Cells: A Systematic Review of In Vitro Studies'
+  journal: Materials
+  published: '2023-03-22'
+  type: journal-article
+  pmid: '36984413'
+  pmcid: PMC10056999
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/pathogens12020161
+  title: Biomonitoring of Indoor Air Fungal or Chemical Toxins with Caenorhabditis elegans nematodes
+  journal: Pathogens
+  published: '2023-01-19'
+  type: journal-article
+  pmid: '36839433'
+  pmcid: PMC9964051
+  source: website
+  added: '2026-09-30'

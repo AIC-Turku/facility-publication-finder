@@ -1,0 +1,379 @@
+# Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2015 (44).
+# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.
+- doi: 10.1002/cam4.541
+  title: Protein phosphatase methylesterase‐1 (PME‐1) expression predicts a favorable clinical outcome in colorectal cancer
+  journal: Cancer Medicine
+  published: '2015-09-17'
+  type: journal-article
+  pmid: '26377365'
+  pmcid: PMC5123709
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/humu.22793
+  title: LMNAMutation c.917T>G (p.L306R) Leads to Deleterious Hyper-Assembly of Lamin A/C and Associates with Severe Right Ventricular Cardiomyopathy and Premature Aging
+  journal: Human Mutation
+  published: '2015-06-01'
+  type: journal-article
+  pmid: '25820511'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/978-1-4939-2569-8_3
+  title: 'Rab-NANOPS: FRET Biosensors for Rab Membrane Nanoclustering and Prenylation Detection in Mammalian Cells'
+  journal: Methods in Molecular Biology
+  published: '2015'
+  type: book-chapter
+  pmid: '25800830'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.algal.2015.05.015
+  title: Screening native isolates of cyanobacteria and a green alga for integrated wastewater treatment, biomass accumulation and neutral lipid production
+  journal: Algal Research
+  published: 2015-09
+  type: journal-article
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.celrep.2015.07.003
+  title: Serine 62-Phosphorylated MYC Associates with Nuclear Lamins and Its Regulation by CIP2A Is Essential for Regenerative Proliferation
+  journal: Cell Reports
+  published: 2015-08
+  type: journal-article
+  pmid: '26235622'
+  pmcid: PMC4535171
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.ejpb.2015.07.009
+  title: Sugar-decorated mesoporous silica nanoparticles as delivery vehicles for the poorly soluble drug celastrol enables targeted induction of apoptosis in cancer cells
+  journal: European Journal of Pharmaceutics and Biopharmaceutics
+  published: 2015-10
+  type: journal-article
+  pmid: '26184689'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.mce.2014.11.026
+  title: Retromer vesicles interact with RNA granules in haploid male germ cells
+  journal: Molecular and Cellular Endocrinology
+  published: 2015-02
+  type: journal-article
+  pmid: '25486514'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.molonc.2015.01.005
+  title: MicroRNA let‐7b regulates genomic balance by targeting Aurora B kinase
+  journal: Molecular Oncology
+  published: '2015-01-27'
+  type: journal-article
+  pmid: '25682900'
+  pmcid: PMC5528760
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.stemcr.2015.01.014
+  title: The L1TD1 Protein Interactome Reveals the Importance of Post-transcriptional Regulation in Human Pluripotency
+  journal: Stem Cell Reports
+  published: 2015-03
+  type: journal-article
+  pmid: '25702638'
+  pmcid: PMC4376047
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.yexcr.2014.10.019
+  title: OSBP-related protein 3 (ORP3) coupling with VAMP-associated protein A regulates R-Ras activity
+  journal: Experimental Cell Research
+  published: 2015-02
+  type: journal-article
+  pmid: '25447204'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1021/acs.biochem.5b00724
+  title: Phenotypic Screening Identifies Protein Synthesis Inhibitors as H-Ras-Nanocluster-Increasing Tumor Growth Inducers
+  journal: Biochemistry
+  published: '2015-11-30'
+  type: journal-article
+  pmid: '26568031'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/ncb3250
+  title: Integrin endosomal signalling suppresses anoikis
+  journal: Nature Cell Biology
+  published: '2015-10-05'
+  type: journal-article
+  pmid: '26436690'
+  pmcid: PMC4890650
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/ncomms6962
+  title: Endothelial destabilization by angiopoietin-2 via integrin β1 activation
+  journal: Nature Communications
+  published: '2015-01-30'
+  type: journal-article
+  pmid: '25635707'
+  pmcid: PMC4316742
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/ni.3101
+  title: The endothelial protein PLVAP in lymphatics controls the entry of lymphocytes and antigens into lymph nodes
+  journal: Nature Immunology
+  published: '2015-02-09'
+  type: journal-article
+  pmid: '25665101'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/onc.2015.241
+  title: Heat-shock factor 2 is a suppressor of prostate cancer invasion
+  journal: Oncogene
+  published: '2015-06-29'
+  type: journal-article
+  pmid: '26119944'
+  pmcid: PMC4830906
+  source: website
+  added: '2026-09-30'
+- doi: 10.1039/c4bm00278d
+  title: Targeted delivery of a novel anticancer compound anisomelic acid using chitosan-coated porous silica nanorods for enhancing the apoptotic effect
+  journal: Biomaterials Science
+  published: '2015'
+  type: journal-article
+  pmid: '26214194'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1039/c5nr01403d
+  title: Functionalization of graphene oxide nanostructures improves photoluminescence and facilitates their use as optical probes in preclinical imaging
+  journal: Nanoscale
+  published: '2015'
+  type: journal-article
+  pmid: '25998585'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1039/c5nr06218g
+  title: Cellular recognition and macropinocytosis-like internalization of nanoparticles targeted to integrin α2β1
+  journal: Nanoscale
+  published: '2015'
+  type: journal-article
+  pmid: '26462719'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1074/jbc.m115.643668
+  title: Transient Receptor Potential Canonical 1 (TRPC1) Channels as Regulators of Sphingolipid and VEGF Receptor Expression
+  journal: Journal of Biological Chemistry
+  published: 2015-06
+  type: journal-article
+  pmid: '25971967'
+  pmcid: PMC4481213
+  source: website
+  added: '2026-09-30'
+- doi: 10.1074/mcp.m115.050773
+  title: Relevance Rank Platform (RRP) for Functional Filtering of High Content Protein–Protein Interaction Data*
+  journal: Molecular &amp; Cellular Proteomics
+  published: 2015-12
+  type: journal-article
+  pmid: '26499835'
+  pmcid: PMC4762622
+  source: website
+  added: '2026-09-30'
+- doi: 10.1080/19491034.2015.1017167
+  title: Phosphorylation of lamins determine their structural properties and signaling functions
+  journal: Nucleus
+  published: '2015-03-20'
+  type: journal-article
+  pmid: '25793944'
+  pmcid: PMC4615644
+  source: website
+  added: '2026-09-30'
+- doi: 10.1091/mbc.e14-02-0736
+  title: Keratin 8 absence down-regulates colonocyte HMGCS2 and modulates colonic ketogenesis and energy metabolism
+  journal: Molecular Biology of the Cell
+  published: '2015-06-15'
+  type: journal-article
+  pmid: '25904331'
+  pmcid: PMC4462946
+  source: website
+  added: '2026-09-30'
+- doi: 10.1091/mbc.e14-12-1634
+  title: Cyclin-dependent kinase 5 acts as a critical determinant of AKT-dependent proliferation and regulates differential gene expression by the androgen receptor in prostate cancer cells
+  journal: Molecular Biology of the Cell
+  published: 2015-06
+  type: journal-article
+  pmid: '25851605'
+  pmcid: PMC4472009
+  source: website
+  added: '2026-09-30'
+- doi: 10.1095/biolreprod.115.131938
+  title: DICER Regulates the Formation and Maintenance of Cell-Cell Junctions in the Mouse Seminiferous Epithelium1
+  journal: Biology of Reproduction
+  published: '2015-12-01'
+  type: journal-article
+  pmid: '26510868'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1096/fj.14-269795
+  title: Absence of keratin 8 or 18 promotes antimitochondrial autoantibody formation in aging male mice
+  journal: The FASEB Journal
+  published: '2015-09-23'
+  type: journal-article
+  pmid: '26399787'
+  pmcid: PMC4653051
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/andr.12066
+  title: A detailed protocol for a rapid analysis of testicular cell populations using flow cytometry
+  journal: Andrology
+  published: '2015-08-07'
+  type: journal-article
+  pmid: '26256546'
+  pmcid: PMC5042039
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/andr.12090
+  title: E2F1 controls germ cell apoptosis during the first wave of spermatogenesis
+  journal: Andrology
+  published: '2015-08-20'
+  type: journal-article
+  pmid: '26311345'
+  pmcid: PMC5042044
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/sji.12343
+  title: IRF4 Deficiency Leads to Altered BCR Signalling Revealed by Enhanced PI3K Pathway, Decreased SHIP Expression and Defected Cytoskeletal Responses
+  journal: Scandinavian Journal of Immunology
+  published: '2015-10-09'
+  type: journal-article
+  pmid: '26173778'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1128/mcb.00816-14
+  title: Uncoupling Stress-Inducible Phosphorylation of Heat Shock Factor 1 from Its Activation
+  journal: Molecular and Cellular Biology
+  published: '2023-03-20'
+  type: journal-article
+  pmid: '25963659'
+  pmcid: PMC4475925
+  source: website
+  added: '2026-09-30'
+- doi: 10.1158/0008-5472.can-14-2842
+  title: Vimentin–ERK Signaling Uncouples Slug Gene Regulatory Function
+  journal: Cancer Research
+  published: '2015-05-31'
+  type: journal-article
+  pmid: '25855378'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1186/s12943-015-0410-5
+  title: Hypoxia inducible prolyl hydroxylase PHD3 maintains carcinoma cell growth by decreasing the stability of p27
+  journal: Molecular Cancer
+  published: '2015-07-30'
+  type: journal-article
+  pmid: '26223520'
+  pmcid: PMC4520080
+  source: website
+  added: '2026-09-30'
+- doi: 10.1186/s13058-015-0621-0
+  title: Human breast cancer cells educate macrophages toward the M2 activation status
+  journal: Breast Cancer Research
+  published: '2015-08-05'
+  type: journal-article
+  pmid: '26243145'
+  pmcid: PMC4531540
+  source: website
+  added: '2026-09-30'
+- doi: 10.1186/s13075-015-0826-8
+  title: 68Ga-DOTA-Siglec-9 – a new imaging tool to detect synovitis
+  journal: Arthritis Research &amp; Therapy
+  published: '2015-11-03'
+  type: journal-article
+  pmid: '26530096'
+  pmcid: PMC4632466
+  source: website
+  added: '2026-09-30'
+- doi: 10.1242/jcs.160341
+  title: Sphingolipids inhibit vimentin-dependent cell migration
+  journal: Journal of Cell Science
+  published: '2015-06-01'
+  type: journal-article
+  pmid: '25908861'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1371/journal.pone.0127436
+  title: The Amount of Keratins Matters for Stress Protection of the Colonic Epithelium
+  journal: PLOS ONE
+  published: '2015-05-22'
+  type: journal-article
+  pmid: '26000979'
+  pmcid: PMC4441500
+  source: website
+  added: '2026-09-30'
+- doi: 10.1371/journal.pone.0130340
+  title: Pim Kinases Promote Migration and Metastatic Growth of Prostate Cancer Xenografts
+  journal: PLOS ONE
+  published: '2015-06-15'
+  type: journal-article
+  pmid: '26075720'
+  pmcid: PMC4467846
+  source: website
+  added: '2026-09-30'
+- doi: 10.1371/journal.pone.0134721
+  title: CD73 Activity is Dispensable for the Polarization of M2 Macrophages
+  journal: PLOS ONE
+  published: '2015-08-10'
+  type: journal-article
+  pmid: '26258883'
+  pmcid: PMC4530872
+  source: website
+  added: '2026-09-30'
+- doi: 10.1371/journal.pone.0141974
+  title: Direct Comparison of a Natural Loss-Of-Function Single Nucleotide Polymorphism with a Targeted Deletion in the Ncf1 Gene Reveals Different Phenotypes
+  journal: PLOS ONE
+  published: '2015-11-03'
+  type: journal-article
+  pmid: '26528554'
+  pmcid: PMC4631371
+  source: website
+  added: '2026-09-30'
+- doi: 10.1371/journal.pone.0143423
+  title: Mutually Exclusive Roles of SHARPIN in Integrin Inactivation and NF-κB Signaling
+  journal: PLOS ONE
+  published: '2015-11-23'
+  type: journal-article
+  pmid: '26600301'
+  pmcid: PMC4658161
+  source: website
+  added: '2026-09-30'
+- doi: 10.1530/eje-14-1095
+  title: A novel inactivating mutation of the LH/chorionic gonadotrophin receptor with impaired membrane trafficking leading to Leydig cell hypoplasia type 1
+  journal: European Journal of Endocrinology
+  published: 2015-06
+  type: journal-article
+  pmid: '25795638'
+  source: website
+  added: '2026-09-30'
+- doi: 10.18632/oncotarget.5046
+  title: Automated tracking of tumor-stroma morphology in microtissues identifies functional targets within the tumor microenvironment for therapeutic intervention
+  journal: Oncotarget
+  published: '2015-09-03'
+  type: journal-article
+  pmid: '26375443'
+  pmcid: PMC4745780
+  source: website
+  added: '2026-09-30'
+- doi: 10.4049/jimmunol.1500016
+  title: 'GIMAP GTPase Family Genes: Potential Modifiers in Autoimmune Diabetes, Asthma, and Allergy'
+  journal: The Journal of Immunology
+  published: '2015-06-15'
+  type: journal-article
+  pmid: '25964488'
+  pmcid: PMC4456634
+  source: website
+  added: '2026-09-30'
+- doi: 10.4172/2157-7471.1000252
+  title: Differential Effects of Viral Coat Protein on Induction of Hypersensitive Response and Systemic Movement of Tobacco Mosaic Virus and Tobacco Mild Green Mosaic Virus in Nicotiana megalosiphon
+  journal: Journal of Plant Pathology &amp; Microbiology
+  published: '2015'
+  type: journal-article
+  source: website
+  added: '2026-09-30'
+- doi: 10.7554/elife.08905
+  title: Specific cancer-associated mutations in the switch III region of Ras increase tumorigenicity by nanocluster augmentation
+  journal: eLife
+  published: '2015-08-14'
+  type: journal-article
+  pmid: '26274561'
+  pmcid: PMC4563131
+  source: website
+  added: '2026-09-30'

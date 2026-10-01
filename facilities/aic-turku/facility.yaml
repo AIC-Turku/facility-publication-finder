@@ -1,0 +1,339 @@
+# Everything facility-specific lives here. The code contains no AIC names.
+#
+# Patterns are Python regular expressions, matched case-insensitively against
+# full text in which PDF line-break hyphenation has been undone and all
+# whitespace collapsed to single spaces.
+
+facility:
+  name: Advanced Imaging Core (AIC), Turku Bioscience Centre
+  # Public list the facility already maintains; used only for benchmarking.
+  website_publications: https://bioscience.fi/aic/publications/
+  website_core_slug: aic-turku
+  # Instrument records (source of truth for which instruments exist).
+  instrument_database: https://github.com/AIC-Turku/AIC-Turku-database
+
+# Local publication repositories: the candidate backbone (every DOI-bearing record of the
+# year is screened). Adapters: dspace7 (DSpace 7 REST, e.g. UTUPub) and pure_oai (Pure
+# OAI-PMH, e.g. Åbo Akademi). A new adapter is one small function in sources.py.
+institutional_sources:
+  - name: utupub
+    adapter: dspace7
+    base_url: https://www.utupub.fi/server/api
+    query: "dc.year.issued:{year} AND dc.relation.doi:[* TO *]"
+    science_fields_only: true      # Finnish field-of-science codes (see institutional_fields)
+  - name: abo
+    adapter: pure_oai
+    base_url: https://research.abo.fi/ws/oai
+    set: "publications:year{year}"
+    file_prefix: https://research.abo.fi/ws/files/
+    author_list_complete: false    # OAI creators are not the institution's local-author list
+
+# Author-affiliation lines (postal addresses) are not acknowledgements.
+postal_patterns: \bFI-?\s?\d{5}\b|\b20[0-9]{3} (Turku|Åbo|Abo)\b|Tykistökatu|Artillerigatan
+
+# Sentences matching these are removed before embedding, so the check list cannot just
+# re-learn "acknowledges the facility" (facility names, umbrella networks, thanks words).
+facility_name_terms: imaging core|imaging cent|cytometry core|bioimaging|turku bioscience|biocenter finland|euro-?bioimaging|acknowledg|thank|grateful|funded|grant
+
+# Any match = the text names the facility. Historical names included.
+acknowledgement_patterns:
+  - cell imaging,? (and |& )?cytometry( \(CIC\))? core
+  - cell imaging core
+  - advanced imaging core
+  - turku bio ?imaging
+  - imaging core facility.{0,80}turku
+  - turku.{0,80}imaging core
+  - euro-?bio ?imaging.{0,60}turku
+  - turku.{0,60}euro-?bio ?imaging
+  # the Institute of Biomedicine Imaging Center and the Medisiina Imaging Centre are part of AIC
+  - medisiina imaging cent(er|re)
+  - institute of biomedicine imaging cent(er|re)
+  - imaging cent(er|re)[^.]{0,30}institute of biomedicine
+  # FIRI infrastructure grants quoted in the standard acknowledgement text
+  - \b(359073|358879|367582|367577)\b
+
+# UTUPub fields to sweep: "science" (field-of-science groups 1-4, default) or "all".
+# 2025: the 993 papers outside groups 1-4 gave 0 AIC leads.
+institutional_fields: science
+
+# Searched in Europe PMC acknowledgement/methods sections (any affiliation).
+europepmc_search_terms:
+  - Cell Imaging and Cytometry Core
+  - Cell Imaging Core
+  - Advanced Imaging Core
+  - Turku Bioimaging
+  - Turku BioImaging
+  - Medisiina Imaging Centre
+  - Medisiina Imaging Center
+  - Institute of Biomedicine Imaging Centre
+  - Institute of Biomedicine Imaging Center
+europepmc_grant_numbers: ["359073", "358879", "367582", "367577"]
+
+# A facility-name match inside one of these contexts is NOT evidence of use.
+false_positive_contexts:
+  # Free flow-cytometry software distributed by the old Cell Imaging Core,
+  # cited by labs worldwide.
+  flowing_software: flowing software
+  # Author affiliation lines ("5Turku Bioimaging, University of Turku ...").
+  affiliation: (^|\d\s*|[,;]\s*|\b[a-h]\s)(turku bio ?imaging|euro-?bio ?imaging( eric)?),? (university of turku|(fi-)?(20\d{3} )?(turku|åbo|abo)\b)
+
+# Imaging credited to someone else. A sentence that thanks or credits one of
+# these (or any "imaging/microscopy core|facility|unit|platform" that is not
+# AIC) marks the paper "credited_elsewhere" and lowers its score.
+other_facilities:
+  - biomedicum imaging unit
+  - light microscopy unit
+  - FIMM[^.]{0,60}(imaging|HCA|microscopy)
+  - high content imaging and analysis
+  - cell and tissue imaging unit
+  - tampere imaging facility
+  - biocenter oulu[^.]{0,60}imaging
+  - genome biology unit[^.]{0,40}imaging
+generic_imaging_facility: (light |optical |confocal |bio ?|advanced )?(imaging|microscopy)( research)? (core|facilit|platform|unit|cent(er|re)|network|infrastructure)
+not_light_microscopy: electron microscop|\bTEM\b|\bSEM\b|histolog|PET cent|MRI
+
+# Supporting-network names: weak evidence on their own.
+network_patterns:
+  - biocent(er|re) finland
+  - euro-?bio ?imaging
+
+# Other Turku imaging units. Crediting one of these instead of AIC is useful
+# context for a reviewer.
+other_local_imaging:
+  - turku pet centre
+  - light microscopy unit.{0,40}helsinki
+
+# Generic microscopy vocabulary (counted, not decisive).
+microscopy_terms:
+  - microscop
+  - confocal
+  - spinning[- ]?disk
+  - widefield
+  - super-?resolution
+  - airyscan
+  - \bSTED\b
+  - \bTIRF
+  - light[- ]?sheet
+  - live[- ]?cell imaging
+  - immunofluorescen
+  - time[- ]?lapse imaging
+
+# Component fingerprints are only counted near an instrument mention, rather
+# than anywhere in the paper. This prevents components from unrelated experiments
+# being combined into an apparent AIC instrument fingerprint.
+component_window_chars: 600
+
+# Lead score (sort order of review.csv). Priority: score >= report -> "report",
+# >= check -> "check", else "low".
+score:
+  acknowledgement: 10
+  strong_instrument: 4
+  component: 1          # per distinct component of the best-matching instrument
+  component_max: 4
+  weak_instrument_with_components: 3   # weak model + >= 2 of its components
+  specialist_technique: 1
+  specialist_technique_max: 3
+  local_email: 1
+  credited_elsewhere: -5
+  affiliation_only: 0
+  report: 10
+  check: 5
+  # Paper-level rules (from repository metadata and where instruments are named).
+  # Penalties never demote an acknowledging paper; "not_a_paper" always applies.
+  single_local_author: -2        # one UTU author (and not also an ÅA record): imaging likely elsewhere
+  many_local_authors: 1          # >= 3 UTU authors
+  life_science_unit: 1           # a UTU author unit matches life_science_units
+  non_life_science_field: -3     # field codes known and none is a life-science field
+  review: -3                     # review/perspective: no primary imaging
+  preprint: -2                   # prefer the published version
+  not_a_paper: -6                # dataset DOI (Zenodo, figshare, 4TU, ...)
+  instrument_named_with_turku: 1 # an instrument sentence also names Turku / Åbo
+  instrument_named_elsewhere: -2 # an instrument sentence names another university/institute
+  repeat_user: 2                 # a local author co-authored an acknowledging paper in another year
+  staff_thanked: 4               # a name from facility_staff is thanked in the acknowledgements
+  staff_author: 3                # a facility staff member is a local author (config or private/staff.csv)
+  group_booked: 2                # a local author (or their group head) trained on / used AIC in the paper's
+                                 # year or the 3 before; only for microscopy papers (a group using AIC
+                                 # also publishes papers without imaging)
+  booked_instrument_used: 3      # ... and was trained on an instrument the paper names
+
+# Facility staff as they appear in UTUPub author lists ("Lastname, Firstname").
+# Fill in to enable the staff_author rule.
+facility_staff: []
+
+# Statistics Finland field-of-science code prefixes counted as life science.
+life_science_fields: ["118", "3", "116", "1172", "215", "216", "217", "220", "4"]
+life_science_units: bioscience|biomedicine|cell biology|biochem|medicin|medical|dentist|pharma|biology|molecular|clinical|oncolog|immunolog|patholog|medicity|inflames|biotech|physiology|neuro
+review_title: \b(review|perspective|overview|primer|commentary|editorial)\b
+dataset_doi_prefixes: ["10.5281/", "10.6084/", "10.4121/", "10.17632/", "10.5061/", "10.17044/"]
+preprint_doi_prefixes: ["10.1101/", "10.64898/", "10.21203/", "10.20944/", "10.2139/", "10.48550/", "10.31219/"]
+# Place names of the facility's institutions (an instrument sentence naming them is local).
+local_place_words: turku|åbo|abo akademi
+other_institution: \b(universit(y|é|ät|at|a|eit)|institut(e|o)?|hospital|school of medicine|cent(er|re) for)\b
+
+local_email_domains: [utu.fi, abo.fi, tuks.fi]
+
+# Techniques the facility offers, keyed by term id in the AIC-Turku-database
+# vocabularies (vocab/<vocab>.yaml). `aic-pubs coverage` lists capabilities
+# used by active instruments that have no entry here.
+# specialist: offered by few Turku labs; with Turku authors and no other
+#   facility named, a match is a lead (category C).
+# general: common; counted for the statistics only.
+# (?-i:...) makes an acronym case-sensitive (SIM, STED, FLIM, ...).
+techniques:
+  sim:                    {vocab: imaging_modes, strength: specialist, pattern: 'structured[- ]illumination|(?-i:\b(3D-?)?SIM\b)'}
+  sted:                   {vocab: imaging_modes, strength: specialist, pattern: 'stimulated emission depletion|(?-i:\bSTED\b)'}
+  resolft:                {vocab: imaging_modes, strength: specialist, pattern: '(?-i:\bRESOLFT\b)'}
+  smlm:                   {vocab: imaging_modes, strength: specialist, pattern: 'single[- ]molecule locali[sz]ation|(?-i:\b(d?STORM|PALM|SMLM)\b)|DNA-PAINT'}
+  light_sheet:            {vocab: imaging_modes, strength: specialist, pattern: 'light[- ]?sheet|lattice light'}
+  tirf:                   {vocab: imaging_modes, strength: specialist, pattern: 'total internal reflection fluorescence|(?-i:\bTIRF)'}
+  ism:                    {vocab: imaging_modes, strength: specialist, pattern: 'airyscan|image scanning microscopy'}
+  flim:                   {vocab: readouts, strength: specialist, pattern: 'fluorescence lifetime imaging|(?-i:\bFLIM\b)'}
+  fcs:                    {vocab: readouts, strength: specialist, pattern: 'fluorescence (cross-)?correlation spectroscopy'}  # bare 'FCS' is fetal calf serum
+  frap:                   {vocab: assay_operations, strength: specialist, pattern: 'fluorescence recovery after photobleaching|(?-i:\bFRAP\b)'}
+  photoactivation:        {vocab: assay_operations, strength: specialist, pattern: 'photo-?activat(ion|able|ed) (GFP|fluorescent|protein)|(?-i:\bPA-?(GFP|mCherry)\b)|photoconver'}
+  single_particle_tracking: {vocab: workflows, strength: specialist, pattern: 'single[- ]particle tracking'}
+  afm:                    {vocab: non_optical_capabilities, strength: general, pattern: 'atomic force microscop'}
+  impedance_cytometry:    {vocab: non_optical_capabilities, strength: general, pattern: 'xCELLigence|impedance-based (cell|real-time)'}
+  fret:                   {vocab: readouts, strength: general, pattern: '(?-i:\bFRET\b)|förster resonance|fluorescence resonance energy'}
+  spectral_imaging:       {vocab: readouts, strength: general, pattern: 'spectral (imaging|unmixing)|lambda scan'}
+  confocal_point:         {vocab: imaging_modes, strength: general, pattern: 'laser[- ]scanning confocal|confocal laser[- ]scanning|point[- ]scanning confocal'}
+  confocal_spinning_disk: {vocab: imaging_modes, strength: general, pattern: 'spinning[- ]?dis[ck]'}
+  widefield_fluorescence: {vocab: imaging_modes, strength: general, pattern: 'wide-?field (fluorescence|microscop|imaging)|epifluorescence'}
+  live_cell_imaging:      {vocab: workflows, strength: general, pattern: 'live[- ]?cell imaging|time[- ]?lapse (imaging|microscopy)|live imaging'}
+  high_content_screening: {vocab: workflows, strength: general, pattern: 'high[- ]content (imaging|screening|analysis)'}
+
+# Instrument name patterns, keyed by instrument_id in AIC-Turku-database.
+# strong: distinctive enough that a match is a real lead.
+# weak: common models many labs own; recorded but never decisive alone.
+instruments:
+  scope-zeiss-lsm-880-with-airyscan:
+    strength: strong
+    components: ['Airyscan( detector)?(?! ?2)', '32[- ]channel GaAsP|Quasar', 'ZEN (2\.3 )?(SP1 )?black']
+    pattern: LSM[\s-]?880|LSM880|Zeiss\W{0,3}880\b|\b880\W{0,3}(LSM|confocal|Airyscan)
+    exclude: airyscan 2|LSM[\s-]?9[08]0
+  scope-3i-csu-w1-spinning-disk:
+    strength: strong
+    components: ['Photometrics Evolve|Evolve (512|EMCCD|10 MHz)', 'ORCA[- ]?Flash ?4(\.0)?', 'SlideBook', 'LaserStack', 'X-?Cite XLED', '3i Vector|Vector (FRAP|photomanipulation)']
+    pattern: CSU[\s-]?W1|Marianas|Intelligent Imaging Innovations|\b3i\b[^.]{0,40}spinning
+  scope-3i-csu-w1-spinning-disk-med-c:
+    strength: strong
+    components: ['Prime BSI', 'SlideBook', 'CoolLED pE-?300', 'LaserStack']
+    pattern: CSU[\s-]?W1|Marianas|Intelligent Imaging Innovations
+  scope-1e33f909:
+    strength: strong
+    components: ['Imspector', '(Facility|Expert) Line', 'Katana', 'PicoQuant', 'easy ?3D|RESCue']
+    pattern: Abberior[^.]{0,60}((?-i:\bSTED\b)|microscope|Expert Line|Facility Line)|(?-i:\bSTED\b)[^.]{0,60}Abberior  # 'suggested'/'tested' contain 'sted'
+  scope-andor-bc43:
+    strength: strong
+    components: ['Borealis', 'Fusion (software|BC43)', 'dual[- ]microlens']
+    pattern: \bBC43\b
+  scope-deltavision-omx:
+    strength: strong
+    components: ['PCO[.\- ]?edge', 'softWoRx|OMX (Acquisition|SI|SR)']
+    pattern: \bOMX\b|DeltaVision OMX
+  scope-leica-stellaris-8-falcon-flim-resonant:
+    strength: strong
+    components: ['(Power )?HyD ?[XSR]\b', 'white light laser|WLL', 'FALCON', 'LAS ?X']
+    pattern: Leica[^.]{0,40}STELLARIS|STELLARIS ?[58]\b|STELLARIS[^.]{0,20}FALCON
+  scope-leica-thunder:
+    strength: strong
+    components: ['Leica (DFC9000|K8|K5|K3C)|\bK8 (camera|sCMOS)', 'LAS ?X', 'LED ?8\b', 'Computational Clearing']
+    pattern: THUNDER (Imager|imaging)|Leica THUNDER
+  scope-oni-nanoimager:
+    strength: strong
+    components: ['NimOS', '\bCODI\b']
+    pattern: Nanoimager
+  scope-zeiss-axiozoom-v16:
+    strength: strong
+    components: ['Plan-?NeoFluar Z', 'AxioCam 105', 'HXP ?200']
+    pattern: Axio ?Zoom
+  scope-agilent-rtca-esight:
+    strength: strong
+    components: ['\bRTCA\b', 'xCELLigence']
+    pattern: \beSight\b
+  scope-msquared-aurora-airy-beam:
+    strength: strong
+    components: ['\bOBIS\b', 'Cubes (acquisition|software|deconvolution)']
+    pattern: Aurora[^.]{0,40}(light[- ]?sheet|Airy)|M Squared Life|M2 Aurora
+  scope-nikon-crest-v3:
+    strength: strong
+    components: ['Kinetix', 'Celesta', 'X-?Light']
+    pattern: CREST ?(V3|X-?Light)|X-?Light V3|CrestOptics
+  scope-lambert-flim-frequency-domain:
+    strength: strong
+    components: ['\bLIFA\b', 'AXIO Observer\.? ?D1']
+    pattern: Lambert Instruments|LIFA (fast )?(frequency|FLIM|system)
+  scope-zeiss-lsm-510-jpk-afm:
+    strength: strong
+    pattern: JPK[^.]{0,60}(LSM|Zeiss)|LSM[\s-]?510[^.]{0,60}JPK
+  scope-zeiss-tirf:
+    strength: weak
+    components: ['C9100-13|ImagEM']
+    pattern: Zeiss[^.]{0,60}TIRF|TIRF[^.]{0,60}Zeiss
+  scope-nikon-eclipse-ti2-e:
+    strength: weak
+    components: ['Spectra ?X', 'DS-Fi3', 'Perfect Focus']
+    pattern: (Nikon|Eclipse)[^.]{0,30}\bTi2(-E)?\b|\bTi2-E\b  # leading \b: 'Kesti2' is an author with a superscript
+  scope-evos-fl:
+    strength: weak
+    pattern: (?-i:\bEVOS\b)(?! ?(M?[357]000|FL Auto|XL))  # AIC has the EVOS FL; case-sensitive ('EVOs' = epoxidized oils)
+  scope-leica-dm-irbe:
+    strength: weak
+    pattern: Leica[^.]{0,20}\bDM ?IRBE\b
+  scope-leica-dm-rb:
+    strength: weak
+    pattern: Leica[^.]{0,20}\bDM ?RB\b
+  scope-leica-dmre:
+    strength: weak
+    pattern: Leica[^.]{0,20}\bDM ?RE\b
+  scope-olympus-bx60:
+    strength: weak
+    components: ['\bDP71\b', 'cell\^?D\b']
+    pattern: \bBX-?60\b
+  # in OpenIRIS but not (yet) in AIC-Turku-database: common models, so weak
+  unrecorded-zeiss-lsm-780:
+    strength: weak
+    pattern: LSM[\s-]?780
+  unrecorded-incucyte-s3:
+    strength: weak
+    pattern: IncuCyte
+  # retired (still relevant for older years)
+  retired-leica-tcs-sp5-multiphoton:
+    strength: weak   # SP5s were common; never decisive
+    pattern: TCS ?SP5|Leica SP5
+
+# OpenIRIS resource names (lower-case substring, first match wins) -> instrument_id,
+# for `aic-pubs import-openiris` (private bookings export).
+openiris_resources:
+  "med c 3i spinning disk": scope-3i-csu-w1-spinning-disk-med-c
+  "3i spinning disk": scope-3i-csu-w1-spinning-disk
+  "lsm880": scope-zeiss-lsm-880-with-airyscan
+  "lsm780": unrecorded-zeiss-lsm-780
+  "lsm510": scope-zeiss-lsm-510-jpk-afm
+  "eclipse ti2": scope-nikon-eclipse-ti2-e
+  "crest": scope-nikon-crest-v3
+  "axiozoom": scope-zeiss-axiozoom-v16
+  "stellaris": scope-leica-stellaris-8-falcon-flim-resonant
+  "thunder": scope-leica-thunder
+  "deltavision omx": scope-deltavision-omx
+  "bx60": scope-olympus-bx60
+  "bc43": scope-andor-bc43
+  "nanoimager": scope-oni-nanoimager
+  "abberior sted": scope-1e33f909
+  "esight": scope-agilent-rtca-esight
+  "aurora": scope-msquared-aurora-airy-beam
+  "lambert flim": scope-lambert-flim-frequency-domain
+  "zeiss tirf": scope-zeiss-tirf
+  "tcs sp5": retired-leica-tcs-sp5-multiphoton
+  "dmre": scope-leica-dmre
+  "dm rb": scope-leica-dm-rb
+  "dm irbe": scope-leica-dm-irbe
+  "incucyte": unrecorded-incucyte-s3
+
+# Facility-specific notes for the optional LLM second opinion (`aic-pubs review`).
+llm_prompt_notes:
+  - "Historical/alternative facility names: Cell Imaging and Cytometry Core (CIC), Cell Imaging Core, Turku Bioimaging (umbrella), Euro-BioImaging node in Turku."
+  - "Local authors: University of Turku, Åbo Akademi, Turku Bioscience."
+  - "Only \"Flowing Software\" cited is not facility use; Abberior is also a reagent supplier; LSM 980 / Airyscan 2 is not the LSM 880."
+  - "Flow cytometry at the Cell Imaging and Cytometry Core counts as facility use (answer as for imaging) and set cytometry_only to true."

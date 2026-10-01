@@ -1,0 +1,35 @@
+# Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2009 (4).
+# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.
+- doi: 10.1002/jbm.a.32564
+  title: Antibacterial effects and dissolution behavior of six bioactive glasses
+  journal: Journal of Biomedical Materials Research Part A
+  published: '2009-07-06'
+  type: journal-article
+  pmid: '19582832'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s00125-009-1599-x
+  title: Enhanced trafficking to the pancreatic lymph nodes and auto-antigen presentation capacity distinguishes peritoneal B lymphocytes in non-obese diabetic mice
+  journal: Diabetologia
+  published: '2009-11-22'
+  type: journal-article
+  pmid: '20033667'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s00418-009-0666-1
+  title: Dilated cardiomyopathy alters the expression patterns of CAR and other adenoviral receptors in human heart
+  journal: Histochemistry and Cell Biology
+  published: '2009-12-02'
+  type: journal-article
+  pmid: '19957088'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s11307-009-0267-3
+  title: 68Ga-Chloride PET Reveals Human Pancreatic Adenocarcinoma Xenografts in Rats—Comparison with FDG
+  journal: Molecular Imaging and Biology
+  published: '2009-10-02'
+  type: journal-article
+  pmid: '19798536'
+  pmcid: PMC2864902
+  source: website
+  added: '2026-09-30'

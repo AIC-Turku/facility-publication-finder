@@ -1,0 +1,294 @@
+# Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2024 (35).
+# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.
+- doi: 10.1002/anie.202408670
+  title: Self‐Adaptive Synthesis of Non‐Covalent Crosslinkers while Folding Single‐Chain Polymers
+  journal: Angewandte Chemie International Edition
+  published: '2024-08-14'
+  type: journal-article
+  pmid: '38943429'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/cam4.70240
+  title: Targeting the cancer cells and cancer‐associated fibroblasts with next‐generation FGFR inhibitors in prostate cancer co‐culture models
+  journal: Cancer Medicine
+  published: '2024-09-20'
+  type: journal-article
+  pmid: '39300962'
+  pmcid: PMC11413502
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/cbic.202400264
+  title: Immunomodulatory Synthetic Glycocluster Molecule Prevents Melanoma Growth In Vivo
+  journal: ChemBioChem
+  published: '2024-08-26'
+  type: journal-article
+  pmid: '38864514'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/cbic.202400908
+  title: Chondroitin Sulfate‐Coated Heteroduplex‐Molecular Spherical Nucleic Acids
+  journal: ChemBioChem
+  published: '2024-11-28'
+  type: journal-article
+  pmid: '39544138'
+  pmcid: PMC11907394
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s00018-024-05429-3
+  title: 'Phenotypic profiling of human induced regulatory T cells at early differentiation: insights into distinct immunosuppressive potential'
+  journal: Cellular and Molecular Life Sciences
+  published: '2024-09-12'
+  type: journal-article
+  pmid: '39264416'
+  pmcid: PMC11393232
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s00259-024-06686-x
+  title: 'Macrophage mannose receptor CD206 targeting of fluoride-18 labeled mannosylated dextran: A validation study in mice'
+  journal: European Journal of Nuclear Medicine and Molecular Imaging
+  published: '2024-03-27'
+  type: journal-article
+  pmid: '38532026'
+  pmcid: PMC11178572
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s10911-024-09557-1
+  title: Spatial Engineering of Mammary Epithelial Cell Cultures with 3D Bioprinting Reveals Growth Control by Branch Point Proximity
+  journal: Journal of Mammary Gland Biology and Neoplasia
+  published: '2024-02-28'
+  type: journal-article
+  pmid: '38416267'
+  pmcid: PMC10902034
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.bioflm.2024.100219
+  title: Real-time acid production and extracellular matrix formation in mature biofilms of three Streptococcus mutans strains with special reference to xylitol
+  journal: Biofilm
+  published: 2024-12
+  type: journal-article
+  pmid: '39281714'
+  pmcid: PMC11402442
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.biopha.2024.116822
+  title: The Notch inhibitor, FLI-06, increases the chemosensitivity of head and neck Squamous cell carcinoma cells to taxanes-based treatment
+  journal: Biomedicine &amp; Pharmacotherapy
+  published: 2024-08
+  type: journal-article
+  pmid: '38906029'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.biopha.2024.117453
+  title: Empagliflozin attenuates hypoxia-induced heart failure of zebrafish embryos via influencing MMP13 expression
+  journal: Biomedicine &amp; Pharmacotherapy
+  published: 2024-11
+  type: journal-article
+  pmid: '39332186'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.celrep.2024.114430
+  title: Germline-specific RNA helicase DDX4 forms cytoplasmic granules in cancer cells and promotes tumor growth
+  journal: Cell Reports
+  published: 2024-07
+  type: journal-article
+  pmid: '38963760'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.clim.2024.110261
+  title: A proximal enhancer regulates RORA expression during early human Th17 cell differentiation
+  journal: Clinical Immunology
+  published: 2024-07
+  type: journal-article
+  pmid: '38788884'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.isci.2024.108914
+  title: Embigin deficiency leads to delayed embryonic lung development and high neonatal mortality in mice
+  journal: iScience
+  published: 2024-02
+  type: journal-article
+  pmid: '38318368'
+  pmcid: PMC10839689
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.scr.2023.103301
+  title: Generation of three isogenic human induced pluripotent stem cell lines from normal neonate skin fibroblasts
+  journal: Stem Cell Research
+  published: 2024-02
+  type: journal-article
+  pmid: '38176368'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.xpro.2024.103198
+  title: Protocol to study early lung developmental branching in mouse embryos using explant culture
+  journal: STAR Protocols
+  published: 2024-09
+  type: journal-article
+  pmid: '39024094'
+  pmcid: PMC11315079
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41419-024-06907-z
+  title: The PP2A regulator IER5L supports prostate cancer progression
+  journal: Cell Death &amp; Disease
+  published: '2024-07-18'
+  type: journal-article
+  pmid: '39025841'
+  pmcid: PMC11258296
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41435-024-00274-7
+  title: TIMP-1 is an activator of MHC-I expression in myeloid dendritic cells with implications for tumor immunogenicity
+  journal: Genes &amp; Immunity
+  published: '2024-05-22'
+  type: journal-article
+  pmid: '38777826'
+  pmcid: PMC11178497
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41467-024-46868-7
+  title: Focal adhesions contain three specialized actin nanoscale layers
+  journal: Nature Communications
+  published: '2024-03-21'
+  type: journal-article
+  pmid: '38514695'
+  pmcid: PMC10957975
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41467-024-52326-1
+  title: SHANK3 depletion leads to ERK signalling overdose and cell death in KRAS-mutant cancers
+  journal: Nature Communications
+  published: '2024-09-12'
+  type: journal-article
+  pmid: '39266533'
+  pmcid: PMC11393128
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s44321-024-00088-0
+  title: DUSP6 inhibition overcomes neuregulin/HER3-driven therapy tolerance in HER2+ breast cancer
+  journal: EMBO Molecular Medicine
+  published: '2024-06-17'
+  type: journal-article
+  pmid: '38886591'
+  pmcid: PMC11251193
+  source: website
+  added: '2026-09-30'
+- doi: 10.1039/d4nr02471k
+  title: Encapsulated mitochondria to reprogram the metabolism of M2-type macrophages for anti-tumor therapy
+  journal: Nanoscale
+  published: '2024'
+  type: journal-article
+  pmid: '39469868'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1073/pnas.2315363121
+  title: Long noncoding RNA LIRIL2R modulates FOXP3 levels and suppressive function of human CD4 + regulatory T cells by regulating IL2RA
+  journal: Proceedings of the National Academy of Sciences
+  published: '2024-05-28'
+  type: journal-article
+  pmid: '38805281'
+  pmcid: PMC11161746
+  source: website
+  added: '2026-09-30'
+- doi: 10.1080/17435889.2024.2405454
+  title: Detection of Tn-antigen in breast and prostate cancer models by VVL-labeled red dye-doped nanoparticles
+  journal: Nanomedicine
+  published: '2024-10-09'
+  type: journal-article
+  pmid: '39382009'
+  pmcid: PMC11520574
+  source: website
+  added: '2026-09-30'
+- doi: 10.1101/2024.01.12.575356
+  title: Body-wide genetic deficiency of poly(ADP-ribose) polymerase 14 sensitizes mice to colitis
+  type: posted-content
+  europepmc_id: PPR787214
+  source: website
+  added: '2026-09-30'
+- doi: 10.1101/2024.05.07.592305
+  title: Early precursor-derived pituitary gland tissue-resident macrophages play a pivotal role in modulating hormonal balance
+  type: posted-content
+  europepmc_id: PPR850830
+  source: website
+  added: '2026-09-30'
+- doi: 10.1101/2024.09.03.609146
+  title: Heat stress sensitizes zebrafish embryos to neurological and cardiac toxicity
+  type: posted-content
+  europepmc_id: PPR905757
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/andr.13777
+  title: Imatinib decreases germ cell survival and germline stem cell proliferation in rodent testis ex vivo and in vitro
+  journal: Andrology
+  published: '2024-10-18'
+  type: journal-article
+  pmid: '39422608'
+  pmcid: PMC12368934
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/febs.17271
+  title: Proteomic profiling identifies a direct interaction between heat shock transcription factor 2 and the focal adhesion adapter talin‐1
+  journal: The FEBS Journal
+  published: '2024-09-16'
+  type: journal-article
+  pmid: '39285620'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1152/ajpcell.00123.2024
+  title: β-Cell keratin 8 maintains islet mechanical integrity, mitochondrial ultrastructure, and β-cell glucose transporter 2 plasma membrane targeting
+  journal: American Journal of Physiology-Cell Physiology
+  published: '2024-08-01'
+  type: journal-article
+  pmid: '38912736'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1152/ajpgi.00220.2023
+  title: Colonocyte keratins stabilize mitochondria and contribute to mitochondrial energy metabolism
+  journal: American Journal of Physiology-Gastrointestinal and Liver Physiology
+  published: '2024-09-01'
+  type: journal-article
+  pmid: '38860856'
+  pmcid: PMC11427106
+  source: website
+  added: '2026-09-30'
+- doi: 10.1242/bio.060428
+  title: Glutaraldehyde-enhanced autofluorescence as a general tool for 3D morphological imaging
+  journal: Biology Open
+  published: '2024-11-11'
+  type: journal-article
+  pmid: '39428988'
+  pmcid: PMC11583915
+  source: website
+  added: '2026-09-30'
+- doi: 10.1242/prelights.39236
+  title: Restoring mechanophenotype reverts malignant properties of ECM-enriched vocal fold cancer
+  type: posted-content
+  source: website
+  added: '2026-09-30'
+- doi: 10.1371/journal.pbio.3002740
+  title: CellTracksColab is a platform that enables compilation, analysis, and exploration of cell tracking data
+  journal: PLOS Biology
+  published: '2024-08-08'
+  type: journal-article
+  pmid: '39116189'
+  pmcid: PMC11335138
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/pharmaceutics16091164
+  title: Reactive Oxygen Species-Regulated Conjugates Based on Poly(jasmine) Lactone for Simultaneous Delivery of Doxorubicin and Docetaxel
+  journal: Pharmaceutics
+  published: '2024-09-03'
+  type: journal-article
+  pmid: '39339200'
+  pmcid: PMC11434831
+  source: website
+  added: '2026-09-30'
+- doi: 10.34133/research.0448
+  title: Utilizing Macrophages Missile for Sulfate-Based Nanomedicine Delivery in Lung Cancer Therapy
+  journal: Research
+  published: '2024-08-14'
+  type: journal-article
+  pmid: '39109249'
+  pmcid: PMC11301451
+  source: website
+  added: '2026-09-30'

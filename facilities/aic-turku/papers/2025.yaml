@@ -1,0 +1,350 @@
+# Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2025 (40).
+# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.
+- doi: 10.1002/adma.202513757
+  title: 'Mitochondria‐Targeted Nanomotor: H 2 S‐Driven Cascade Therapy for Hepatocellular Carcinoma'
+  journal: Advanced Materials
+  published: '2025-12-01'
+  type: journal-article
+  pmid: '41327892'
+  pmcid: PMC12879285
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/advs.202503569
+  title: RAB5A Promotes Active Fluid Wetting by Reprogramming Breast Cancer Spheroid Mechanics
+  journal: Advanced Science
+  published: '2025-07-25'
+  type: journal-article
+  pmid: '40712149'
+  pmcid: PMC12442610
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/path.6405
+  title: 'Spatial profiling of ANO7 in prostate tissue: links to AR‐signalling‐associated lipid metabolism and inflammation'
+  journal: The Journal of Pathology
+  published: '2025-02-20'
+  type: journal-article
+  pmid: '39978863'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/smmd.134
+  title: Biomineralize Mitochondria in Metal‐Organic Frameworks to Promote Mitochondria Transplantation From Non‐Tumorigenic Cells Into Cancer Cells
+  journal: Smart Medicine
+  published: '2025-02-26'
+  type: journal-article
+  pmid: '40059964'
+  pmcid: PMC11862567
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/978-1-0716-4442-3_6
+  title: High-Resolution Imaging of Intracellular Trafficking of B Cell Receptor Using Specific Hybridization Internalization Probe (SHIP)
+  journal: Methods in Molecular Biology
+  published: '2025-03-04'
+  type: book-chapter
+  pmid: '40029516'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.ajpath.2025.02.004
+  title: C5aR1 Promotes Invasion, Metastasis, and Poor Prognosis in Cutaneous Squamous Cell Carcinoma
+  journal: The American Journal of Pathology
+  published: 2025-06
+  type: journal-article
+  pmid: '40056975'
+  pmcid: PMC12163391
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.celrep.2024.115227
+  title: Early precursor-derived pituitary gland tissue-resident macrophages play a pivotal role in modulating hormonal balance
+  journal: Cell Reports
+  published: 2025-02
+  type: journal-article
+  pmid: '39841599'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.cub.2025.10.081
+  title: Calponin isoforms define the cell-type-specific organization and dynamics of actomyosin bundles
+  journal: Current Biology
+  published: 2025-12
+  type: journal-article
+  pmid: '41297546'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.devcel.2025.06.025
+  title: EPLINα controls integrin recycling from Rab21 endosomes to drive breast cancer cell migration
+  journal: Developmental Cell
+  published: 2025-11
+  type: journal-article
+  pmid: '40669465'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.isci.2025.111745
+  title: Nuclear talin-1 provides a bridge between cell adhesion and gene expression
+  journal: iScience
+  published: 2025-02
+  type: journal-article
+  pmid: '39898029'
+  pmcid: PMC11787672
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.isci.2025.113879
+  title: Mechanosensitive interactions between Jag1 and Myo1c control Jag1 trafficking in endothelial cells
+  journal: iScience
+  published: 2025-12
+  type: journal-article
+  pmid: '41321631'
+  pmcid: PMC12663732
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.isci.2025.113974
+  title: Proteomics- and BRET- screens identify SPRY2 as a Ras effector that impacts its membrane organization
+  journal: iScience
+  published: 2025-12
+  type: journal-article
+  pmid: '41362608'
+  pmcid: PMC12682140
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.jid.2025.04.007
+  title: Expression of C1q by Macrophages and Fibroblasts in Tumor Microenvironment Is Associated with Progression and Metastasis of Cutaneous Squamous Cell Carcinoma
+  journal: Journal of Investigative Dermatology
+  published: 2025-11
+  type: journal-article
+  pmid: '40311866'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.matdes.2025.114920
+  title: Nanotopography-driven changes in focal adhesion morphology of human dermal fibroblast cells on inkjet-printed hierarchically structured hemitoroids
+  journal: Materials &amp; Design
+  published: 2025-11
+  type: journal-article
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.mcpro.2025.101028
+  title: Extracellular Vesicles Bearing Vimentin Drive Epithelial–Mesenchymal Transition
+  journal: Molecular &amp; Cellular Proteomics
+  published: 2025-12
+  type: journal-article
+  pmid: '40618999'
+  pmcid: PMC12719745
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.micron.2025.103847
+  title: High-resolution live imaging of tardigrade response to anoxia
+  journal: Micron
+  published: 2025-09
+  type: journal-article
+  pmid: '40367672'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.stemcr.2025.102538
+  title: Integrin β1 activity controls colony morphology during human pluripotent stem cell state transitions
+  journal: Stem Cell Reports
+  published: 2025-07
+  type: journal-article
+  pmid: '40541174'
+  pmcid: PMC12277811
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.xhgg.2025.100446
+  title: The ERBB2 c.1795C>T, p.Arg599Cys variant is associated with left ventricular outflow tract obstruction defects in humans
+  journal: Human Genetics and Genomics Advances
+  published: 2025-07
+  type: journal-article
+  pmid: '40329538'
+  pmcid: PMC12145837
+  source: website
+  added: '2026-09-30'
+- doi: 10.1021/cbmi.5c00207
+  title: Development of an In Vitro Assay for Evaluation of Intracellular SPAAC Reactions Using Hoechst-DBCO
+  journal: Chemical &amp; Biomedical Imaging
+  published: '2025-12-29'
+  type: journal-article
+  pmid: '42222556'
+  pmcid: PMC13217358
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41467-025-64981-z
+  title: Breast cancer remodels lymphatics in sentinel lymph nodes
+  journal: Nature Communications
+  published: '2025-11-17'
+  type: journal-article
+  pmid: '41249124'
+  pmcid: PMC12623973
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41556-025-01663-4
+  title: Dynamic regulation of integrin β1 phosphorylation supports invasion of breast cancer cells
+  journal: Nature Cell Biology
+  published: '2025-05-26'
+  type: journal-article
+  pmid: '40419795'
+  pmcid: PMC12173946
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41592-024-02562-6
+  title: Efficiently accelerated bioimage analysis with NanoPyx, a Liquid Engine-powered Python framework
+  journal: Nature Methods
+  published: '2025-01-02'
+  type: journal-article
+  pmid: '39747509'
+  pmcid: PMC11810771
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41598-024-83349-9
+  title: Loss of Sirtuin 7 impairs cell motility and proliferation and enhances S-phase cell arrest after 5-fluorouracil treatment in head and neck cancer
+  journal: Scientific Reports
+  published: '2025-01-16'
+  type: journal-article
+  pmid: '39820554'
+  pmcid: PMC11739472
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41598-024-83954-8
+  title: Enhanced antibody responses in CD19-Cre mice
+  journal: Scientific Reports
+  published: '2025-01-08'
+  type: journal-article
+  pmid: '39779739'
+  pmcid: PMC11711458
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41598-025-92841-9
+  title: Increased primary breast tumor expression of CD73 is associated with development of bone metastases and is a potential biomarker for adjuvant bisphosphonate use
+  journal: Scientific Reports
+  published: '2025-03-19'
+  type: journal-article
+  pmid: '40108234'
+  pmcid: PMC11923362
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s44321-025-00266-8
+  title: LIMA1-alpha staining predicts curative intent surgery response in HPV negative head and neck cancer
+  journal: EMBO Molecular Medicine
+  published: '2025-07-17'
+  type: journal-article
+  pmid: '40676267'
+  pmcid: PMC12340046
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/febs.70197
+  title: Phosphoproteomic analysis reveals the diversity of signaling behind E rb B ‐inhibitor‐induced phenotypes
+  journal: The FEBS Journal
+  published: '2025-07-24'
+  type: journal-article
+  pmid: '40705969'
+  pmcid: PMC12713336
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/febs.70243
+  title: Newly identified properties of known pharmaceuticals and myxobacterial small molecules revealed by screening for autophagy modulators
+  journal: The FEBS Journal
+  published: '2025-08-28'
+  type: journal-article
+  pmid: '40875533'
+  pmcid: PMC13080243
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/nph.70114
+  title: Flavodiiron proteins associate pH ‐dependently with the thylakoid membrane for ferredoxin‐1‐powered O 2 photoreduction
+  journal: New Phytologist
+  published: '2025-04-03'
+  type: journal-article
+  pmid: '40178019'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/nph.70328
+  title: Inorganic carbon levels regulate growth via SigC signaling cascade in cyanobacteria
+  journal: New Phytologist
+  published: '2025-06-25'
+  type: journal-article
+  pmid: '40566868'
+  pmcid: PMC12329169
+  source: website
+  added: '2026-09-30'
+- doi: 10.1126/sciadv.ady1289
+  title: HSF2 drives breast cancer progression by acting as a stage-specific switch between proliferation and invasion
+  journal: Science Advances
+  published: '2025-09-05'
+  type: journal-article
+  pmid: '40901953'
+  pmcid: PMC12407055
+  source: website
+  added: '2026-09-30'
+- doi: 10.1126/sciimmunol.adr6787
+  title: COVID-19 vaccine type controls stromal reprogramming in draining lymph nodes
+  journal: Science Immunology
+  published: '2025-08-15'
+  type: journal-article
+  pmid: '40815672'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1177/08853282251313503
+  title: Gingival keratinocyte adhesion on atomic layer-deposited hydroxyapatite coated titanium
+  journal: Journal of Biomaterials Applications
+  published: '2025-01-08'
+  type: journal-article
+  pmid: '39773092'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1177/08853282251334902
+  title: Anti-adherence capacity of phytosphingosine on titanium surfaces
+  journal: Journal of Biomaterials Applications
+  published: '2025-04-20'
+  type: journal-article
+  pmid: '40253606'
+  pmcid: PMC12267862
+  source: website
+  added: '2026-09-30'
+- doi: 10.1186/s12964-025-02081-7
+  title: ANO7 expression in the prostate modulates mitochondrial function and lipid metabolism
+  journal: Cell Communication and Signaling
+  published: '2025-02-08'
+  type: journal-article
+  pmid: '39923095'
+  pmcid: PMC11807338
+  source: website
+  added: '2026-09-30'
+- doi: 10.1371/journal.ppat.1013108
+  title: Heat shock factor 2 regulates oncogenic gamma-herpesvirus gene expression by remodeling the chromatin at the ORF50 and BZLF1 promoter
+  journal: PLOS Pathogens
+  published: '2025-04-17'
+  type: journal-article
+  pmid: '40245053'
+  pmcid: PMC12047821
+  source: website
+  added: '2026-09-30'
+- doi: 10.1530/rep-25-0297
+  title: The late chromatoid body component TSSK2 is involved in translational regulation in elongating spermatids in mice
+  journal: Reproduction
+  published: '2025-10-03'
+  type: journal-article
+  pmid: '41042594'
+  pmcid: PMC12529751
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/nano15100716
+  title: Proliferation of Human Cervical Cancer Cells Responds to Surface Properties of Bicomponent Polymer Coatings
+  journal: Nanomaterials
+  published: '2025-05-09'
+  type: journal-article
+  pmid: '40423106'
+  pmcid: PMC12114405
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/nano15120887
+  title: Impact of Atomic Layer-Deposited Hydroxyapatite-Coated Titanium on Expression of Focal Adhesion Molecules of Human Gingival Fibroblasts
+  journal: Nanomaterials
+  published: '2025-06-08'
+  type: journal-article
+  pmid: '40559250'
+  pmcid: PMC12195992
+  source: website
+  added: '2026-09-30'
+- doi: 10.34133/research.0924
+  title: Solid-Liquid Interface Lubricating Hydrogels for Tendon-Bone Healing
+  journal: Research
+  published: '2025-10-23'
+  type: journal-article
+  pmid: '41143113'
+  pmcid: PMC12547148
+  source: website
+  added: '2026-09-30'

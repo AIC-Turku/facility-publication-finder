@@ -1,0 +1,34 @@
+name: max_recall
+
+resume: true
+
+on_error: continue
+
+discovery:
+  - institutional
+  - strategy: known_users_orcid
+    options:
+      year_pad: 1
+  - europepmc_facility
+  - crossref_awards
+  - openalex_facility
+  - strategy: datacite
+    options:
+      queries:
+        - '"Advanced Imaging Core"'
+        - '"Cell Imaging and Cytometry Core"'
+        - '"Turku Bioimaging"'
+
+text:
+  mode: first_success
+  cache_successes: true
+  strategies:
+    - cache
+    - utupub
+    - abo_pdf
+    - europepmc
+    - crossref_fulltext
+    - openalex_oa
+    - publisher_html
+
+screen: true

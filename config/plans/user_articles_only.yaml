@@ -1,0 +1,28 @@
+name: user_articles_only
+
+on_error: continue
+workers: 4
+resume: true
+
+discovery:
+  - institutional
+  - strategy: known_users_orcid
+    options:
+      year_pad: 1
+      include_types:
+        - article
+      exclude_retracted: true
+      exclude_paratext: true
+
+text:
+  mode: first_success
+  cache_successes: true
+  strategies:
+    - cache
+    - utupub
+    - abo_pdf
+    - europepmc
+    - crossref_fulltext
+    - openalex_oa
+
+screen: true

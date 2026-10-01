@@ -1,0 +1,215 @@
+# Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2012 (25).
+# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.
+- doi: 10.1002/art.33391
+  title: Enhanced phosphorylation of STAT‐1 is dependent on double‐stranded RNA–dependent protein kinase signaling in HLA–B27–expressing U937 monocytic cells
+  journal: Arthritis &amp; Rheumatism
+  published: '2012-02-28'
+  type: journal-article
+  pmid: '21968657'
+  pmcid: PMC3271176
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/jcb.24088
+  title: Phenotypic characterization of transgenic mice harboring Nf1+/− or Nf1−/− osteoclasts in otherwise Nf1+/+ background
+  journal: Journal of Cellular Biochemistry
+  published: '2012-04-10'
+  type: journal-article
+  pmid: '22307743'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/stem.1013
+  title: RNA‐Binding Protein L1TD1 Interacts with LIN28 via RNA and is Required for Human Embryonic Stem Cell Self‐Renewal and Cancer Cell Proliferation
+  journal: STEM CELLS
+  published: '2012-02-14'
+  type: journal-article
+  pmid: '22162396'
+  pmcid: PMC3507993
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/stem.1077
+  title: Identification and Regulation of a Stage‐Specific Stem Cell Niche Enriched by Nanog‐Positive Spermatogonial Stem Cells in the Mouse Testis
+  journal: STEM CELLS
+  published: '2012-04-09'
+  type: journal-article
+  pmid: '22388986'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.bbrc.2012.05.083
+  title: Spontaneous curvature of ganglioside GM1 – Effect of cross-linking
+  journal: Biochemical and Biophysical Research Communications
+  published: 2012-06
+  type: journal-article
+  pmid: '22634013'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.eplepsyres.2012.01.011
+  title: Histamine 1 receptor knock out mice show age-dependent susceptibility to status epilepticus and consequent neuronal damage
+  journal: Epilepsy Research
+  published: 2012-06
+  type: journal-article
+  pmid: '22348791'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.febslet.2012.11.006
+  title: Novel heterocyst‐specific flavodiiron proteins in Anabaena sp. PCC 7120
+  journal: FEBS Letters
+  published: '2012-11-21'
+  type: journal-article
+  pmid: '23178714'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.micpath.2011.12.002
+  title: Chlamydia pneumoniae entry into epithelial cells by clathrin-independent endocytosis
+  journal: Microbial Pathogenesis
+  published: 2012-03
+  type: journal-article
+  pmid: '22203235'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.yexcr.2011.12.014
+  title: The flavonoid eupatorin inactivates the mitotic checkpoint leading to polyploidy and apoptosis
+  journal: Experimental Cell Research
+  published: 2012-03
+  type: journal-article
+  pmid: '22227008'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/ja.2012.49
+  title: Combining biofilm matrix measurements with biomass and viability assays in susceptibility assessments of antimicrobials against Staphylococcus aureus biofilms
+  journal: The Journal of Antibiotics
+  published: '2012-06-27'
+  type: journal-article
+  pmid: '22739537'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/nmeth.2047
+  title: 'BioImageXD: an open, general-purpose and high-throughput image-processing platform'
+  journal: Nature Methods
+  published: '2012-06-28'
+  type: journal-article
+  pmid: '22743773'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1055/s-0032-1320488
+  title: Antibacterial and anti-biofilm activities of cinchona alkaloid derivatives against Staphylococcus aureus
+  journal: Planta Medica
+  published: '2012-07-19'
+  type: journal-article
+  source: website
+  added: '2026-09-30'
+- doi: 10.1074/jbc.m111.299537
+  title: Interaction with ErbB4 Promotes Hypoxia-inducible Factor-1α Signaling
+  journal: Journal of Biological Chemistry
+  published: 2012-03
+  type: journal-article
+  pmid: '22308027'
+  pmcid: PMC3322979
+  source: website
+  added: '2026-09-30'
+- doi: 10.1074/jbc.m112.374348
+  title: Canonical Transient Receptor Potential Channel 2 (TRPC2) as a Major Regulator of Calcium Homeostasis in Rat Thyroid FRTL-5 Cells
+  journal: Journal of Biological Chemistry
+  published: 2012-12
+  type: journal-article
+  pmid: '23144458'
+  pmcid: PMC3531749
+  source: website
+  added: '2026-09-30'
+- doi: 10.1091/mbc.e12-05-0419
+  title: Nucleolar AATF regulates c-Jun–mediated apoptosis
+  journal: Molecular Biology of the Cell
+  published: 2012-11
+  type: journal-article
+  pmid: '22933572'
+  pmcid: PMC3484108
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/j.1365-3083.2011.02648.x
+  title: Altered PKR Signalling and C / EBPβ Expression is Associated with HLA‐B27 Expression in Monocytic Cells
+  journal: Scandinavian Journal of Immunology
+  published: '2012-01-10'
+  type: journal-article
+  pmid: '21988375'
+  pmcid: PMC3271165
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/j.1600-0854.2012.01327.x
+  title: Distinct Recycling of Active and Inactive β1 Integrins
+  journal: Traffic
+  published: '2012-01-31'
+  type: journal-article
+  pmid: '22222055'
+  pmcid: PMC3531618
+  source: website
+  added: '2026-09-30'
+- doi: 10.1128/iai.05528-11
+  title: Flotillin-1 (Reggie-2) Contributes to Chlamydia pneumoniae Growth and Is Associated with Bacterial Inclusion
+  journal: Infection and Immunity
+  published: 2012-03
+  type: journal-article
+  pmid: '22215737'
+  pmcid: PMC3294677
+  source: website
+  added: '2026-09-30'
+- doi: 10.1128/mcb.00713-12
+  title: c-Jun N-Terminal Kinase Phosphorylation of MARCKSL1 Determines Actin Stability and Migration in Neurons and in Cancer Cells
+  journal: Molecular and Cellular Biology
+  published: '2023-03-20'
+  type: journal-article
+  pmid: '22751924'
+  pmcid: PMC3421996
+  source: website
+  added: '2026-09-30'
+- doi: 10.1186/1556-276x-7-358
+  title: Shape engineering vs organic modification of inorganic nanoparticles as a tool for enhancing cellular internalization
+  journal: Nanoscale Research Letters
+  published: '2012-07-01'
+  type: journal-article
+  pmid: '22747910'
+  pmcid: PMC3519764
+  source: website
+  added: '2026-09-30'
+- doi: 10.1189/jlb.1211588
+  title: Identification of a region in p47phox/NCF1 crucial for phagocytic NADPH oxidase (NOX2) activation
+  journal: Journal of Leukocyte Biology
+  published: '2012-12-27'
+  type: journal-article
+  pmid: '23271700'
+  pmcid: PMC3579024
+  source: website
+  added: '2026-09-30'
+- doi: 10.1210/me.2012-1171
+  title: 'Communication Between the Calcium and cAMP Pathways Regulate the Expression of the TSH Receptor: TRPC2 in the Center of Action'
+  journal: Molecular Endocrinology
+  published: '2012-12-01'
+  type: journal-article
+  pmid: '23015753'
+  pmcid: PMC5416954
+  source: website
+  added: '2026-09-30'
+- doi: 10.1530/erc-12-0092
+  title: Sphingosine 1-phosphate and human ether-a′-go-go-related gene potassium channels modulate migration in human anaplastic thyroid cancer cells
+  journal: Endocrine-Related Cancer
+  published: 2012-10
+  type: journal-article
+  pmid: '22889737'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1681/asn.2011020160
+  title: ErbB4 Modulates Tubular Cell Polarity and Lumen Diameter during Kidney Development
+  journal: Journal of the American Society of Nephrology
+  published: 2012-01
+  type: journal-article
+  pmid: '22076439'
+  pmcid: PMC3269924
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/toxins4111008
+  title: Comparative Cellular Toxicity of Hydrophilic and Hydrophobic Microcystins on Caco-2 Cells
+  journal: Toxins
+  published: '2012-10-25'
+  type: journal-article
+  pmid: '23202304'
+  pmcid: PMC3509696
+  source: website
+  added: '2026-09-30'

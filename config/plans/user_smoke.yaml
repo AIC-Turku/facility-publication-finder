@@ -1,0 +1,19 @@
+name: user_smoke
+
+on_error: continue
+workers: 2
+
+discovery:
+  - strategy: known_users_orcid
+    options:
+      year_pad: 0
+      timeout: 10
+      max_pages: 2
+
+text:
+  mode: first_success
+  cache_successes: false
+  strategies:
+    - metadata_only
+
+screen: false

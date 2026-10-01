@@ -1,0 +1,373 @@
+# Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2020 (45).
+# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.
+- doi: 10.1002/anie.202010937
+  title: Self‐Synthesizing Nanorods from Dynamic Combinatorial Libraries against Drug Resistant Cancer
+  journal: Angewandte Chemie International Edition
+  published: '2020-12-16'
+  type: journal-article
+  pmid: '33112477'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/cm.21634
+  title: Exosomal vimentin from adipocyte progenitors accelerates wound healing
+  journal: Cytoskeleton
+  published: '2020-10-17'
+  type: journal-article
+  pmid: '32978896'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/eji.201948432
+  title: CD73 contributes to anti‐inflammatory properties of afferent lymphatic endothelial cells in humans and mice
+  journal: European Journal of Immunology
+  published: '2020-10-29'
+  type: journal-article
+  pmid: '32970335'
+  pmcid: PMC7821194
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/eji.202048531
+  title: Fetal‐derived macrophages persist and sequentially maturate in ovaries after birth in mice
+  journal: European Journal of Immunology
+  published: '2020-06-09'
+  type: journal-article
+  pmid: '32459864'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/eji.202048714
+  title: Plasmacytoid dendritic cells regulate host immune response to Citrobacter rodentium induced colitis in colon‐draining lymph nodes
+  journal: European Journal of Immunology
+  published: '2020-11-30'
+  type: journal-article
+  pmid: '33078848'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/pros.23985
+  title: Interaction between prostate cancer cells and prostate fibroblasts promotes accumulation and proteolytic processing of basement membrane proteins
+  journal: The Prostate
+  published: '2020-05-04'
+  type: journal-article
+  pmid: '32364250'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s00259-020-05115-z
+  title: Evaluation of [18F]F-DPA as a target for TSPO in head and neck cancer under normal conditions and after radiotherapy
+  journal: European Journal of Nuclear Medicine and Molecular Imaging
+  published: '2020-12-19'
+  type: journal-article
+  pmid: '33340054'
+  pmcid: PMC8113193
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s11605-019-04425-4
+  title: Preperitoneal Fat Grafting Inhibits the Formation of Intra-abdominal Adhesions in Mice
+  journal: Journal of Gastrointestinal Surgery
+  published: 2020-12
+  type: journal-article
+  pmid: '31823326'
+  pmcid: PMC7674570
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s13402-020-00562-0
+  title: Effects of FGFR inhibitors TKI258, BGJ398 and AZD4547 on breast cancer cells in 2D, 3D and tissue explant cultures
+  journal: Cellular Oncology
+  published: '2020-10-29'
+  type: journal-article
+  pmid: '33119860'
+  pmcid: PMC7907049
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.biocel.2020.105878
+  title: 'Keratin intermediate filaments in the colon: guardians of epithelial homeostasis'
+  journal: The International Journal of Biochemistry &amp; Cell Biology
+  published: 2020-12
+  type: journal-article
+  pmid: '33152513'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.celrep.2019.12.037
+  title: Heat Shock Factor 2 Protects against Proteotoxicity by Maintaining Cell-Cell Adhesion
+  journal: Cell Reports
+  published: 2020-01
+  type: journal-article
+  pmid: '31940498'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.ejpb.2019.12.015
+  title: Nanoparticles carrying fingolimod and methotrexate enables targeted induction of apoptosis and immobilization of invasive thyroid cancer
+  journal: European Journal of Pharmaceutics and Biopharmaceutics
+  published: 2020-03
+  type: journal-article
+  pmid: '31917332'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.ejphar.2020.173186
+  title: Melanocortin 3 receptor activation with [D-Trp8]-γ-MSH suppresses inflammation in apolipoprotein E deficient mice
+  journal: European Journal of Pharmacology
+  published: 2020-08
+  type: journal-article
+  pmid: '32416182'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.isci.2020.100947
+  title: CIP2A Constrains Th17 Differentiation by Modulating STAT3 Signaling
+  journal: iScience
+  published: 2020-03
+  type: journal-article
+  pmid: '32171124'
+  pmcid: PMC7068643
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.isci.2020.101507
+  title: Integrin Binding Dynamics Modulate Ligand-Specific Mechanosensing in Mammary Gland Fibroblasts
+  journal: iScience
+  published: 2020-09
+  type: journal-article
+  pmid: '32896770'
+  pmcid: PMC7482011
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.jacbts.2020.01.008
+  title: Therapeutic Antibody Against Phosphorylcholine Preserves Coronary Function and Attenuates Vascular 18F-FDG Uptake in Atherosclerotic Mice
+  journal: 'JACC: Basic to Translational Science'
+  published: 2020-04
+  type: journal-article
+  pmid: '32368695'
+  pmcid: PMC7188869
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.matbio.2019.09.001
+  title: H-Ras activation and fibroblast-induced TGF-β signaling promote laminin-332 accumulation and invasion in cutaneous squamous cell carcinoma
+  journal: Matrix Biology
+  published: 2020-05
+  type: journal-article
+  pmid: '31655292'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.mimet.2020.105994
+  title: Coculture of P. aeruginosa and S. aureus on cell derived matrix - An in vitro model of biofilms in infected wounds
+  journal: Journal of Microbiological Methods
+  published: 2020-08
+  type: journal-article
+  pmid: '32593628'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.xpro.2020.100021
+  title: Single-Cell Transcriptomics of Human Lymph Node Stroma
+  journal: STAR Protocols
+  published: 2020-06
+  type: journal-article
+  pmid: '33111075'
+  pmcid: PMC7580237
+  source: website
+  added: '2026-09-30'
+- doi: 10.1021/acs.biomac.0c00107
+  title: 'Human Dermal Fibroblast Viability and Adhesion on Cellulose Nanomaterial Coatings: Influence of Surface Characteristics'
+  journal: Biomacromolecules
+  published: '2020-03-09'
+  type: journal-article
+  pmid: '32150393'
+  pmcid: PMC7157835
+  source: website
+  added: '2026-09-30'
+- doi: 10.1021/scimeetings.0c02897
+  title: Structure activity relationship of 3-Methylcytidine-5’-α,β-Methylenediphosphates as CD73 inhibitors
+  type: posted-content
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41385-019-0230-9
+  title: Robo4 contributes to the turnover of Peyer's patch B cells
+  journal: Mucosal Immunology
+  published: 2020-03
+  type: journal-article
+  pmid: '31772321'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41467-020-18206-0
+  title: Generation, localization and functions of macrophages during the development of testis
+  journal: Nature Communications
+  published: '2020-09-01'
+  type: journal-article
+  pmid: '32873797'
+  pmcid: PMC7463013
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41598-020-70394-3
+  title: Radiosynthesis and preclinical evaluation of [68Ga]Ga-NOTA-folate for PET imaging of folate receptor β-positive macrophages
+  journal: Scientific Reports
+  published: '2020-08-12'
+  type: journal-article
+  pmid: '32788595'
+  pmcid: PMC7423886
+  source: website
+  added: '2026-09-30'
+- doi: 10.1080/19420862.2020.1838036
+  title: Fully human anti-CD39 antibody potently inhibits ATPase activity in cancer cells via uncompetitive allosteric mechanism
+  journal: mAbs
+  published: '2020-11-04'
+  type: journal-article
+  pmid: '33146056'
+  pmcid: PMC7646477
+  source: website
+  added: '2026-09-30'
+- doi: 10.1083/jcb.201906204
+  title: MASTL promotes cell contractility and motility through kinase-independent signaling
+  journal: Journal of Cell Biology
+  published: '2020-04-20'
+  type: journal-article
+  pmid: '32311005'
+  pmcid: PMC7265322
+  source: website
+  added: '2026-09-30'
+- doi: 10.1093/braincomms/fcaa002
+  title: Monotherapy efficacy of blood–brain barrier permeable small molecule reactivators of protein phosphatase 2A in glioblastoma
+  journal: Brain Communications
+  published: '2020-01-11'
+  type: journal-article
+  pmid: '32954276'
+  pmcid: PMC7425423
+  source: website
+  added: '2026-09-30'
+- doi: 10.1093/nar/gkaa460
+  title: DICER regulates the expression of major satellite repeat transcripts and meiotic chromosome segregation during spermatogenesis
+  journal: Nucleic Acids Research
+  published: '2020-06-02'
+  type: journal-article
+  pmid: '32484548'
+  pmcid: PMC7367195
+  source: website
+  added: '2026-09-30'
+- doi: 10.1096/fj.202001046r
+  title: Protein synthesis is suppressed in sporadic and familial Parkinson’s disease by LRRK2
+  journal: The FASEB Journal
+  published: '2020-09-14'
+  type: journal-article
+  pmid: '32926469'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1101/2020.05.05.078733
+  title: Myosin-X and talin modulate integrin activity at filopodia tips
+  type: posted-content
+  europepmc_id: PPR158983
+  source: website
+  added: '2026-09-30'
+- doi: 10.1101/2020.05.19.103606
+  title: Talin Rod Domain Containing Protein 1 (TLNRD1) is a novel actin-bundling protein which promotes filopodia formation
+  type: posted-content
+  europepmc_id: PPR164999
+  source: website
+  added: '2026-09-30'
+- doi: 10.1101/2020.06.10.143735
+  title: A feed-forward loop between SorLA and HER3 determines heregulin response and neratinib resistance
+  type: posted-content
+  europepmc_id: PPR174399
+  source: website
+  added: '2026-09-30'
+- doi: 10.1101/2020.10.05.323295
+  title: Cargo-specific recruitment in clathrin and dynamin-independent endocytosis
+  type: posted-content
+  europepmc_id: PPR222171
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/pce.13932
+  title: 'Root‐type ferredoxin‐NADP+ oxidoreductase isoforms in Arabidopsis thaliana: Expression patterns, location and stress responses'
+  journal: Plant, Cell &amp; Environment
+  published: '2020-11-18'
+  type: journal-article
+  pmid: '33131061'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1177/2472555219884033
+  title: Medium-Throughput Detection of Hsp90/Cdc37 Protein–Protein Interaction Inhibitors Using a Split Renilla Luciferase-Based Assay
+  journal: SLAS Discovery
+  published: 2020-02
+  type: journal-article
+  pmid: '31662027'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1186/s12881-020-01171-2
+  title: Two novel mutations in the DNAH11 gene in primary ciliary dyskinesia (CILD7) with considerable variety in the clinical and beating cilia phenotype
+  journal: BMC Medical Genetics
+  published: '2020-11-26'
+  type: journal-article
+  pmid: '33243178'
+  pmcid: PMC7690114
+  source: website
+  added: '2026-09-30'
+- doi: 10.1242/jcs.240713
+  title: The cell biologist's guide to super-resolution microscopy
+  journal: Journal of Cell Science
+  published: '2020-06-11'
+  type: journal-article
+  pmid: '32527967'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1242/jcs.241463
+  title: Compartmentalization of adenosine metabolism in cancer cells and its modulation during acute hypoxia
+  journal: Journal of Cell Science
+  published: '2020-05-29'
+  type: journal-article
+  pmid: '32317394'
+  pmcid: PMC10681022
+  source: website
+  added: '2026-09-30'
+- doi: 10.1242/jcs.242909
+  title: Mechano-responsiveness of fibrillar adhesions on stiffness-gradient gels
+  journal: Journal of Cell Science
+  published: '2020-06-22'
+  type: journal-article
+  pmid: '32393601'
+  pmcid: PMC7328166
+  source: website
+  added: '2026-09-30'
+- doi: 10.12688/f1000research.27019.2
+  title: Automated cell tracking using StarDist and TrackMate
+  journal: F1000Research
+  published: '2020-12-21'
+  type: journal-article
+  europepmc_id: PPR255328
+  source: website
+  added: '2026-09-30'
+- doi: 10.1371/journal.pone.0227466
+  title: Evolutionary conservation and post-translational control of S-adenosyl-L-homocysteine hydrolase in land plants
+  journal: PLOS ONE
+  published: '2020-07-17'
+  type: journal-article
+  pmid: '32678822'
+  pmcid: PMC7367456
+  source: website
+  added: '2026-09-30'
+- doi: 10.1523/eneuro.0303-19.2019
+  title: Optogenetic Control of Spine-Head JNK Reveals a Role in Dendritic Spine Regression
+  journal: eneuro
+  published: '2020-01-14'
+  type: journal-article
+  pmid: '31937523'
+  pmcid: PMC7053173
+  source: website
+  added: '2026-09-30'
+- doi: 10.3389/fimmu.2020.00166
+  title: Age Distribution of Multiple Functionally Relevant Subsets of CD4+ T Cells in Human Blood Using a Standardized and Validated 14-Color EuroFlow Immune Monitoring Tube
+  journal: Frontiers in Immunology
+  published: '2020-02-27'
+  type: journal-article
+  pmid: '32174910'
+  pmcid: PMC7056740
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/cells9020440
+  title: Impact of JNK and Its Substrates on Dendritic Spine Morphology
+  journal: Cells
+  published: '2020-02-14'
+  type: journal-article
+  pmid: '32074971'
+  pmcid: PMC7072711
+  source: website
+  added: '2026-09-30'
+- doi: 10.3791/61800
+  title: Transillumination-Assisted Dissection of Specific Stages of the Mouse Seminiferous Epithelial Cycle for Downstream Immunostaining Analyses
+  journal: Journal of Visualized Experiments
+  published: '2020-10-07'
+  type: journal-article
+  pmid: '33104058'
+  source: website
+  added: '2026-09-30'

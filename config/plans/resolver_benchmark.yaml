@@ -1,0 +1,19 @@
+name: resolver_benchmark
+
+on_error: continue
+
+discovery:
+  - institutional
+
+text:
+  mode: all
+  cache_successes: false
+  strategies:
+    - utupub
+    - abo_pdf
+    - europepmc
+    - publisher_html
+    - crossref_fulltext
+    - openalex_oa
+
+screen: true

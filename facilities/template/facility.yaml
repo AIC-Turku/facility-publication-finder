@@ -1,0 +1,140 @@
+# Template for a new facility. Copy this folder to facilities/<your-facility>/, fill in the
+# FILL IN parts, and set PUBS_FACILITY=<your-facility> (the notebooks have a FACILITY setting).
+# `aic-pubs check-facility` shows what was loaded. facilities/aic-turku/ is a complete,
+# tuned example with comments on why each rule exists.
+#
+# Patterns are Python regular expressions, matched case-insensitively against full text in
+# which PDF line-break hyphenation has been undone and whitespace collapsed. (?-i:...) makes
+# a part case-sensitive (acronyms such as STED).
+
+facility:
+  name: FILL IN - Example Imaging Facility, Example University
+  # optional: a public page listing the facility's publications (benchmark only)
+  website_publications: ""
+  website_core_slug: ""
+  # optional: instrument records (AIC-Turku-database format) for `aic-pubs coverage`
+  instrument_database: ""
+
+# Local publication repositories: every DOI-bearing record of the year is screened.
+# Adapters: dspace7 (DSpace 7 REST) and pure_oai (Pure OAI-PMH). Remove what you do not have.
+institutional_sources:
+  - name: repository                 # FILL IN: short name, shown in the sheets
+    adapter: dspace7
+    base_url: https://repository.example.edu/server/api
+    query: "dc.date.issued:{year} AND dc.identifier.doi:[* TO *]"
+    doi_fields: [dc.identifier.doi, dc.relation.doi]   # metadata fields that hold the DOI
+    science_fields_only: false       # true only with Finnish field-of-science codes
+  # - name: portal
+  #   adapter: pure_oai
+  #   base_url: https://research.example.edu/ws/oai
+  #   set: "publications:year{year}"
+  #   author_list_complete: false
+
+institutional_fields: all            # "science" applies the field-of-science gate above
+
+# FILL IN: every way your facility is credited (current and historical names).
+acknowledgement_patterns:
+  - example imaging facility
+  - imaging facility.{0,80}example university
+
+# FILL IN: searched in Europe PMC acknowledgement/methods sections, any affiliation.
+europepmc_search_terms:
+  - Example Imaging Facility
+europepmc_grant_numbers: []          # infrastructure grant numbers users are asked to quote
+
+# A facility-name match in these contexts is not evidence of use.
+false_positive_contexts:
+  # author-affiliation lines naming the facility
+  affiliation: (^|\d\s*|[,;]\s*)example imaging facility,? example university
+  # flowing_software: ...            # (AIC only: a free tool cited worldwide)
+
+# FILL IN: author-affiliation postal addresses (not acknowledgements).
+postal_patterns: \b12345 Example City\b
+
+# FILL IN: removed before embedding (facility names, umbrella networks, thanks words).
+facility_name_terms: example imaging facility|imaging facilit|acknowledg|thank|grateful|funded|grant
+
+# Imaging credited to someone else (lowers the score).
+other_facilities:
+  - another imaging unit
+generic_imaging_facility: (light |optical |confocal |bio ?|advanced )?(imaging|microscopy)( research)? (core|facilit|platform|unit|cent(er|re)|network|infrastructure)
+not_light_microscopy: electron microscop|\bTEM\b|\bSEM\b|histolog|PET cent|MRI
+
+# Supporting networks (weak evidence on their own).
+network_patterns:
+  - euro-?bio ?imaging
+other_local_imaging: []
+
+microscopy_terms:
+  - microscop
+  - confocal
+  - spinning[- ]?disk
+  - widefield
+  - super-?resolution
+  - \bSTED\b
+  - \bTIRF
+  - light[- ]?sheet
+  - live[- ]?cell imaging
+  - immunofluorescen
+  - time[- ]?lapse imaging
+
+component_window_chars: 600
+
+# Score weights; see facilities/aic-turku/facility.yaml for what each one means.
+score:
+  acknowledgement: 10
+  strong_instrument: 4
+  component: 1
+  component_max: 4
+  weak_instrument_with_components: 3
+  specialist_technique: 1
+  specialist_technique_max: 3
+  local_email: 1
+  credited_elsewhere: -5
+  affiliation_only: 0
+  report: 10
+  check: 5
+  single_local_author: -2
+  many_local_authors: 1
+  life_science_unit: 1
+  non_life_science_field: -3
+  review: -3
+  preprint: -2
+  not_a_paper: -6
+  instrument_named_with_turku: 1     # an instrument sentence names a local place
+  instrument_named_elsewhere: -2
+  repeat_user: 2
+  staff_thanked: 4
+  staff_author: 3
+  group_booked: 2
+  booked_instrument_used: 3
+
+facility_staff: []                   # keep empty: the staff list is a private input
+
+life_science_fields: []              # field-of-science code prefixes, if your repository has them
+life_science_units: bioscience|biomedicine|cell biology|biochem|medicin|medical|pharma|biology|molecular|clinical|oncolog|immunolog|patholog|biotech|physiology|neuro
+review_title: \b(review|perspective|overview|primer|commentary|editorial)\b
+dataset_doi_prefixes: ["10.5281/", "10.6084/", "10.4121/", "10.17632/", "10.5061/"]
+preprint_doi_prefixes: ["10.1101/", "10.21203/", "10.20944/", "10.2139/", "10.48550/", "10.31219/"]
+
+# FILL IN: place names of your institutions, and their e-mail domains.
+local_place_words: example city
+other_institution: \b(universit(y|é|ät|at|a|eit)|institut(e|o)?|hospital|school of medicine|cent(er|re) for)\b
+local_email_domains: [example.edu]
+
+# Techniques you offer: specialist = few local labs have it (a lead); general = counted only.
+techniques:
+  sted:
+    vocab: imaging_modes
+    strength: specialist
+    pattern: (?-i:\bSTED\b)|stimulated emission depletion
+
+# FILL IN: your instruments. strong = distinctive model (a lead on its own); weak = common
+# model (needs >= 2 of its components nearby). Components: scanner, cameras, lasers, software.
+instruments:
+  scope-example-confocal:
+    strength: strong
+    pattern: example confocal model
+    components:
+      - example camera
+      - example acquisition software

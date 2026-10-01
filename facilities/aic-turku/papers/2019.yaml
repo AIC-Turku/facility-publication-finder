@@ -1,0 +1,358 @@
+# Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2019 (42).
+# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.
+- doi: 10.1002/jbmr.3680
+  title: Mesenchymal Cell-Derived Juxtacrine Wnt1 Signaling Regulates Osteoblast Activity and Osteoclast Differentiation
+  journal: Journal of Bone and Mineral Research
+  published: '2019-01-28'
+  type: journal-article
+  pmid: '30690791'
+  pmcid: PMC6850336
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/path.5356
+  title: ALDH1A1‐related stemness in high‐grade serous ovarian cancer is a negative prognostic indicator but potentially targetable by EGFR/mTOR‐PI3K/aurora kinase inhibitors
+  journal: The Journal of Pathology
+  published: '2019-12-03'
+  type: journal-article
+  pmid: '31595974'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/978-1-4939-9686-5_16
+  title: Filopodia Quantification Using FiloQuant
+  journal: Methods in Molecular Biology
+  published: '2019-08-21'
+  type: book-chapter
+  pmid: '31432487'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s00109-018-01734-0
+  title: Soluble and membrane-bound adenylate kinase and nucleotidases augment ATP-mediated inflammation in diabetic retinopathy eyes with vitreous hemorrhage
+  journal: Journal of Molecular Medicine
+  published: '2019-01-07'
+  type: journal-article
+  pmid: '30617853'
+  pmcid: PMC6394560
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s00404-018-5015-y
+  title: Tumor cell-specific Serpin A1 expression in vulvar squamous cell carcinoma
+  journal: Archives of Gynecology and Obstetrics
+  published: '2019-01-04'
+  type: journal-article
+  pmid: '30607583'
+  pmcid: PMC6475512
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s00701-019-03835-2
+  title: Protective distal side-to-side neurorrhaphy in proximal nerve injury—an experimental study with rats
+  journal: Acta Neurochirurgica
+  published: '2019-02-12'
+  type: journal-article
+  pmid: '30746570'
+  pmcid: PMC6431300
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s12192-019-00999-9
+  title: Quantitative bioimage analytics enables measurement of targeted cellular stress response induced by celastrol-loaded nanoparticles
+  journal: Cell Stress and Chaperones
+  published: 2019-07
+  type: journal-article
+  pmid: '31079284'
+  pmcid: PMC6629742
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.bbamcr.2019.06.006
+  title: Sphingosine kinase 1 overexpression induces MFN2 fragmentation and alters mitochondrial matrix Ca2+ handling in HeLa cells
+  journal: Biochimica et Biophysica Acta (BBA) - Molecular Cell Research
+  published: 2019-09
+  type: journal-article
+  pmid: '31220477'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.colsurfb.2018.10.064
+  title: Human dermal fibroblast proliferation controlled by surface roughness of two-component nanostructured latex polymer coatings
+  journal: 'Colloids and Surfaces B: Biointerfaces'
+  published: 2019-02
+  type: journal-article
+  pmid: '30447522'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.funbio.2019.05.009
+  title: The central role of septa in the basidiomycete Schizophyllum commune hyphal morphogenesis
+  journal: Fungal Biology
+  published: 2019-09
+  type: journal-article
+  pmid: '31416583'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.immuni.2019.06.027
+  title: Single-Cell Survey of Human Lymphatics Unveils Marked Endothelial Cell Heterogeneity and Mechanisms of Homing for Neutrophils
+  journal: Immunity
+  published: 2019-09
+  type: journal-article
+  pmid: '31402260'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.isci.2018.12.020
+  title: Quantitative Proteomics Reveals the Dynamic Protein Landscape during Initiation of Human Th17 Cell Polarization
+  journal: iScience
+  published: 2019-01
+  type: journal-article
+  pmid: '30641411'
+  pmcid: PMC6330361
+  source: website
+  added: '2026-09-30'
+- doi: 10.1021/acsomega.9b03639
+  title: PDE6D Inhibitors with a New Design Principle Selectively Block K-Ras Activity
+  journal: ACS Omega
+  published: '2019-12-23'
+  type: journal-article
+  pmid: '31956834'
+  pmcid: PMC6964506
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41467-018-08065-1
+  title: Fetal-derived macrophages dominate in adult mammary glands
+  journal: Nature Communications
+  published: '2019-01-17'
+  type: journal-article
+  pmid: '30655530'
+  pmcid: PMC6336770
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41467-019-10275-0
+  title: SORLA regulates endosomal trafficking and oncogenic fitness of HER2
+  journal: Nature Communications
+  published: '2019-05-28'
+  type: journal-article
+  pmid: '31138794'
+  pmcid: PMC6538630
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41467-019-12611-w
+  title: Superresolution architecture of cornerstone focal adhesions in human pluripotent stem cells
+  journal: Nature Communications
+  published: '2019-10-18'
+  type: journal-article
+  pmid: '31628312'
+  pmcid: PMC6802214
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41598-019-52068-x
+  title: Fenestral diaphragms and PLVAP associations in liver sinusoidal endothelial cells are developmentally regulated
+  journal: Scientific Reports
+  published: '2019-10-30'
+  type: journal-article
+  pmid: '31666588'
+  pmcid: PMC6821839
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41598-019-56410-1
+  title: Synthesis and Evaluation of Anisomelic acid-like Compounds for the Treatment of HPV-Mediated Carcinomas
+  journal: Scientific Reports
+  published: '2019-12-30'
+  type: journal-article
+  pmid: '31889069'
+  pmcid: PMC6937315
+  source: website
+  added: '2026-09-30'
+- doi: 10.1039/c9nr02593f
+  title: 'Brilliant blue, green, yellow, and red fluorescent diamond particles: synthesis, characterization, and multiplex imaging demonstrations'
+  journal: Nanoscale
+  published: '2019'
+  type: journal-article
+  pmid: '31169858'
+  pmcid: PMC6642439
+  source: website
+  added: '2026-09-30'
+- doi: 10.1042/ebc20190012
+  title: Cell matrix adhesion in cell migration
+  journal: Essays in Biochemistry
+  published: '2019-08-23'
+  type: journal-article
+  pmid: '31444228'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1074/jbc.ra118.004902
+  title: Hypoxia-inducible factor (HIF)-prolyl hydroxylase 3 (PHD3) maintains high HIF2A mRNA levels in clear cell renal cell carcinoma
+  journal: Journal of Biological Chemistry
+  published: 2019-03
+  type: journal-article
+  pmid: '30617181'
+  pmcid: PMC6416423
+  source: website
+  added: '2026-09-30'
+- doi: 10.1074/jbc.ra118.006336
+  title: An unbiased in vitro screen for activating epidermal growth factor receptor mutations
+  journal: Journal of Biological Chemistry
+  published: 2019-06
+  type: journal-article
+  pmid: '30952700'
+  pmcid: PMC6579474
+  source: website
+  added: '2026-09-30'
+- doi: 10.1091/mbc.e18-07-0460
+  title: ErbB4 tyrosine kinase inhibition impairs neuromuscular development in zebrafish embryos
+  journal: Molecular Biology of the Cell
+  published: '2019-01-15'
+  type: journal-article
+  pmid: '30462579'
+  pmcid: PMC6589560
+  source: website
+  added: '2026-09-30'
+- doi: 10.1101/581660
+  title: PME-1 suppresses anoikis and is associated with therapy relapse of PTEN-deficient prostate cancers
+  type: posted-content
+  europepmc_id: PPR73585
+  source: website
+  added: '2026-09-30'
+- doi: 10.1101/775882
+  title: B cells rapidly target antigen and surface-derived MHCII into peripheral degradative compartments
+  type: posted-content
+  europepmc_id: PPR93198
+  source: website
+  added: '2026-09-30'
+- doi: 10.1101/823278
+  title: Dynamic-ultrastructural cell volume (3D) correlative microscopy facilitated by intracellular fluorescent nanodiamonds as multi-modal probes
+  type: posted-content
+  europepmc_id: PPR100269
+  source: website
+  added: '2026-09-30'
+- doi: 10.1104/pp.19.00893
+  title: PROTEIN PHOSPHATASE 2A-B′ γ Controls Botrytis cinerea Resistance and Developmental Leaf Senescence
+  journal: Plant Physiology
+  published: '2019-10-28'
+  type: journal-article
+  pmid: '31659127'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/bjd.18095
+  title: Tumour‐cell‐derived complement components C1r and C1s promote growth of cutaneous squamous cell carcinoma
+  journal: British Journal of Dermatology
+  published: '2019-07-28'
+  type: journal-article
+  pmid: '31049937'
+  pmcid: PMC7065064
+  source: website
+  added: '2026-09-30'
+- doi: 10.1126/sciimmunol.aat0297
+  title: Clever-1 contributes to lymphocyte entry into the spleen via the red pulp
+  journal: Science Immunology
+  published: '2019-03-22'
+  type: journal-article
+  pmid: '30926591'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1158/1078-0432.ccr-18-3016
+  title: Immunotherapeutic Blockade of Macrophage Clever-1 Reactivates the CD8+ T-cell Response against Immunosuppressive Tumors
+  journal: Clinical Cancer Research
+  published: '2019-06-03'
+  type: journal-article
+  pmid: '30755440'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1172/jci125740
+  title: Transcytosis route mediates rapid delivery of intact antibodies to draining lymph nodes
+  journal: Journal of Clinical Investigation
+  published: '2019-06-24'
+  type: journal-article
+  pmid: '31232704'
+  pmcid: PMC6668680
+  source: website
+  added: '2026-09-30'
+- doi: 10.1186/s12964-019-0463-y
+  title: Phosphorylation of NFATC1 at PIM1 target sites is essential for its ability to promote prostate cancer cell migration and invasion
+  journal: Cell Communication and Signaling
+  published: '2019-11-15'
+  type: journal-article
+  pmid: '31730483'
+  pmcid: PMC6858710
+  source: website
+  added: '2026-09-30'
+- doi: 10.1242/jcs.229849
+  title: Retinoblastoma protein represses E2F3 to maintain Sertoli cell quiescence in mouse testis
+  journal: Journal of Cell Science
+  published: '2019-07-15'
+  type: journal-article
+  pmid: '31308245'
+  source: website
+  added: '2026-09-30'
+- doi: 10.2337/db19-0287
+  title: Early Detection of Peripheral Blood Cell Signature in Children Developing β-Cell Autoimmunity at a Young Age
+  journal: Diabetes
+  published: '2019-07-16'
+  type: journal-article
+  pmid: '31311800'
+  source: website
+  added: '2026-09-30'
+- doi: 10.2967/jnumed.118.222026
+  title: 68Ga-DOTA-E[c(RGDfK)]2 PET Imaging of SHARPIN-Regulated Integrin Activity in Mice
+  journal: Journal of Nuclear Medicine
+  published: '2019-03-08'
+  type: journal-article
+  pmid: '30850498'
+  pmcid: PMC6785786
+  source: website
+  added: '2026-09-30'
+- doi: 10.3389/fimmu.2019.00667
+  title: NF-κB Signaling and IL-4 Signaling Regulate SATB1 Expression via Alternative Promoter Usage During Th2 Differentiation
+  journal: Frontiers in Immunology
+  published: '2019-04-02'
+  type: journal-article
+  pmid: '31001272'
+  pmcid: PMC6454056
+  source: website
+  added: '2026-09-30'
+- doi: 10.3389/fmicb.2019.01272
+  title: Growth Mode and Carbon Source Impact the Surfaceome Dynamics of Lactobacillus rhamnosus GG
+  journal: Frontiers in Microbiology
+  published: '2019-06-05'
+  type: journal-article
+  pmid: '31231350'
+  pmcid: PMC6560171
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/cells8060594
+  title: Modeling of LMNA-Related Dilated Cardiomyopathy Using Human Induced Pluripotent Stem Cells
+  journal: Cells
+  published: '2019-06-15'
+  type: journal-article
+  pmid: '31208058'
+  pmcid: PMC6627421
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/cells8121644
+  title: Genetically Engineered Lung Cancer Cells for Analyzing Epithelial–Mesenchymal Transition
+  journal: Cells
+  published: '2019-12-15'
+  type: journal-article
+  pmid: '31847480'
+  pmcid: PMC6953058
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/ijms20143408
+  title: Comparison of Polydopamine-Coated Mesoporous Silica Nanorods and Spheres for the Delivery of Hydrophilic and Hydrophobic Anticancer Drugs
+  journal: International Journal of Molecular Sciences
+  published: '2019-07-11'
+  type: journal-article
+  pmid: '31336697'
+  pmcid: PMC6679059
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/molecules24061072
+  title: Amyloid-Targeting PET Tracer [18F]Flutemetamol Accumulates in Atherosclerotic Plaques
+  journal: Molecules
+  published: '2019-03-19'
+  type: journal-article
+  pmid: '30893771'
+  pmcid: PMC6471324
+  source: website
+  added: '2026-09-30'
+- doi: 10.3791/60271
+  title: Enrichment of Pachytene Spermatocytes and Spermatids from Mouse Testes Using Standard Laboratory Equipment
+  journal: Journal of Visualized Experiments
+  published: '2019-09-17'
+  type: journal-article
+  pmid: '31609338'
+  source: website
+  added: '2026-09-30'

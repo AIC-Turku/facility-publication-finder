@@ -1,0 +1,23 @@
+name: quality_upgrade
+
+on_error: continue
+workers: 4
+resume: true
+
+discovery:
+  - institutional
+  - europepmc_facility
+
+text:
+  mode: first_success
+  prefer_quality: high
+  cache_successes: true
+  strategies:
+    - cache
+    - utupub
+    - abo_pdf
+    - europepmc
+    - crossref_fulltext
+    - openalex_oa
+
+screen: true

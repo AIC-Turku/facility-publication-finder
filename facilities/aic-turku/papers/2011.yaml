@@ -1,0 +1,286 @@
+# Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2011 (34).
+# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.
+- doi: 10.1002/bit.23214
+  title: Developing a compound‐specific receptor for bisphenol a by directed evolution of human estrogen receptor α
+  journal: Biotechnology and Bioengineering
+  published: '2011-06-15'
+  type: journal-article
+  pmid: '21618468'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/eji.201040760
+  title: Ly6C supports preferential homing of central memory CD8+ T cells into lymph nodes
+  journal: European Journal of Immunology
+  published: '2011-02-10'
+  type: journal-article
+  pmid: '21308682'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/eji.201041292
+  title: Altered purinergic signaling in CD73‐deficient mice inhibits tumor progression
+  journal: European Journal of Immunology
+  published: '2011-04-26'
+  type: journal-article
+  pmid: '21469131'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/eji.201041376
+  title: Stabilin‐1/CLEVER‐1, a type 2 macrophage marker, is an adhesion and scavenging molecule on human placental macrophages
+  journal: European Journal of Immunology
+  published: 2011-06
+  type: journal-article
+  pmid: '21480214'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/eji.201141553
+  title: Alternate pathways for Bcl6‐mediated regulation of B cell to plasma cell differentiation
+  journal: European Journal of Immunology
+  published: '2011-07-06'
+  type: journal-article
+  pmid: '21674482'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/glia.21212
+  title: Multiple cellular and molecular mechanisms Are involved in human Aβ clearance by transplanted adult astrocytes
+  journal: Glia
+  published: '2011-08-08'
+  type: journal-article
+  pmid: '21826742'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/ijc.26457
+  title: Type and location of tumor‐infiltrating macrophages and lymphatic vessels predict survival of colorectal cancer patients
+  journal: International Journal of Cancer
+  published: '2011-11-08'
+  type: journal-article
+  pmid: '21952788'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/ppul.21541
+  title: Fetal hyperglycemia alters lung structural development in neonatal rat
+  journal: Pediatric Pulmonology
+  published: '2011-09-08'
+  type: journal-article
+  pmid: '21905266'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s00125-011-2097-5
+  title: Effects of a germ-free environment on gut immune regulation and diabetes progression in non-obese diabetic (NOD) mice
+  journal: Diabetologia
+  published: '2011-03-05'
+  type: journal-article
+  pmid: '21380595'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s11357-011-9208-6
+  title: Probiotic cheese containing Lactobacillus rhamnosus HN001 and Lactobacillus acidophilus NCFM® modifies subpopulations of fecal lactobacilli and Clostridium difficile in the elderly
+  journal: AGE
+  published: '2011-01-25'
+  type: journal-article
+  pmid: '21264685'
+  pmcid: PMC3260371
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.bbamem.2011.01.009
+  title: N- and O-methylation of sphingomyelin markedly affects its membrane properties and interactions with cholesterol
+  journal: Biochimica et Biophysica Acta (BBA) - Biomembranes
+  published: 2011-04
+  type: journal-article
+  pmid: '21262197'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.cellimm.2011.03.019
+  title: Increased sensitivity of cholera toxin B treated K562 cells to natural killer cells
+  journal: Cellular Immunology
+  published: '2011'
+  type: journal-article
+  pmid: '21481337'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.joca.2011.04.016
+  title: Snorc is a novel cartilage specific small membrane proteoglycan expressed in differentiating and articular chondrocytes
+  journal: Osteoarthritis and Cartilage
+  published: 2011-08
+  type: journal-article
+  pmid: '21624478'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.neuropharm.2010.09.024
+  title: 'Kainic acid-induced neurodegeneration and activation of inflammatory processes in organotypic hippocampal slice cultures: Treatment with cyclooxygenase-2 inhibitor does not prevent neuronal death'
+  journal: Neuropharmacology
+  published: 2011-06
+  type: journal-article
+  pmid: '20932983'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/mt.2011.105
+  title: Mesoporous Silica Nanoparticles as Drug Delivery Systems for Targeted Inhibition of Notch Signaling in Cancer
+  journal: Molecular Therapy
+  published: 2011-08
+  type: journal-article
+  pmid: '21629222'
+  pmcid: PMC3149161
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/nn.2755
+  title: Phosphorylation of SCG10/stathmin-2 determines multipolar stage exit and neuronal migration rate
+  journal: Nature Neuroscience
+  published: '2011-02-06'
+  type: journal-article
+  pmid: '21297631'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1073/pnas.1104943108
+  title: Hypo- and hyperactivated Notch signaling induce a glycolytic switch through distinct mechanisms
+  journal: Proceedings of the National Academy of Sciences
+  published: '2011-11-07'
+  type: journal-article
+  pmid: '22065781'
+  pmcid: PMC3219154
+  source: website
+  added: '2026-09-30'
+- doi: 10.1074/jbc.m110.177097
+  title: Modeling Reveals That Dynamic Regulation of c-FLIP Levels Determines Cell-to-Cell Distribution of CD95-mediated Apoptosis
+  journal: Journal of Biological Chemistry
+  published: 2011-05
+  type: journal-article
+  pmid: '21324892'
+  pmcid: PMC3099654
+  source: website
+  added: '2026-09-30'
+- doi: 10.1091/mbc.e10-07-0568
+  title: Nestin as a regulator of Cdk5 in differentiating myoblasts
+  journal: Molecular Biology of the Cell
+  published: 2011-05
+  type: journal-article
+  pmid: '21346193'
+  pmcid: PMC3084676
+  source: website
+  added: '2026-09-30'
+- doi: 10.1093/hmg/ddr167
+  title: Molecular and cellular characterization of novel α-mannosidosis mutations
+  journal: Human Molecular Genetics
+  published: '2011-04-19'
+  type: journal-article
+  pmid: '21505070'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1093/infdis/jir207
+  title: Decorin Binding by DbpA and B of Borrelia garinii, Borrelia afzelii, and Borrelia burgdorferi Sensu Stricto
+  journal: The Journal of Infectious Diseases
+  published: '2011-07-01'
+  type: journal-article
+  pmid: '21628660'
+  pmcid: PMC3307154
+  source: website
+  added: '2026-09-30'
+- doi: 10.1104/pp.111.178442
+  title: Regulatory Subunit B′γ of Protein Phosphatase 2A Prevents Unnecessary Defense Reactions under Low Light in Arabidopsis
+  journal: Plant Physiology
+  published: '2011-05-12'
+  type: journal-article
+  pmid: '21571669'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1128/aem.00662-11
+  title: Cd-Specific Mutants of Mercury-Sensing Regulatory Protein MerR, Generated by Directed Evolution
+  journal: Applied and Environmental Microbiology
+  published: 2011-09
+  type: journal-article
+  pmid: '21764963'
+  pmcid: PMC3165431
+  source: website
+  added: '2026-09-30'
+- doi: 10.1159/000328822
+  title: Ontogenesis of Ap-2γ Expression in Rat Testes
+  journal: Sexual Development
+  published: '2011-06-08'
+  type: journal-article
+  pmid: '21654158'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1177/1479164111415882
+  title: 'Inflammatory effects of blood leukocytes: association with vascular function in neuropeptide Y proline 7-genotyped type 2 diabetes patients'
+  journal: Diabetes and Vascular Disease Research
+  published: '2011-07-11'
+  type: journal-article
+  pmid: '21746772'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1182/blood-2010-09-311076
+  title: Siglec-9 is a novel leukocyte ligand for vascular adhesion protein-1 and can be used in PET imaging of inflammation and cancer
+  journal: Blood
+  published: '2011-09-29'
+  type: journal-article
+  pmid: '21821708'
+  pmcid: PMC3833035
+  source: website
+  added: '2026-09-30'
+- doi: 10.1182/blood-2010-11-321646
+  title: Different role of CD73 in leukocyte trafficking via blood and lymph vessels
+  journal: Blood
+  published: '2011-04-21'
+  type: journal-article
+  pmid: '21346249'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1242/jcs.068254
+  title: Loss of p38γ MAPK induces pleiotropic mitotic defects and massive cell death
+  journal: Journal of Cell Science
+  published: '2011-01-15'
+  type: journal-article
+  pmid: '21172807'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1371/journal.pone.0024456
+  title: SOD3 Decreases Ischemic Injury Derived Apoptosis through Phosphorylation of Erk1/2, Akt, and FoxO3a
+  journal: PLoS ONE
+  published: '2011-08-31'
+  type: journal-article
+  pmid: '21909393'
+  pmcid: PMC3164207
+  source: website
+  added: '2026-09-30'
+- doi: 10.1371/journal.pone.0024821
+  title: Dicer Is Required for Haploid Male Germ Cell Differentiation in Mice
+  journal: PLoS ONE
+  published: '2011-09-16'
+  type: journal-article
+  pmid: '21949761'
+  pmcid: PMC3174967
+  source: website
+  added: '2026-09-30'
+- doi: 10.1371/journal.pone.0027112
+  title: Prolyl Hydroxylase PHD3 Enhances the Hypoxic Survival and G1 to S Transition of Carcinoma Cells
+  journal: PLoS ONE
+  published: '2011-11-08'
+  type: journal-article
+  pmid: '22087251'
+  pmcid: PMC3210766
+  source: website
+  added: '2026-09-30'
+- doi: 10.1523/jneurosci.4396-10.2011
+  title: Nestin Is Not Essential for Development of the CNS But Required for Dispersion of Acetylcholine Receptor Clusters at the Area of Neuromuscular Junctions
+  journal: The Journal of Neuroscience
+  published: '2011-08-10'
+  type: journal-article
+  pmid: '21832185'
+  pmcid: PMC6623112
+  source: website
+  added: '2026-09-30'
+- doi: 10.3109/01902148.2011.581738
+  title: Cathepsin K deficiency aggravates lung injury in hyperoxia-exposed newborn mice
+  journal: Experimental Lung Research
+  published: 2011-07
+  type: journal-article
+  pmid: '21721952'
+  source: website
+  added: '2026-09-30'
+- doi: 10.4161/cc.10.16.17194
+  title: Function ofERBB4is determined by alternative splicing
+  journal: Cell Cycle
+  published: '2014-10-28'
+  type: journal-article
+  pmid: '21811097'
+  source: website
+  added: '2026-09-30'

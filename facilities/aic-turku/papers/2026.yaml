@@ -1,0 +1,20 @@
+# Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2026 (2).
+# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.
+- doi: 10.1016/j.jcmgh.2025.101716
+  title: Genetically Induced Mouse Model for Colon-specific Epithelial Cell Tumorigenesis Driven by Loss of K8 and Apc
+  journal: Cellular and Molecular Gastroenterology and Hepatology
+  published: '2026'
+  type: journal-article
+  pmid: '41453638'
+  pmcid: PMC12906100
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s44318-025-00678-9
+  title: Fast label-free live imaging with FlowVision reveals key principles of cancer cell arrest on endothelial monolayers
+  journal: The EMBO Journal
+  published: '2026-01-06'
+  type: journal-article
+  pmid: '41495248'
+  pmcid: PMC12909858
+  source: website
+  added: '2026-09-30'

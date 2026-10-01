@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aic-pubs"
+version = "0.1.0"
+description = "Find publications that used a core imaging facility, starting from institutional repositories."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = ["pyyaml", "pymupdf", "openpyxl"]
+
+[project.optional-dependencies]
+llm = ["torch", "transformers>=4.45", "accelerate", "bitsandbytes; platform_system == 'Linux'"]
+embed = ["fastembed", "scikit-learn"]
+test = ["pytest", "numpy", "scikit-learn"]
+
+[project.scripts]
+aic-pubs = "aic_pubs.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

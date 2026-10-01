@@ -1,0 +1,100 @@
+# Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2010 (12).
+# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.
+- doi: 10.1007/978-1-4419-6612-4_66
+  title: Regulation of Cell Death by c-FLIP Phosphorylation
+  journal: Advances in Experimental Medicine and Biology
+  published: '2010-10-22'
+  type: book-chapter
+  pmid: '21153369'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s00259-010-1497-y
+  title: 'PET imaging of inflammation and adenocarcinoma xenografts using vascular adhesion protein 1 targeting peptide 68Ga-DOTAVAP-P1: comparison with 18F-FDG'
+  journal: European Journal of Nuclear Medicine and Molecular Imaging
+  published: '2010-06-04'
+  type: journal-article
+  pmid: '20523988'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.cellsig.2009.09.010
+  title: Expression and significance of HERG (KCNH2) potassium channels in the regulation of MDA-MB-435S melanoma cell proliferation and migration
+  journal: Cellular Signalling
+  published: 2010-01
+  type: journal-article
+  pmid: '19765650'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1042/cbi20090288
+  title: Inhibition of GGTase‐I and FTase disrupts cytoskeletal organization of human PC‐3 prostate cancer cells
+  journal: Cell Biology International
+  published: '2013-01-02'
+  type: journal-article
+  pmid: '20446922'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/j.1365-2222.2010.03657.x
+  title: Interaction of orally administered Lactobacillus rhamnosus GG with skin and gut microbiota and humoral immunity in infants with atopic dermatitis
+  journal: Clinical &amp; Experimental Allergy
+  published: '2010-12-01'
+  type: journal-article
+  pmid: '21121981'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1186/1471-2121-11-45
+  title: An autocrine sphingosine-1-phosphate signaling loop enhances NF-κB-activation and survival
+  journal: BMC Cell Biology
+  published: '2010-06-24'
+  type: journal-article
+  pmid: '20573281'
+  pmcid: PMC2906432
+  source: website
+  added: '2026-09-30'
+- doi: 10.1186/1471-2407-10-596
+  title: Fast growth associated with aberrant vasculature and hypoxia in fibroblast growth factor 8b (FGF8b) over-expressing PC-3 prostate tumour xenografts
+  journal: BMC Cancer
+  published: '2010-10-30'
+  type: journal-article
+  pmid: '21034500'
+  pmcid: PMC2984431
+  source: website
+  added: '2026-09-30'
+- doi: 10.1210//en.2009-1387
+  title: S1P1 and VEGFR-2 Form a Signaling Complex with Extracellularly Regulated Kinase 1/2 and Protein Kinase C- Regulating ML-1 Thyroid Carcinoma Cell Migration
+  journal: Endocrinology
+  published: '2010-05-25'
+  type: journal-article
+  source: website
+  added: '2026-09-30'
+- doi: 10.1242/dev.050955
+  title: miR-18, a member of Oncomir-1, targets heat shock transcription factor 2 in spermatogenesis
+  journal: Development
+  published: '2010-10-01'
+  type: journal-article
+  pmid: '20724452'
+  source: website
+  added: '2026-09-30'
+- doi: 10.2337/db10-0147
+  title: Inflammatory Tendencies and Overproduction of IL-17 in the Colon of Young NOD Mice Are Counteracted With Diet Change
+  journal: Diabetes
+  published: '2010-06-14'
+  type: journal-article
+  pmid: '20547977'
+  pmcid: PMC2927946
+  source: website
+  added: '2026-09-30'
+- doi: 10.3945/ajcn.2010.29877
+  title: 'Effect of mother’s weight on infant’s microbiota acquisition, composition, and activity during early infancy: a prospective follow-up study initiated in early pregnancy'
+  journal: The American Journal of Clinical Nutrition
+  published: 2010-11
+  type: journal-article
+  pmid: '20844065'
+  source: website
+  added: '2026-09-30'
+- doi: 10.4049/jimmunol.0902760
+  title: Disordered Lymphoid Purine Metabolism Contributes to the Pathogenesis of PersistentBorrelia gariniiInfection in Mice
+  journal: The Journal of Immunology
+  published: '2010-05-01'
+  type: journal-article
+  pmid: '20357256'
+  source: website
+  added: '2026-09-30'

@@ -1,0 +1,382 @@
+# Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2016 (44).
+# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.
+- doi: 10.1002/ijc.30285
+  title: Leukocyte trafficking is not affected by multikinase inhibitors sunitinib or sorafenib in mice
+  journal: International Journal of Cancer
+  published: '2016-08-11'
+  type: journal-article
+  pmid: '27459381'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/jgm.2885
+  title: Intramyocardial injection of SERCA2a‐expressing lentivirus improves myocardial function in doxorubicin‐induced heart failure
+  journal: The Journal of Gene Medicine
+  published: '2016-07-05'
+  type: journal-article
+  pmid: '27203155'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/smll.201503392
+  title: Prolonged Dye Release from Mesoporous Silica-Based Imaging Probes Facilitates Long-Term Optical Tracking of Cell Populations In Vivo
+  journal: Small
+  published: '2016-01-25'
+  type: journal-article
+  pmid: '26807551'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s00018-016-2357-0
+  title: Human adenosine deaminases ADA1 and ADA2 bind to different subsets of immune cells
+  journal: Cellular and Molecular Life Sciences
+  published: '2016-09-23'
+  type: journal-article
+  pmid: '27663683'
+  pmcid: PMC11107696
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s00109-016-1472-6
+  title: Deregulation of ocular nucleotide homeostasis in patients with diabetic retinopathy
+  journal: Journal of Molecular Medicine
+  published: '2016-09-16'
+  type: journal-article
+  pmid: '27638339'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s10585-016-9781-2
+  title: Spheroid culture of LuCaP 136 patient-derived xenograft enables versatile preclinical models of prostate cancer
+  journal: Clinical &amp; Experimental Metastasis
+  published: '2016-02-12'
+  type: journal-article
+  pmid: '26873136'
+  pmcid: PMC12997442
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.biocel.2016.06.017
+  title: Tumor promoter PMA enhances kindlin-2 and decreases vimentin recruitment into cell adhesion sites
+  journal: The International Journal of Biochemistry &amp; Cell Biology
+  published: 2016-09
+  type: journal-article
+  pmid: '27373681'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.jid.2016.03.028
+  title: Long Noncoding RNA PICSAR Promotes Growth of Cutaneous Squamous Cell Carcinoma by Regulating ERK1/2 Activity
+  journal: Journal of Investigative Dermatology
+  published: 2016-08
+  type: journal-article
+  pmid: '27049681'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.scr.2016.09.025
+  title: Mature Let-7 miRNAs fine tune expression of LIN28B in pluripotent human embryonic stem cells
+  journal: Stem Cell Research
+  published: 2016-11
+  type: journal-article
+  pmid: '27776272'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.yexcr.2016.02.018
+  title: The PIM1 kinase promotes prostate cancer cell migration and adhesion via multiple signalling pathways
+  journal: Experimental Cell Research
+  published: 2016-03
+  type: journal-article
+  pmid: '26934497'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1021/acs.biomac.6b00865
+  title: Advanced Cellulose Fibers for Efficient Immobilization of Enzymes
+  journal: Biomacromolecules
+  published: '2016-09-15'
+  type: journal-article
+  pmid: '27575620'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/mp.2016.203
+  title: JNK1 controls adult hippocampal neurogenesis and imposes cell-autonomous control of anxiety behaviour from the neurogenic niche
+  journal: Molecular Psychiatry
+  published: '2016-11-15'
+  type: journal-article
+  pmid: '27843149'
+  pmcid: PMC5794884
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/mt.2016.42
+  title: Inhibiting Notch Activity in Breast Cancer Stem Cells by Glucose Functionalized Nanoparticles Carrying γ-secretase Inhibitors
+  journal: Molecular Therapy
+  published: 2016-05
+  type: journal-article
+  pmid: '26916284'
+  pmcid: PMC4881775
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/nature19814
+  title: Fetal liver endothelium regulates the seeding of tissue-resident macrophages
+  journal: Nature
+  published: '2016-10-12'
+  type: journal-article
+  pmid: '27732581'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/ncomms12237
+  title: Normal stroma suppresses cancer cell proliferation via mechanosensitive regulation of JMJD1a-mediated transcription
+  journal: Nature Communications
+  published: '2016-08-04'
+  type: journal-article
+  pmid: '27488962'
+  pmcid: PMC4976218
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/ncomms13297
+  title: L-type calcium channels regulate filopodia stability and cancer cell invasion downstream of integrin signalling
+  journal: Nature Communications
+  published: '2016-12-02'
+  type: journal-article
+  pmid: '27910855'
+  pmcid: PMC5146291
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/nsmb.3161
+  title: Selective integrin endocytosis is driven by interactions between the integrin α-chain and AP2
+  journal: Nature Structural &amp; Molecular Biology
+  published: '2016-01-18'
+  type: journal-article
+  pmid: '26779610'
+  pmcid: PMC5130146
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/onc.2016.59
+  title: Cancer stem cell drugs target K-ras signaling in a stemness context
+  journal: Oncogene
+  published: '2016-03-14'
+  type: journal-article
+  pmid: '26973241'
+  pmcid: PMC5057041
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/srep22585
+  title: In vitro model of bone to facilitate measurement of adhesion forces and super-resolution imaging of osteoclasts
+  journal: Scientific Reports
+  published: '2016-03-03'
+  type: journal-article
+  pmid: '26935172'
+  pmcid: PMC4776281
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/srep24165
+  title: Galectin-1 dimers can scaffold Raf-effectors to increase H-ras nanoclustering
+  journal: Scientific Reports
+  published: '2016-04-18'
+  type: journal-article
+  pmid: '27087647'
+  pmcid: PMC4834570
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/srep28962
+  title: Image Quality Ranking Method for Microscopy
+  journal: Scientific Reports
+  published: '2016-07-01'
+  type: journal-article
+  pmid: '27364703'
+  pmcid: PMC4929473
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/srep35089
+  title: Leukocyte trafficking-associated vascular adhesion protein 1 is expressed and functionally active in atherosclerotic plaques
+  journal: Scientific Reports
+  published: '2016-10-12'
+  type: journal-article
+  pmid: '27731409'
+  pmcid: PMC5059718
+  source: website
+  added: '2026-09-30'
+- doi: 10.1073/pnas.1519197113
+  title: Vimentin coordinates fibroblast proliferation and keratinocyte differentiation in wound healing via TGF-β–Slug signaling
+  journal: Proceedings of the National Academy of Sciences
+  published: '2016-07-08'
+  type: journal-article
+  pmid: '27466403'
+  pmcid: PMC4968728
+  source: website
+  added: '2026-09-30'
+- doi: 10.1073/pnas.1602357113
+  title: Gene-expression profiling of different arms of lymphatic vasculature identifies candidates for manipulation of cell traffic
+  journal: Proceedings of the National Academy of Sciences
+  published: '2016-09-06'
+  type: journal-article
+  pmid: '27601677'
+  pmcid: PMC5035878
+  source: website
+  added: '2026-09-30'
+- doi: 10.1073/pnas.1604780113
+  title: Stabilin-1 expression defines a subset of macrophages that mediate tissue homeostasis and prevent fibrosis in chronic liver injury
+  journal: Proceedings of the National Academy of Sciences
+  published: '2016-07-29'
+  type: journal-article
+  pmid: '27474165'
+  pmcid: PMC4995933
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/pce.12718
+  title: Crosstalk between chloroplast thioredoxin systems in regulation of photosynthesis
+  journal: Plant, Cell &amp; Environment
+  published: '2016-04-06'
+  type: journal-article
+  pmid: '26831830'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/tra.12390
+  title: Regulation of Cell Migration and β1 Integrin Trafficking by the Endosomal Adaptor GGA3
+  journal: Traffic
+  published: '2016-04-05'
+  type: journal-article
+  pmid: '26935970'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1128/mcb.00191-16
+  title: SPRED1 Interferes with K-ras but Not H-ras Membrane Anchorage and Signaling
+  journal: Molecular and Cellular Biology
+  published: '2023-03-17'
+  type: journal-article
+  pmid: '27503857'
+  pmcid: PMC5038144
+  source: website
+  added: '2026-09-30'
+- doi: 10.1158/0008-5472.can-16-1134
+  title: PP2A Inhibitor PME-1 Drives Kinase Inhibitor Resistance in Glioma Cells
+  journal: Cancer Research
+  published: '2016-11-30'
+  type: journal-article
+  pmid: '27671680'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1177/2211068215606048
+  title: Automated High-Throughput Fluorescence Lifetime Imaging Microscopy to Detect Protein–Protein Interactions
+  journal: SLAS Technology
+  published: 2016-04
+  type: journal-article
+  pmid: '26384400'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1242/jcs.184150
+  title: Deleterious assembly of the lamin A/C mutant p.S143P causes ER stress in familial dilated cardiomyopathy
+  journal: Journal of Cell Science
+  published: '2016-07-15'
+  type: journal-article
+  pmid: '27235420'
+  pmcid: PMC4958296
+  source: website
+  added: '2026-09-30'
+- doi: 10.1371/journal.pone.0152996
+  title: CIP2A Promotes T-Cell Activation and Immune Response to Listeria monocytogenes Infection
+  journal: PLOS ONE
+  published: '2016-04-21'
+  type: journal-article
+  pmid: '27100879'
+  pmcid: PMC4839633
+  source: website
+  added: '2026-09-30'
+- doi: 10.1371/journal.pone.0159677
+  title: ASPP2 Is a Novel Pan-Ras Nanocluster Scaffold
+  journal: PLOS ONE
+  published: '2016-07-20'
+  type: journal-article
+  pmid: '27437940'
+  pmcid: PMC4954646
+  source: website
+  added: '2026-09-30'
+- doi: 10.1371/journal.pone.0166264
+  title: Geographic Variation in Festuca rubra L. Ploidy Levels and Systemic Fungal Endophyte Frequencies
+  journal: PLOS ONE
+  published: '2016-11-15'
+  type: journal-article
+  pmid: '27846291'
+  pmcid: PMC5112939
+  source: website
+  added: '2026-09-30'
+- doi: 10.1530/erc-16-0050
+  title: FTY720 (Fingolimod) attenuates basal and sphingosine-1-phosphate-evoked thyroid cancer cell invasion
+  journal: Endocrine-Related Cancer
+  published: 2016-05
+  type: journal-article
+  pmid: '26935838'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1530/joe-16-0384
+  title: A vital region for human glycoprotein hormone trafficking revealed by an LHB mutation
+  journal: Journal of Endocrinology
+  published: 2016-12
+  type: journal-article
+  pmid: '27656125'
+  source: website
+  added: '2026-09-30'
+- doi: 10.18632/oncotarget.7860
+  title: Novel Mad2-targeting miR-493-3p controls mitotic fidelity and cancer cells’ sensitivity to paclitaxel
+  journal: Oncotarget
+  published: '2016-03-02'
+  type: journal-article
+  pmid: '26943585'
+  pmcid: PMC4914283
+  source: website
+  added: '2026-09-30'
+- doi: 10.18632/oncotarget.9215
+  title: Phosphorylation of Notch1 by Pim kinases promotes oncogenic signaling in breast and prostate cancer cells
+  journal: Oncotarget
+  published: '2016-05-07'
+  type: journal-article
+  pmid: '27281612'
+  pmcid: PMC5190019
+  source: website
+  added: '2026-09-30'
+- doi: 10.2147/ijn.s120611
+  title: Stimuli-responsive hybrid nanocarriers developed by controllable integration of hyperbranched PEI with mesoporous silica nanoparticles for sustained intracellular siRNA delivery
+  journal: International Journal of Nanomedicine
+  published: 2016-12
+  type: journal-article
+  pmid: '27994460'
+  pmcid: PMC5154729
+  source: website
+  added: '2026-09-30'
+- doi: 10.2147/ijn.s94013
+  title: Targeted modulation of cell differentiation in distinct regions of the gastrointestinal tract via oral administration of differently PEG-PEI functionalized mesoporous silica nanoparticles
+  journal: International Journal of Nanomedicine
+  published: 2016-01
+  type: journal-article
+  pmid: '26855569'
+  pmcid: PMC4725644
+  source: website
+  added: '2026-09-30'
+- doi: 10.3389/fimmu.2016.00489
+  title: Thymocytes in Lyve1-CRE/S1pr1f/f Mice Accumulate in the Thymus due to Cell-Intrinsic Loss of Sphingosine-1-Phosphate Receptor Expression
+  journal: Frontiers in Immunology
+  published: '2016-11-08'
+  type: journal-article
+  pmid: '27877175'
+  pmcid: PMC5099144
+  source: website
+  added: '2026-09-30'
+- doi: 10.3389/fncel.2016.00057
+  title: KIF5C S176 Phosphorylation Regulates Microtubule Binding and Transport Efficiency in Mammalian Neurons
+  journal: Frontiers in Cellular Neuroscience
+  published: '2016-03-15'
+  type: journal-article
+  pmid: '27013971'
+  pmcid: PMC4791394
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/cells5030035
+  title: Keratins Are Altered in Intestinal Disease-Related Stress Responses
+  journal: Cells
+  published: '2016-09-10'
+  type: journal-article
+  pmid: '27626448'
+  pmcid: PMC5040977
+  source: website
+  added: '2026-09-30'
+- doi: 10.4049/jimmunol.1600235
+  title: Activation of Plasmacytoid Dendritic Cells in Colon-Draining Lymph Nodes during Citrobacter rodentium Infection Involves Pathogen-Sensing and Inflammatory Pathways Distinct from Conventional Dendritic
+    Cells
+  journal: The Journal of Immunology
+  published: '2016-06-01'
+  type: journal-article
+  pmid: '27183629'
+  source: website
+  added: '2026-09-30'

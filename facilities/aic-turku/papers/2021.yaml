@@ -1,0 +1,355 @@
+# Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2021 (41).
+# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.
+- doi: 10.1002/1878-0261.13106
+  title: Sortilin‐related receptor is a druggable therapeutic target in breast cancer
+  journal: Molecular Oncology
+  published: '2021-10-10'
+  type: journal-article
+  pmid: '34564954'
+  pmcid: PMC8732349
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/cre2.396
+  title: Interferon‐γ and IL‐5 associated cell‐mediated immune responses to HPV16 E2 and E6 distinguish between persistent oral HPV16 infections and noninfected mucosa
+  journal: Clinical and Experimental Dental Research
+  published: '2021-01-09'
+  type: journal-article
+  pmid: '33421352'
+  pmcid: PMC8543460
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/smll.202100479
+  title: Peritumoral Microgel Reservoir for Long‐Term Light‐Controlled Triple‐Synergistic Treatment of Osteosarcoma with Single Ultra‐Low Dose
+  journal: Small
+  published: '2021-06-25'
+  type: journal-article
+  pmid: '34173330'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/978-1-0716-1190-6_13
+  title: FLIM-FRET Analysis of Ras Nanoclustering and Membrane-Anchorage
+  journal: Methods in Molecular Biology
+  published: '2021-05-12'
+  type: book-chapter
+  pmid: '33977480'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/978-1-0716-1402-0_9
+  title: 'Analysis of Intracellular Vesicles in B Lymphocytes: Antigen Traffic in the Spotlight'
+  journal: Methods in Molecular Biology
+  published: '2021-05-25'
+  type: book-chapter
+  pmid: '34028717'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s00018-021-03880-0
+  title: Stromal interaction molecule 1 (STIM1) knock down attenuates invasion and proliferation and enhances the expression of thyroid-specific proteins in human follicular thyroid cancer cells
+  journal: Cellular and Molecular Life Sciences
+  published: '2021-06-21'
+  type: journal-article
+  pmid: '34155535'
+  pmcid: PMC8316191
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s00018-021-03977-6
+  title: Vascular adhesion protein-1 defines a unique subpopulation of human hematopoietic stem cells and regulates their proliferation
+  journal: Cellular and Molecular Life Sciences
+  published: '2021-11-01'
+  type: journal-article
+  pmid: '34719737'
+  pmcid: PMC8629906
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s00018-021-04081-5
+  title: Targeted deletion of keratin 8 in intestinal epithelial cells disrupts tissue integrity and predisposes to tumorigenesis in the colon
+  journal: Cellular and Molecular Life Sciences
+  published: '2021-12-24'
+  type: journal-article
+  pmid: '34951664'
+  pmcid: PMC8709826
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.celrep.2021.109973
+  title: Quantitative genome-scale metabolic modeling of human CD4+ T cell differentiation reveals subset-specific regulation of glycosphingolipid pathways
+  journal: Cell Reports
+  published: 2021-11
+  type: journal-article
+  pmid: '34758307'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.colsurfb.2021.112059
+  title: 'Influence of mineral coatings on fibroblast behaviour: The importance of coating formulation and experimental design'
+  journal: 'Colloids and Surfaces B: Biointerfaces'
+  published: 2021-12
+  type: journal-article
+  pmid: '34454364'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.cub.2021.09.022
+  title: SHANK3 conformation regulates direct actin binding and crosstalk with Rap1 signaling
+  journal: Current Biology
+  published: 2021-11
+  type: journal-article
+  pmid: '34610274'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.jbc.2021.100593
+  title: PIM-induced phosphorylation of Notch3 promotes breast cancer tumorigenicity in a CSL-independent fashion
+  journal: Journal of Biological Chemistry
+  published: 2021-01
+  type: journal-article
+  pmid: '33775697'
+  pmcid: PMC8100066
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.jcis.2020.09.124
+  title: 'J-like aggregation of a cationic polythiophene with hydrogen-bonding capabilities due to 1,4-dioxane: Solution excitation spectra and fluorescence, morphology and surface free energy of films'
+  journal: Journal of Colloid and Interface Science
+  published: 2021-02
+  type: journal-article
+  pmid: '33069027'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.semcdb.2020.10.010
+  title: Integrin-mediated adhesion and mechanosensing in the mammary gland
+  journal: Seminars in Cell &amp; Developmental Biology
+  published: 2021-06
+  type: journal-article
+  pmid: '33187835'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1021/acsomega.1c03681
+  title: Interactome Networks of FOSL1 and FOSL2 in Human Th17 Cells
+  journal: ACS Omega
+  published: '2021-09-16'
+  type: journal-article
+  pmid: '34604665'
+  pmcid: PMC8482465
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41418-021-00832-w
+  title: Drice restrains Diap2-mediated inflammatory signalling and intestinal inflammation
+  journal: Cell Death &amp; Differentiation
+  published: '2021-07-14'
+  type: journal-article
+  pmid: '34262145'
+  pmcid: PMC8738736
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41467-021-22518-0
+  title: Democratising deep learning for microscopy with ZeroCostDL4Mic
+  journal: Nature Communications
+  published: '2021-04-15'
+  type: journal-article
+  pmid: '33859193'
+  pmcid: PMC8050272
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41592-021-01284-3
+  title: Avoiding a replication crisis in deep-learning-based bioimage analysis
+  journal: Nature Methods
+  published: '2021-10-04'
+  type: journal-article
+  pmid: '34608322'
+  pmcid: PMC7611896
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41598-021-85379-z
+  title: CD73 facilitates EMT progression and promotes lung metastases in triple-negative breast cancer
+  journal: Scientific Reports
+  published: '2021-03-16'
+  type: journal-article
+  pmid: '33727591'
+  pmcid: PMC7966763
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41598-021-96033-z
+  title: Combined genetic and chemical screens indicate protective potential for EGFR inhibition to cardiomyocytes under hypoxia
+  journal: Scientific Reports
+  published: '2021-08-17'
+  type: journal-article
+  pmid: '34404849'
+  pmcid: PMC8371130
+  source: website
+  added: '2026-09-30'
+- doi: 10.1039/d1nr02872c
+  title: Improving the knock-in efficiency of the MOF-encapsulated CRISPR/Cas9 system through controllable embedding structures
+  journal: Nanoscale
+  published: '2021'
+  type: journal-article
+  pmid: '34596650'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1089/scd.2019.0171
+  title: An In Vitro Co-Culture Model of Bone Marrow Mesenchymal Stromal Cells and Peripheral Blood Mononuclear Cells Promotes the Differentiation of Myeloid Angiogenic Cells and Pericyte-Like Cells
+  journal: Stem Cells and Development
+  published: '2021-03-15'
+  type: journal-article
+  pmid: '33499756'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1093/plphys/kiab225
+  title: ACONITASE 3 is part of theANAC017 transcription factor-dependent mitochondrial dysfunction response
+  journal: Plant Physiology
+  published: '2021-05-12'
+  type: journal-article
+  pmid: '34618107'
+  pmcid: PMC8331168
+  source: website
+  added: '2026-09-30'
+- doi: 10.1101/2021.04.19.440145
+  title: Cytoskeletal vimentin regulates cell size and autophagy through mTORC1 signaling
+  type: posted-content
+  europepmc_id: PPR314536
+  source: website
+  added: '2026-09-30'
+- doi: 10.1101/2021.07.15.452583
+  title: Ultraviolet screening by slug tissue and tight packing of plastids protect photosynthetic sea slugs from photoinhibition
+  type: posted-content
+  europepmc_id: PPR371237
+  source: website
+  added: '2026-09-30'
+- doi: 10.1158/0008-5472.can-20-3651
+  title: CIP2A Interacts with TopBP1 and Drives Basal-Like Breast Cancer Tumorigenesis
+  journal: Cancer Research
+  published: '2021-06-18'
+  type: journal-article
+  pmid: '34145035'
+  pmcid: PMC8373817
+  source: website
+  added: '2026-09-30'
+- doi: 10.1158/1078-0432.ccr-20-4862
+  title: 'Systemic Blockade of Clever-1 Elicits Lymphocyte Activation Alongside Checkpoint Molecule Downregulation in Patients with Solid Tumors: Results from a Phase I/II Clinical Trial'
+  journal: Clinical Cancer Research
+  published: '2021-06-02'
+  type: journal-article
+  pmid: '34078651'
+  pmcid: PMC9401456
+  source: website
+  added: '2026-09-30'
+- doi: 10.1186/s12885-021-08357-8
+  title: Head and neck squamous cell carcinoma cell lines have an immunomodulatory effect on macrophages independent of hypoxia and toll-like receptor 9
+  journal: BMC Cancer
+  published: '2021-09-03'
+  type: journal-article
+  pmid: '34479492'
+  pmcid: PMC8418007
+  source: website
+  added: '2026-09-30'
+- doi: 10.1186/s12964-021-00749-4
+  title: PIM kinases inhibit AMPK activation and promote tumorigenicity by phosphorylating LKB1
+  journal: Cell Communication and Signaling
+  published: '2021-06-30'
+  type: journal-article
+  pmid: '34193159'
+  pmcid: PMC8247201
+  source: website
+  added: '2026-09-30'
+- doi: 10.26508/lsa.202000972
+  title: NRAS is unique among RAS proteins in requiring ICMT for trafficking to the plasma membrane
+  journal: Life Science Alliance
+  published: '2021-02-12'
+  type: journal-article
+  pmid: '33579760'
+  pmcid: PMC7893820
+  source: website
+  added: '2026-09-30'
+- doi: 10.3389/fimmu.2021.602122
+  title: Lymphatic Endothelial Cell Activation and Dendritic Cell Transmigration Is Modified by Genetic Deletion of Clever-1
+  journal: Frontiers in Immunology
+  published: '2021-03-04'
+  type: journal-article
+  pmid: '33746947'
+  pmcid: PMC7970002
+  source: website
+  added: '2026-09-30'
+- doi: 10.3389/fimmu.2021.719979
+  title: Single-Cell Proteomics Reveals the Defined Heterogeneity of Resident Macrophages in White Adipose Tissue
+  journal: Frontiers in Immunology
+  published: '2021-07-26'
+  type: journal-article
+  pmid: '34381461'
+  pmcid: PMC8350344
+  source: website
+  added: '2026-09-30'
+- doi: 10.3389/fimmu.2021.774013
+  title: Melanocortin 1 Receptor Deficiency in Hematopoietic Cells Promotes the Expansion of Inflammatory Leukocytes in Atherosclerotic Mice
+  journal: Frontiers in Immunology
+  published: '2021-11-19'
+  type: journal-article
+  pmid: '34868038'
+  pmcid: PMC8640177
+  source: website
+  added: '2026-09-30'
+- doi: 10.3389/fonc.2021.733700
+  title: Targeting DNA Homologous Repair Proficiency With Concomitant Topoisomerase II and c-Abl Inhibition
+  journal: Frontiers in Oncology
+  published: '2021-09-20'
+  type: journal-article
+  pmid: '34616682'
+  pmcid: PMC8488401
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/biom11060836
+  title: Elaiophylin Is a Potent Hsp90/ Cdc37 Protein Interface Inhibitor with K-Ras Nanocluster Selectivity
+  journal: Biomolecules
+  published: '2021-06-04'
+  type: journal-article
+  pmid: '34199986'
+  pmcid: PMC8229862
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/cancers13040927
+  title: Novel Small Molecule Hsp90/Cdc37 Interface Inhibitors Indirectly Target K-Ras-Signaling
+  journal: Cancers
+  published: '2021-02-23'
+  type: journal-article
+  pmid: '33672199'
+  pmcid: PMC7927014
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/cancers13112631
+  title: Circumventing Drug Treatment? Intrinsic Lethal Effects of Polyethyleneimine (PEI)-Functionalized Nanoparticles on Glioblastoma Cells Cultured in Stem Cell Conditions
+  journal: Cancers
+  published: '2021-05-27'
+  type: journal-article
+  pmid: '34071918'
+  pmcid: PMC8198814
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/cancers13235988
+  title: Stage I–IV Colorectal Cancer Prognosis Can Be Predicted by Type and Number of Intratumoral Macrophages and CLEVER-1+ Vessel Density
+  journal: Cancers
+  published: '2021-11-28'
+  type: journal-article
+  pmid: '34885098'
+  pmcid: PMC8656733
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/ijms22094678
+  title: Exosomal Vimentin from Adipocyte Progenitors Protects Fibroblasts against Osmotic Stress and Inhibits Apoptosis to Enhance Wound Healing
+  journal: International Journal of Molecular Sciences
+  published: '2021-04-28'
+  type: journal-article
+  pmid: '33925176'
+  pmcid: PMC8125065
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/ijms22094727
+  title: Exploring the Ion Channel TRPV2 and Testicular Macrophages in Mouse Testis
+  journal: International Journal of Molecular Sciences
+  published: '2021-04-29'
+  type: journal-article
+  pmid: '33946947'
+  pmcid: PMC8124949
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/ijms22157784
+  title: Keratin 7 Is a Constituent of the Keratin Network in Mouse Pancreatic Islets and Is Upregulated in Experimental Diabetes
+  journal: International Journal of Molecular Sciences
+  published: '2021-07-21'
+  type: journal-article
+  pmid: '34360548'
+  pmcid: PMC8346022
+  source: website
+  added: '2026-09-30'

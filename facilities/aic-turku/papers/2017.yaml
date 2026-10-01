@@ -1,0 +1,242 @@
+# Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2017 (28).
+# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.
+- doi: 10.1002/cjp2.69
+  title: PLA2G7 associates with hormone receptor negativity in clinical breast cancer samples and regulates epithelial‐mesenchymal transition in cultured breast cancer cells
+  journal: 'The Journal of Pathology: Clinical Research'
+  published: '2017-04-04'
+  type: journal-article
+  pmid: '28451461'
+  pmcid: PMC5402179
+  source: website
+  added: '2026-09-30'
+- doi: 10.1002/smll.201701807
+  title: STED‐TEM Correlative Microscopy Leveraging Nanodiamonds as Intracellular Dual‐Contrast Markers
+  journal: Small
+  published: '2017-12-18'
+  type: journal-article
+  pmid: '29251417'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s10096-017-2958-z
+  title: The presence of human papillomavirus (HPV) in placenta and/or cord blood might result in Th2 polarization
+  journal: European Journal of Clinical Microbiology &amp; Infectious Diseases
+  published: '2017-03-21'
+  type: journal-article
+  pmid: '28324192'
+  pmcid: PMC5524867
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s11010-017-3004-2
+  title: 'Diversity of actin architecture in human osteoclasts: network of curved and branched actin supporting cell shape and intercellular micrometer-level tubes'
+  journal: Molecular and Cellular Biochemistry
+  published: '2017-03-14'
+  type: journal-article
+  pmid: '28293874'
+  pmcid: PMC5532409
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.diff.2016.11.005
+  title: Fam3c modulates osteogenic differentiation by down-regulating Runx2
+  journal: Differentiation
+  published: 2017-01
+  type: journal-article
+  pmid: '27914282'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.stemcr.2017.05.021
+  title: A Strong Contractile Actin Fence and Large Adhesions Direct Human Pluripotent Colony Morphology and Adhesion
+  journal: Stem Cell Reports
+  published: 2017-07
+  type: journal-article
+  pmid: '28625538'
+  pmcid: PMC5511101
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.yexcr.2016.12.004
+  title: FHOD1 formin is upregulated in melanomas and modifies proliferation and tumor growth
+  journal: Experimental Cell Research
+  published: 2017-01
+  type: journal-article
+  pmid: '27919746'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/cdd.2017.28
+  title: Keratins regulate colonic epithelial cell differentiation through the Notch1 signalling pathway
+  journal: Cell Death &amp; Differentiation
+  published: '2017-05-05'
+  type: journal-article
+  pmid: '28475172'
+  pmcid: PMC5442467
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/ncb3487
+  title: SHANK proteins limit integrin activation by directly interacting with Rap1 and R-Ras
+  journal: Nature Cell Biology
+  published: '2017-03-06'
+  type: journal-article
+  pmid: '28263956'
+  pmcid: PMC5386136
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/nprot.2017.107
+  title: Cell-derived matrices for studying cell proliferation and directional migration in a complex 3D microenvironment
+  journal: Nature Protocols
+  published: '2017-10-19'
+  type: journal-article
+  pmid: '29048422'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41598-017-09312-z
+  title: Analyses in zebrafish embryos reveal that nanotoxicity profiles are dependent on surface-functionalization controlled penetrance of biological membranes
+  journal: Scientific Reports
+  published: '2017-08-21'
+  type: journal-article
+  pmid: '28827674'
+  pmcid: PMC5566213
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41598-017-09529-y
+  title: The ERK-1 function is required for HSV-1-mediated G1/S progression in HEP-2 cells and contributes to virus growth
+  journal: Scientific Reports
+  published: '2017-08-23'
+  type: journal-article
+  pmid: '28835716'
+  pmcid: PMC5569015
+  source: website
+  added: '2026-09-30'
+- doi: 10.1073/pnas.1703057114
+  title: Selective regulation of Notch ligands during angiogenesis is mediated by vimentin
+  journal: Proceedings of the National Academy of Sciences
+  published: '2017-05-22'
+  type: journal-article
+  pmid: '28533359'
+  pmcid: PMC5468602
+  source: website
+  added: '2026-09-30'
+- doi: 10.1080/15548627.2016.1261319
+  title: FYCO1 and autophagy control the integrity of the haploid male germ cell-specific RNP granules
+  journal: Autophagy
+  published: '2017-01-26'
+  type: journal-article
+  pmid: '27929729'
+  pmcid: PMC5324852
+  source: website
+  added: '2026-09-30'
+- doi: 10.1083/jcb.201609066
+  title: AMPK negatively regulates tensin-dependent integrin activity
+  journal: Journal of Cell Biology
+  published: '2017-03-13'
+  type: journal-article
+  pmid: '28289092'
+  pmcid: PMC5379951
+  source: website
+  added: '2026-09-30'
+- doi: 10.1083/jcb.201704045
+  title: FiloQuant reveals increased filopodia density during breast cancer progression
+  journal: Journal of Cell Biology
+  published: '2017-08-01'
+  type: journal-article
+  pmid: '28765364'
+  pmcid: PMC5626550
+  source: website
+  added: '2026-09-30'
+- doi: 10.1091/mbc.e17-04-0261
+  title: Genome-wide screen of gamma-secretase–mediated intramembrane cleavage of receptor tyrosine kinases
+  journal: Molecular Biology of the Cell
+  published: 2017-11
+  type: journal-article
+  pmid: '28904208'
+  pmcid: PMC5662267
+  source: website
+  added: '2026-09-30'
+- doi: 10.1093/hmg/ddx042
+  title: ATPase-deficient mitochondrial inner membrane protein ATAD3A disturbs mitochondrial dynamics in dominant hereditary spastic paraplegia
+  journal: Human Molecular Genetics
+  published: '2017-01-31'
+  type: journal-article
+  pmid: '28158749'
+  pmcid: PMC5393146
+  source: website
+  added: '2026-09-30'
+- doi: 10.1093/jmicro/dfx118
+  title: Gold nanoparticle printed coverslips to facilitate fluorescence-TEM correlative microscopy
+  journal: Microscopy
+  published: '2017-11-23'
+  type: journal-article
+  pmid: '29186480'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1096/fj.201600935r
+  title: Amine oxidase activity regulates the development of pulmonary fibrosis
+  journal: The FASEB Journal
+  published: 2017-03
+  type: journal-article
+  pmid: '28251930'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1096/fj.201700332r
+  title: Internal epithelia in Drosophila display rudimentary competence to form cytoplasmic networks of transgenic human vimentin
+  journal: The FASEB Journal
+  published: '2017-08-04'
+  type: journal-article
+  pmid: '28778974'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/exd.13278
+  title: Expression of claudin‐11 by tumor cells in cutaneous squamous cell carcinoma is dependent on the activity of p38δ
+  journal: Experimental Dermatology
+  published: '2017-04-10'
+  type: journal-article
+  pmid: '27992079'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/pce.12872
+  title: 'Dissecting the Photoprotective Mechanism Encoded by the flv4‐2 Operon: a Distinct Contribution of Sll0218 in Photosystem II Stabilization'
+  journal: Plant, Cell &amp; Environment
+  published: '2017-01-17'
+  type: journal-article
+  pmid: '27928824'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1159/000481718
+  title: Luteinizing Hormone and GATA4 Action in the Adrenocortical Tumorigenesis of Gonadectomized Female Mice
+  journal: Cellular Physiology and Biochemistry
+  published: '2017-10-04'
+  type: journal-article
+  pmid: '28977799'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1242/dev.152108
+  title: SPEF2 functions in microtubule-mediated transport in elongating spermatids to ensure proper male germ cell differentiation
+  journal: Development
+  published: '2017-07-15'
+  type: journal-article
+  pmid: '28619825'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1242/jcs.200329
+  title: The Sharpin interactome reveals a role for Sharpin in lamellipodium formation via the Arp2/3 complex
+  journal: Journal of Cell Science
+  published: '2017-09-15'
+  type: journal-article
+  pmid: '28775156'
+  pmcid: PMC5612173
+  source: website
+  added: '2026-09-30'
+- doi: 10.1242/jcs.202226
+  title: Nestin contributes to skeletal muscle homeostasis and regeneration
+  journal: Journal of Cell Science
+  published: '2017-09-01'
+  type: journal-article
+  pmid: '28733456'
+  source: website
+  added: '2026-09-30'
+- doi: 10.18632/oncotarget.17573
+  title: Tumor cell-specific AIM2 regulates growth and invasion of cutaneous squamous cell carcinoma
+  journal: Oncotarget
+  published: '2017-05-02'
+  type: journal-article
+  pmid: '28526809'
+  pmcid: PMC5542230
+  source: website
+  added: '2026-09-30'

@@ -1,0 +1,208 @@
+# Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2018 (25).
+# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.
+- doi: 10.1002/art.40482
+  title: Chronic Active Arthritis Driven by Macrophages Without Involvement of T Cells
+  journal: Arthritis &amp; Rheumatology
+  published: '2018-06-20'
+  type: journal-article
+  pmid: '29513929'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/978-1-4939-7474-0_18
+  title: Visualization and Quantitative Analysis of the Actin Cytoskeleton Upon B Cell Activation
+  journal: Methods in Molecular Biology
+  published: '2018-02-01'
+  type: book-chapter
+  pmid: '29388113'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/978-1-4939-7762-8_5
+  title: 'Two-Photon Imaging of T-Cell Motility in Lymph Nodes: In Vivo and Ex Vivo Approaches'
+  journal: Methods in Molecular Biology
+  published: '2018-02-24'
+  type: book-chapter
+  pmid: '29476487'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1007/s10753-018-0763-1
+  title: SERMs Promote Anti-Inflammatory Signaling and Phenotype of CD14+ Cells
+  journal: Inflammation
+  published: '2018-03-24'
+  type: journal-article
+  pmid: '29574654'
+  pmcid: PMC6061028
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.atherosclerosis.2018.06.917
+  title: Melanocortin 1 receptor deficiency promotes atherosclerosis in Apolipoprotein E-/- mice
+  journal: Atherosclerosis
+  published: 2018-08
+  type: journal-article
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.ceca.2018.03.001
+  title: Oxysterol-binding protein related-proteins (ORPs) 5 and 8 regulate calcium signaling at specific cell compartments
+  journal: Cell Calcium
+  published: 2018-06
+  type: journal-article
+  pmid: '29748134'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.celrep.2018.01.070
+  title: Transcriptional Repressor HIC1 Contributes to Suppressive Function of Human Induced Regulatory T Cells
+  journal: Cell Reports
+  published: 2018-02
+  type: journal-article
+  pmid: '29466736'
+  pmcid: PMC5842026
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.colsurfb.2018.04.013
+  title: 'The influence of mineral particles on fibroblast behaviour: A comparative study'
+  journal: 'Colloids and Surfaces B: Biointerfaces'
+  published: 2018-07
+  type: journal-article
+  pmid: '29674292'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.lfs.2018.09.055
+  title: Stem cell factor and NSC87877 synergism enhances c-Kit mediated proliferation of human erythroid cells
+  journal: Life Sciences
+  published: 2018-12
+  type: journal-article
+  pmid: '30308182'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1016/j.nano.2018.03.009
+  title: A method for optical imaging and monitoring of the excretion of fluorescent nanocomposites from the body using artificial neural networks
+  journal: 'Nanomedicine: Nanotechnology, Biology and Medicine'
+  published: 2018-06
+  type: journal-article
+  pmid: '29655916'
+  source: website
+  added: '2026-09-30'
+- doi: 10.1038/s41418-017-0002-6
+  title: Sumoylation of Notch1 represses its target gene expression during cell stress
+  journal: Cell Death &amp; Differentiation
+  published: '2018-01-05'
+  type: journal-article
+  pmid: '29305585'
+  pmcid: PMC5864205
+  source: website
+  added: '2026-09-30'
+- doi: 10.1073/pnas.1722317115
+  title: Targeting β1-integrin inhibits vascular leakage in endotoxemia
+  journal: Proceedings of the National Academy of Sciences
+  published: '2018-06-25'
+  type: journal-article
+  pmid: '29941602'
+  pmcid: PMC6048499
+  source: website
+  added: '2026-09-30'
+- doi: 10.1101/261560
+  title: Regulation of cyclic electron flow by chloroplast NADPH-dependent thioredoxin system
+  type: posted-content
+  europepmc_id: PPR14270
+  source: website
+  added: '2026-09-30'
+- doi: 10.1101/353086
+  title: GGA2 and RAB13 promote activity-dependent β1-integrin recycling
+  type: posted-content
+  europepmc_id: PPR8518
+  source: website
+  added: '2026-09-30'
+- doi: 10.1101/377879
+  title: Filopodome mapping identifies p130Cas as a mechanosensitive regulator of filopodia stability
+  type: posted-content
+  europepmc_id: PPR45930
+  source: website
+  added: '2026-09-30'
+- doi: 10.1111/apha.13085
+  title: Decreased levels of keratin 8 sensitize mice to streptozotocin‐induced diabetes
+  journal: Acta Physiologica
+  published: '2018-05-22'
+  type: journal-article
+  pmid: '29719117'
+  pmcid: PMC6175344
+  source: website
+  added: '2026-09-30'
+- doi: 10.1186/s12974-018-1152-2
+  title: Vascular adhesion protein-1 is actively involved in the development of inflammatory lesions in rat models of multiple sclerosis
+  journal: Journal of Neuroinflammation
+  published: '2018-05-01'
+  type: journal-article
+  pmid: '29716612'
+  pmcid: PMC5930736
+  source: website
+  added: '2026-09-30'
+- doi: 10.1242/bio.037044
+  title: Long non-coding RNA PICSAR decreases adhesion and promotes migration of squamous carcinoma cells by downregulating α2β1 and α5β1 integrin expression
+  journal: Biology Open
+  published: '2018-11-14'
+  type: journal-article
+  pmid: '30429154'
+  pmcid: PMC6262852
+  source: website
+  added: '2026-09-30'
+- doi: 10.1242/jcs.214270
+  title: ProLIF – quantitative integrin protein–protein interactions and synergistic membrane effects on proteoliposomes
+  journal: Journal of Cell Science
+  published: '2018-08-20'
+  type: journal-article
+  pmid: '30072441'
+  pmcid: PMC6398480
+  source: website
+  added: '2026-09-30'
+- doi: 10.1530/joe-18-0009
+  title: Hypothalamic γ-melanocyte stimulating hormone gene delivery reduces fat mass in male mice
+  journal: Journal of Endocrinology
+  published: 2018-10
+  type: journal-article
+  pmid: '30307151'
+  source: website
+  added: '2026-09-30'
+- doi: 10.18632/oncotarget.25961
+  title: Alendronate-induced disruption of actin cytoskeleton and inhibition of migration/invasion are associated with cofilin downregulation in PC-3 prostate cancer cells
+  journal: Oncotarget
+  published: '2018-08-24'
+  type: journal-article
+  pmid: '30220968'
+  pmcid: PMC6135693
+  source: website
+  added: '2026-09-30'
+- doi: 10.3389/fimmu.2018.00114
+  title: The Macrophage Mannose Receptor Regulate Mannan-Induced Psoriasis, Psoriatic Arthritis, and Rheumatoid Arthritis-Like Disease Models
+  journal: Frontiers in Immunology
+  published: '2018-02-06'
+  type: journal-article
+  pmid: '29467756'
+  pmcid: PMC5808283
+  source: website
+  added: '2026-09-30'
+- doi: 10.3389/fimmu.2018.02257
+  title: Enhanced Antibody Production in Clever-1/Stabilin-1–Deficient Mice
+  journal: Frontiers in Immunology
+  published: '2018-10-08'
+  type: journal-article
+  pmid: '30349531'
+  pmcid: PMC6187969
+  source: website
+  added: '2026-09-30'
+- doi: 10.3390/pharmaceutics10040237
+  title: Factors Affecting Intracellular Delivery and Release of Hydrophilic Versus Hydrophobic Cargo from Mesoporous Silica Nanoparticles on 2D and 3D Cell Cultures
+  journal: Pharmaceutics
+  published: '2018-11-17'
+  type: journal-article
+  pmid: '30453596'
+  pmcid: PMC6320991
+  source: website
+  added: '2026-09-30'
+- doi: 10.7554/elife.32490
+  title: Lymphatic endothelium stimulates melanoma metastasis and invasion via MMP14-dependent Notch3 and β1-integrin activation
+  journal: eLife
+  published: '2018-05-01'
+  type: journal-article
+  pmid: '29712618'
+  pmcid: PMC5929907
+  source: website
+  added: '2026-09-30'
