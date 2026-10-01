@@ -9,8 +9,8 @@ in a notebook, and the confirmed DOIs are filed in this repository through a pul
 
 | notebook | what | when |
 |---|---|---|
-| [1 · Build the corpus](notebooks/1_build_corpus.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AIC-Turku/facility-publication-finder/blob/main/notebooks/1_build_corpus.ipynb) | fetch every candidate paper of the chosen years, its full text, screen it, embed it (all in your Google Drive) | once per year; slow, resumable |
-| [2 · Find and validate](notebooks/2_find_and_validate.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AIC-Turku/facility-publication-finder/blob/main/notebooks/2_find_and_validate.ipynb) | search one year with the current rules, rank it, review the papers one by one, write the corresponding authors to a CSV, file the confirmed DOIs, learn | as often as needed; minutes plus the review |
+| [1 · Build the corpus](notebooks/1_build_corpus/1_build_corpus.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AIC-Turku/facility-publication-finder/blob/main/notebooks/1_build_corpus/1_build_corpus.ipynb) | fetch every candidate paper of the chosen years, its full text, screen it, embed it (all in your Google Drive) | once per year; slow, resumable |
+| [2 · Find and validate](notebooks/2_find_and_validate/2_find_and_validate.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AIC-Turku/facility-publication-finder/blob/main/notebooks/2_find_and_validate/2_find_and_validate.ipynb) | search one year with the current rules, rank it, review the papers one by one, write the corresponding authors to a CSV, file the confirmed DOIs, learn | as often as needed; minutes plus the review |
 
 **New here? Follow the [step-by-step protocol](docs/user-guide.md).**
 
@@ -97,9 +97,9 @@ facility-pubs coverage                    # rules still cover every instrument i
 
 ## Desktop app (LabConstrictor)
 
-`notebooks/requirements.yaml` lists the pinned dependencies for packaging the two notebooks with
-[LabConstrictor](https://github.com/CellMigrationLab/LabConstrictor) (copy `src/facility_pubs/`
-into its `src/`). The installed app needs no clone: step 1 downloads the latest rules and
+The notebooks follow [LabConstrictor](https://github.com/CellMigrationLab/LabConstrictor)'s
+layout, `notebooks/<name>/<name>.ipynb` with the pinned dependencies of each in
+`notebooks/<name>/requirements.yaml`; copy `src/facility_pubs/` into its `src/`. The installed app needs no clone: step 1 downloads the latest rules and
 confirmed papers from this repository at each start.
 
 ## Adapting to another facility

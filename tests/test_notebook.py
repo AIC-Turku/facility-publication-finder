@@ -3,7 +3,7 @@ import json
 import re
 from pathlib import Path
 
-NOTEBOOKS = [Path("notebooks/1_build_corpus.ipynb"), Path("notebooks/2_find_and_validate.ipynb")]
+NOTEBOOKS = [Path("notebooks/1_build_corpus/1_build_corpus.ipynb"), Path("notebooks/2_find_and_validate/2_find_and_validate.ipynb")]
 
 
 def _nb(path):
@@ -98,3 +98,15 @@ def test_variables_are_defined_before_use():
             defs = [m.start() for m in re.finditer(rf"\b{name}\s*=|import [\w, ]*\b{name}\b", src)]
             if uses:
                 assert defs and min(defs) <= min(uses), (p, name)
+
+
+def test_each_notebook_folder_has_its_labconstrictor_requirements():
+    import yaml
+    needed = {"pyyaml", "pymupdf", "fastembed", "scikit-learn", "numpy", "ipywidgets"}
+    for p, extra in zip(NOTEBOOKS, ({"openpyxl"}, set())):
+        req = yaml.safe_load((p.parent / "requirements.yaml").read_text())
+        assert {"dependencies", "python_version", "description"} <= set(req) and req["description"].strip()
+        names = {d.split("==")[0].lower() for d in req["dependencies"]}
+        assert names == needed | extra, p
+        assert all("==" in d for d in req["dependencies"]), "pinned versions only"
+        assert p.parent.name == p.stem                       # LabConstrictor: notebooks/<name>/<name>.ipynb

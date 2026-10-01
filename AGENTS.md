@@ -53,7 +53,7 @@ and the traps.
 | reports | `report.py` (review table, techniques), `provenance.py` (rules version, intervals) |
 | notebook steps | `workflow.py` (what notebook 2 calls), `ui.py` (settings form, folder browser: ipywidgets, Colab and local) |
 | optional | `bookings.py` (private OpenIRIS import), `coverage.py` (rules vs the instrument database) |
-| entry points | `cli.py` (`facility-pubs`), `notebooks/1_build_corpus.ipynb`, `notebooks/2_find_and_validate.ipynb` |
+| entry points | `cli.py` (`facility-pubs`), `notebooks/1_build_corpus/1_build_corpus.ipynb`, `notebooks/2_find_and_validate/2_find_and_validate.ipynb` |
 
 Settings come from `config.py` only: `facility_dir()`, `data_root()`, `private_root()` read
 `PUBS_FACILITY`, `PUBS_DATA`, `PUBS_PRIVATE` at call time; `load()` validates `facility.yaml`.
