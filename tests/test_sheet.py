@@ -1,6 +1,6 @@
 import json
 
-from aic_pubs import contacts, papers, sheet
+from facility_pubs import contacts, papers, sheet
 
 # fictitious people and addresses only
 TEXT = ("Title of the paper. Ada Example1, Bo Sample2* 1 University of Somewhere. "
@@ -39,7 +39,7 @@ def _setup_year(monkeypatch, tmp_path):
         {"doi": "10.1000/sim", "title": "Similar", "priority": "low", "category": "F", "has_text": True},
     ]
     monkeypatch.setattr(sheet, "load_screened", lambda year: rows)
-    from aic_pubs import validation
+    from facility_pubs import validation
     monkeypatch.setattr(validation, "load_screened", lambda year: rows)
     monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     monkeypatch.setattr(sheet, "cached_text", lambda year, doi: ("text with grant 359073", "x"))
@@ -141,7 +141,7 @@ class FakeClient:
 
 
 def test_google_sheet_sync_creates_tabs_with_a_dropdown_and_keeps_verdicts(monkeypatch, tmp_path):
-    from aic_pubs import gsheets
+    from facility_pubs import gsheets
     fake_contacts = _setup_year(monkeypatch, tmp_path)
     monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     gc = FakeClient()
@@ -175,7 +175,7 @@ def test_notes_typed_in_facility_papers_survive_a_refresh(monkeypatch, tmp_path)
 
 def test_a_recorded_sheet_that_cannot_be_opened_is_never_replaced(monkeypatch, tmp_path):
     import pytest
-    from aic_pubs import gsheets
+    from facility_pubs import gsheets
     monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     (tmp_path / "2024").mkdir()
     (tmp_path / "2024" / "sheet.json").write_text(json.dumps({"id": "gone", "url": "https://x"}))

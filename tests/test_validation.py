@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from aic_pubs import papers, validation
+from facility_pubs import papers, validation
 
 
 def test_summarize_recall_misses_and_new_finds():
@@ -34,7 +34,7 @@ def test_year_summary_reads_the_swept_year_and_the_confirmed_papers(monkeypatch,
 
 
 def test_cli_refuses_years_that_were_not_swept(capsys):
-    from aic_pubs import cli
+    from facility_pubs import cli
     with pytest.raises(SystemExit, match="not swept yet: 2019"):
         cli.main(["validate", "--years", "2019"])
     with pytest.raises(SystemExit, match="not swept yet: 2019"):
@@ -42,6 +42,6 @@ def test_cli_refuses_years_that_were_not_swept(capsys):
 
 
 def test_cli_requires_its_arguments():
-    from aic_pubs import cli
+    from facility_pubs import cli
     with pytest.raises(SystemExit):
         cli.main(["sheet"])                    # --year is required

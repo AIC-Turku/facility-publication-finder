@@ -1,4 +1,4 @@
-"""`aic-pubs`: the command line of the yearly loop (see README and docs/protocol.md).
+"""`facility-pubs`: the command line of the yearly loop (see README and docs/protocol.md).
 
 Every command takes `--facility` (a folder under facilities/, or a path). The working-data
 and private folders come from $PUBS_DATA and $PUBS_PRIVATE (see config.py).
@@ -19,7 +19,7 @@ def _require_swept(years: list[int]) -> None:
     missing = [y for y in years if not _swept(y)]
     if missing:
         sys.exit(f"not swept yet: {', '.join(map(str, missing))} (no screened.jsonl in {data_root()}) - "
-                 f"run `aic-pubs sweep --year <year>` first")
+                 f"run `facility-pubs sweep --year <year>` first")
 
 
 def _users(path: str | None) -> list[str]:
@@ -132,7 +132,7 @@ def parser() -> argparse.ArgumentParser:
     common = argparse.ArgumentParser(add_help=False)
     common.add_argument("--facility", help="folder under facilities/ or a path (default: $PUBS_FACILITY, "
                                            "else aic-turku)")
-    ap = argparse.ArgumentParser(prog="aic-pubs", parents=[common])
+    ap = argparse.ArgumentParser(prog="facility-pubs", parents=[common])
     sub = ap.add_subparsers(dest="command", required=True)
 
     def add(name, func, help_):

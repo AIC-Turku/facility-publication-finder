@@ -1,8 +1,8 @@
 """Tests for sweep refresh semantics."""
 import json
 
-from aic_pubs import sweep
-from aic_pubs.sweep import completed_dois
+from facility_pubs import sweep
+from facility_pubs.sweep import completed_dois
 
 
 def test_no_text_rows_are_retried(tmp_path):
@@ -115,7 +115,7 @@ ARTICLE = ("Images were acquired on a Zeiss LSM880. We thank the Cell Imaging an
 
 def _fake_run(monkeypatch, tmp_path, papers, resolve):
     """Run sweep.run offline: fixed candidate list, fake resolver, no network."""
-    from aic_pubs.fulltext import TextResult
+    from facility_pubs.fulltext import TextResult
     monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     monkeypatch.setattr(sweep, "collect", lambda year, cfg: {p["doi"]: dict(p) for p in papers})
     monkeypatch.setattr(sweep, "resolve_text", lambda p, **k: TextResult(*resolve(p)))

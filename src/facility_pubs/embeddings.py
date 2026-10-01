@@ -417,7 +417,7 @@ def run(years: Iterable[int], model: str = DEFAULT_MODEL, embedder=None,
         if build_year(y, embedder, progress):
             ready.append(y)
         else:
-            progress(f"{y}: no cached full text here (data/cache/{y}/) - run `aic-pubs sweep --year {y}` "
+            progress(f"{y}: no cached full text here (data/cache/{y}/) - run `facility-pubs sweep --year {y}` "
                      f"in this folder first; skipped")
     return [rank_year(y, known_store, known_rows, other_years=ready, model=embedder.model_name)
             for y in ready]

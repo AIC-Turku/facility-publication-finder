@@ -1,4 +1,4 @@
-from aic_pubs import candidates
+from facility_pubs import candidates
 
 
 def test_institutional_universe_science_gate_is_configurable(monkeypatch):

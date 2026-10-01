@@ -16,8 +16,8 @@ def _source(path):
 
 def test_the_two_notebooks_run_the_canonical_steps():
     one, two = (_source(p) for p in NOTEBOOKS)
-    assert "aic-pubs sweep --year {y}" in one and "aic-pubs embed --years {SWEPT_ARG}" in one
-    assert "aic-pubs rescreen --year {YEAR}" in two and "workflow.prepare_sheet(gc, YEAR" in two
+    assert "facility-pubs sweep --year {y}" in one and "facility-pubs embed --years {SWEPT_ARG}" in one
+    assert "facility-pubs rescreen --year {YEAR}" in two and "workflow.prepare_sheet(gc, YEAR" in two
     assert "workflow.collect(gc, YEAR" in two and "workflow.learn(gc, YEAR" in two and "inbox.txt" in two
 
 

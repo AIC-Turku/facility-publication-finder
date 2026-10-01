@@ -1,6 +1,6 @@
 """Public metadata for papers (Crossref, Europe PMC) and the facility-website import.
 
-`aic-pubs import-website` adds every DOI on the facility's public publication page
+`facility-pubs import-website` adds every DOI on the facility's public publication page
 (facility.yaml `website_publications`, all years) to the confirmed papers
 (facilities/<facility>/papers/<year>.yaml, source "website"), with metadata from Crossref
 and Europe PMC. Only for facilities that keep such a page; the AIC page is WordPress.

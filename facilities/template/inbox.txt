@@ -2,6 +2,6 @@
 # the reporting year, e.g.
 #   10.1038/s41467-024-46868-7 2024
 #   https://doi.org/10.1016/j.celrep.2024.114430
-# Commit the file. The "add papers" GitHub Action (or `aic-pubs add-papers`) fetches the
+# Commit the file. The "add papers" GitHub Action (or `facility-pubs add-papers`) fetches the
 # metadata, files each paper under papers/<year>.yaml, merges duplicates, sorts the files
 # and empties this inbox. Lines it cannot resolve stay here with a note.

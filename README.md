@@ -73,14 +73,14 @@ validated papers; when writing to authors, say where the address comes from and 
 ```bash
 pip install -e ".[embed]"
 export PUBS_DATA=/path/to/working-data PUBS_FACILITY=aic-turku
-aic-pubs check-facility              # what facility.yaml loads
-aic-pubs sweep    --year 2024        # candidates, full text, screening (resumable)
-aic-pubs embed    --years 2024 2025  # check list (rank with other swept years)
-aic-pubs sheet    --year 2024        # the workbook as CSV (the notebook writes a Google Sheet)
-aic-pubs add-papers                  # file the DOIs pasted into the inbox
-aic-pubs rescreen --year 2024        # after a rule change
-aic-pubs validate --years 2024       # recall against the confirmed papers, with a 95 % interval
-aic-pubs coverage                    # rules still cover every instrument in the instrument database?
+facility-pubs check-facility              # what facility.yaml loads
+facility-pubs sweep    --year 2024        # candidates, full text, screening (resumable)
+facility-pubs embed    --years 2024 2025  # check list (rank with other swept years)
+facility-pubs sheet    --year 2024        # the workbook as CSV (the notebook writes a Google Sheet)
+facility-pubs add-papers                  # file the DOIs pasted into the inbox
+facility-pubs rescreen --year 2024        # after a rule change
+facility-pubs validate --years 2024       # recall against the confirmed papers, with a 95 % interval
+facility-pubs coverage                    # rules still cover every instrument in the instrument database?
 ```
 
 ## Adapting to another facility
@@ -89,7 +89,7 @@ aic-pubs coverage                    # rules still cover every instrument in the
    permission (*Settings → Actions → General*), so the inbox Action can file papers.
 2. Create `facilities/<your-facility>/facility.yaml` from `facilities/template/facility.yaml` (fill
    in the `FILL IN` parts; `facilities/aic-turku/` is a complete example) and an empty `inbox.txt`.
-3. `aic-pubs check-facility --facility <your-facility>` (warns about placeholders left).
+3. `facility-pubs check-facility --facility <your-facility>` (warns about placeholders left).
 4. Paste the papers you already know into its `inbox.txt` and commit: they are the benchmark and
    the seed set.
 5. Set `FACILITY`, `REPO` and `DATA` at the top of both notebooks.
@@ -99,7 +99,7 @@ A repository platform other than DSpace 7 or Pure OAI-PMH needs one small adapte
 ## Maintaining the rules
 
 * New instrument: add its id and a name pattern under `instruments:` (`strong` = distinctive model;
-  `weak` = common model, needs ≥ 2 of its components nearby). `aic-pubs coverage` lists instruments
+  `weak` = common model, needs ≥ 2 of its components nearby). `facility-pubs coverage` lists instruments
   in the instrument database that have no pattern yet.
 * New false match: add a test in `tests/test_screen.py` first (synthetic text and DOI), then fix
   the pattern.

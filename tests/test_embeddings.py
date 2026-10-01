@@ -3,7 +3,7 @@ import csv
 import numpy as np
 import pytest
 
-from aic_pubs import embeddings as E
+from facility_pubs import embeddings as E
 
 pytest.importorskip("sklearn")
 
@@ -76,7 +76,7 @@ def test_near_duplicate_known_papers_are_not_used_for_training():
 
 def test_known_paper_without_text_is_not_fetched_again(monkeypatch, tmp_path):
     monkeypatch.setenv("PUBS_DATA", str(tmp_path))
-    import aic_pubs.fulltext as fulltext
+    import facility_pubs.fulltext as fulltext
     monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     monkeypatch.setattr(E, "cached_text", lambda year, doi: (None, None))
     calls = []
@@ -150,7 +150,7 @@ def test_rank_year_writes_the_check_list(monkeypatch, tmp_path):
 def test_run_skips_years_that_were_not_swept(monkeypatch, tmp_path):
     monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     monkeypatch.setattr(E, "build_known", lambda embedder, progress, **kw: {"k": (_unit(1, 0, 0), "t")})
-    import aic_pubs.papers as known
+    import facility_pubs.papers as known
     monkeypatch.setattr(known, "load_papers", lambda: [])
     said = []
     assert E.run([1999], embedder=FakeEmbedder(), progress=said.append) == []
@@ -161,7 +161,7 @@ def test_run_skips_swept_years_without_cached_text(monkeypatch, tmp_path):
     monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     monkeypatch.setattr(E, "build_known", lambda embedder, progress, **kw: {"k": (_unit(1, 0, 0), "t")})
     monkeypatch.setattr(E, "build_year", lambda year, embedder, progress: {})
-    import aic_pubs.papers as known
+    import facility_pubs.papers as known
     monkeypatch.setattr(known, "load_papers", lambda: [])
     (tmp_path / "2025").mkdir()
     (tmp_path / "2025" / "screened.jsonl").write_text("")
@@ -187,8 +187,8 @@ def test_rank_year_leaves_an_existing_sheet_alone_when_there_is_nothing_to_rank(
 
 
 def test_no_text_marker_is_not_written_when_a_host_is_out_of_budget(monkeypatch, tmp_path):
-    import aic_pubs.fulltext as fulltext
-    import aic_pubs.http as http
+    import facility_pubs.fulltext as fulltext
+    import facility_pubs.http as http
     monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     monkeypatch.setattr(E, "cached_text", lambda year, doi: (None, None))
     calls = []
@@ -205,7 +205,7 @@ def test_no_text_marker_is_not_written_when_a_host_is_out_of_budget(monkeypatch,
 
 def test_no_confirmed_papers_gives_no_check_list_but_no_crash(monkeypatch, tmp_path):
     monkeypatch.setenv("PUBS_DATA", str(tmp_path))
-    import aic_pubs.papers as known
+    import facility_pubs.papers as known
     monkeypatch.setattr(known, "load_papers", lambda: [])
     said = []
     assert E.run([2025], embedder=FakeEmbedder(), progress=said.append) == []

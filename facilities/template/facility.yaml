@@ -1,6 +1,6 @@
 # Template for a new facility. Copy this folder to facilities/<your-facility>/, fill in the
 # FILL IN parts, and set PUBS_FACILITY=<your-facility> (the notebooks have a FACILITY setting).
-# `aic-pubs check-facility` shows what was loaded. facilities/aic-turku/ is a complete,
+# `facility-pubs check-facility` shows what was loaded. facilities/aic-turku/ is a complete,
 # tuned example with comments on why each rule exists.
 #
 # Patterns are Python regular expressions, matched case-insensitively against full text in
@@ -12,7 +12,7 @@ facility:
   # optional: a public page listing the facility's publications (benchmark only)
   website_publications: ""
   website_core_slug: ""
-  # optional: instrument records (AIC-Turku-database format) for `aic-pubs coverage`
+  # optional: instrument records (AIC-Turku-database format) for `facility-pubs coverage`
   instrument_database: ""
 
 # Local publication repositories: every DOI-bearing record of the year is screened.

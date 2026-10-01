@@ -1,9 +1,9 @@
 """Regression tests for the false positives and misses found on real 2024-2025 papers."""
 import pytest
 
-from aic_pubs.config import load
-from aic_pubs.report import match_users
-from aic_pubs.screen import screen
+from facility_pubs.config import load
+from facility_pubs.report import match_users
+from facility_pubs.screen import screen
 
 PAD = " Cells were imaged by confocal microscopy. " * 6  # enough microscopy terms
 
@@ -93,7 +93,7 @@ def test_word_collisions_are_not_instruments(cfg, text):
 
 
 def test_doi_normalisation():
-    from aic_pubs.sources import _norm_doi
+    from facility_pubs.sources import _norm_doi
     assert _norm_doi("https://doi.org/10.1016/J.TEST.2024.000013,") == "10.1016/j.test.2024.000013"
     assert _norm_doi("doi: 10.1000/ABC") == "10.1000/abc"
     assert _norm_doi("<https://doi.org/10.1000/ABC>") == "10.1000/abc"
@@ -124,7 +124,7 @@ def test_general_technique_is_counted_but_not_a_lead(cfg):
 def test_config_covers_database():
     """Every active instrument and offered capability in AIC-Turku-database has a pattern."""
     import os
-    from aic_pubs import coverage
+    from facility_pubs import coverage
     db = os.environ.get("AIC_DATABASE")
     if not db:
         pytest.skip("set AIC_DATABASE to a checkout of AIC-Turku-database")
@@ -231,7 +231,7 @@ def test_repeat_user(cfg):
 
 
 def test_placeholder_authors_are_dropped():
-    from aic_pubs.sources import clean_authors
+    from facility_pubs.sources import clean_authors
     assert clean_authors(["Dataimport, tyks, vsshp", "Doe, Jane"]) == ["Doe, Jane"]
 
 
@@ -312,7 +312,7 @@ def test_components_near_instrument_still_promote_weak_model(cfg):
 
 
 def test_report_user_list_does_not_write_private_names(monkeypatch, tmp_path):
-    from aic_pubs import report
+    from facility_pubs import report
 
     monkeypatch.setattr(
         report,
@@ -344,7 +344,7 @@ def test_report_user_list_does_not_write_private_names(monkeypatch, tmp_path):
     report.write_review_csv(2025, set(), users=["Erik Example"], path=path)
     public = path.read_text(encoding="utf-8")
     assert "known_user_match" not in public and "matched_users" not in public
-    from aic_pubs.sweep import private_dir
+    from facility_pubs.sweep import private_dir
     private = (private_dir(2025) / "review.csv").read_text(encoding="utf-8")
     assert "known_user_match" in private
     assert "Erik Example" not in public + private.split("\n", 1)[0]
@@ -374,7 +374,7 @@ def test_stored_sentences_have_no_email_and_are_bounded(cfg):
 
 
 def test_europepmc_entities_are_decoded(monkeypatch):
-    from aic_pubs import sources
+    from facility_pubs import sources
     monkeypatch.setattr(sources, "fetch", lambda url, **k: "<p>Cell Imaging &amp; Cytometry Core, Turku</p>")
     assert "Cell Imaging & Cytometry Core" in sources.europepmc_text("PMC1")
 
@@ -386,7 +386,7 @@ def test_europepmc_entities_are_decoded(monkeypatch):
     ("10.1016/j.test.2025.000003", "10.1016/j.test.2025.000003"),
 ])
 def test_doi_url_junk_is_stripped(raw, doi):
-    from aic_pubs.sources import _norm_doi
+    from facility_pubs.sources import _norm_doi
     assert _norm_doi(raw) == doi
 
 
@@ -457,7 +457,7 @@ def test_staff_thanked_in_acknowledgements(cfg):
 
 
 def test_text_of_another_paper_is_rejected():
-    from aic_pubs.text import matches_paper
+    from facility_pubs.text import matches_paper
     other = "Hydrogen flame simulations with reduced chemistry " * 50
     assert not matches_paper(other, "10.1016/j.test.2025.000008",
                              "Liquid-liquid phase separation of ATXN2L enhances stress granule formation")

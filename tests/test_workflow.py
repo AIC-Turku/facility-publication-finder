@@ -1,6 +1,6 @@
 import pytest
 
-from aic_pubs import workflow
+from facility_pubs import workflow
 
 
 def test_swept_years_are_the_years_with_screening_results(isolated_folders):

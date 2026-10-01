@@ -98,7 +98,7 @@ def import_openiris(xlsx, out_dir=None):
     try:
         import openpyxl
     except ImportError:
-        raise SystemExit('the OpenIRIS import needs openpyxl: pip install "aic-pubs[openiris]"') from None
+        raise SystemExit('the OpenIRIS import needs openpyxl: pip install "facility-pubs[openiris]"') from None
     wb = openpyxl.load_workbook(xlsx, read_only=True)
 
     def sheet(name):

@@ -1,4 +1,4 @@
-from aic_pubs import fulltext
+from facility_pubs import fulltext
 
 
 def test_crossref_links_only_keep_textual_content(monkeypatch):

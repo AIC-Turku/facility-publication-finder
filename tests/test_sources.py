@@ -1,4 +1,4 @@
-from aic_pubs import sources
+from facility_pubs import sources
 
 
 def test_abo_oai_xml_parser_handles_namespaces_and_escaping(monkeypatch):

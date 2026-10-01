@@ -34,7 +34,7 @@ jobs:
             name=$(basename "$dir")
             [ "$name" = template ] && continue
             [ -f "$dir/inbox.txt" ] || continue
-            aic-pubs add-papers --facility "$name" | tee -a "$GITHUB_STEP_SUMMARY"
+            facility-pubs add-papers --facility "$name" | tee -a "$GITHUB_STEP_SUMMARY"
           done
       - name: Commit
         run: |

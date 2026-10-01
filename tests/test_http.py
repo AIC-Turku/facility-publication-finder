@@ -1,6 +1,6 @@
 import urllib.error
 
-from aic_pubs import http
+from facility_pubs import http
 
 
 class _Headers:
@@ -84,7 +84,7 @@ def test_exhausted_host_is_skipped_for_the_rest_of_the_run(monkeypatch):
     stalled every later request for minutes (seen 2026-09-28)."""
     import io
     import urllib.error
-    from aic_pubs import http
+    from facility_pubs import http
 
     http.reset_circuit_breaker()
     calls = []
@@ -108,7 +108,7 @@ def test_exhausted_host_is_skipped_for_the_rest_of_the_run(monkeypatch):
 
 
 def test_openalex_is_not_called_without_a_key(monkeypatch):
-    from aic_pubs import fulltext
+    from facility_pubs import fulltext
 
     monkeypatch.delenv("OPENALEX_API_KEY", raising=False)
     monkeypatch.setattr(fulltext.sources, "europepmc_lookup_doi", lambda doi: None)

@@ -174,7 +174,7 @@ other_institution: \b(universit(y|é|ät|at|a|eit)|institut(e|o)?|hospital|schoo
 local_email_domains: [utu.fi, abo.fi, tuks.fi]
 
 # Techniques the facility offers, keyed by term id in the AIC-Turku-database
-# vocabularies (vocab/<vocab>.yaml). `aic-pubs coverage` lists capabilities
+# vocabularies (vocab/<vocab>.yaml). `facility-pubs coverage` lists capabilities
 # used by active instruments that have no entry here.
 # specialist: offered by few Turku labs; with Turku authors and no other
 #   facility named, a match is a lead (category C).
@@ -304,7 +304,7 @@ instruments:
     pattern: TCS ?SP5|Leica SP5
 
 # OpenIRIS resource names (lower-case substring, first match wins) -> instrument_id,
-# for `aic-pubs import-openiris` (private bookings export).
+# for `facility-pubs import-openiris` (private bookings export).
 openiris_resources:
   "med c 3i spinning disk": scope-3i-csu-w1-spinning-disk-med-c
   "3i spinning disk": scope-3i-csu-w1-spinning-disk

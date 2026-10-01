@@ -1,5 +1,5 @@
 # Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2026 (2).
-# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.
+# Maintained by `facility-pubs add-papers`: paste new DOIs into ../inbox.txt.
 - doi: 10.1016/j.jcmgh.2025.101716
   title: Genetically Induced Mouse Model for Colon-specific Epithelial Cell Tumorigenesis Driven by Loss of K8 and Apc
   journal: Cellular and Molecular Gastroenterology and Hepatology

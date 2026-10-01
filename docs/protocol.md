@@ -54,12 +54,12 @@ anything private.
 
 | step | where | command | output |
 |---|---|---|---|
-| 1. build the corpus | notebook 1 (once per year, slow, resumable) | `aic-pubs sweep --year Y`, `aic-pubs embed --years ...` | candidates, full text, screening, embeddings (Drive) |
-| 2. search | notebook 2 | `aic-pubs rescreen --year Y`, `aic-pubs validate --years Y` | the year screened with the current rules |
+| 1. build the corpus | notebook 1 (once per year, slow, resumable) | `facility-pubs sweep --year Y`, `facility-pubs embed --years ...` | candidates, full text, screening, embeddings (Drive) |
+| 2. search | notebook 2 | `facility-pubs rescreen --year Y`, `facility-pubs validate --years Y` | the year screened with the current rules |
 | 3. rank + Sheet | notebook 2 | `workflow.prepare_sheet` | the year's Google Sheet: Validate, Facility papers, Search misses |
 | 4. validate | the Sheet | staff fill `verdict`: yes (filed), likely (not filed; ask the authors, then yes), no | verdicts |
 | 5. collect | notebook 2 | `workflow.collect` | refreshed Sheet + the new "yes" DOIs |
-| 6. file | GitHub | paste into `facilities/<facility>/inbox.txt`, commit | the Action runs `aic-pubs add-papers` → `papers/<year>.yaml` |
+| 6. file | GitHub | paste into `facilities/<facility>/inbox.txt`, commit | the Action runs `facility-pubs add-papers` → `papers/<year>.yaml` |
 | 7. learn | notebook 2 | `workflow.learn`: re-rank the other years | better check lists everywhere |
 | 8. improve the rules | developer | "no" verdicts → a test + a pattern fix in `facility.yaml`; misses → why | next year's run |
 
@@ -112,7 +112,7 @@ a 95 % Wilson interval.
 2. Create `facilities/<your-facility>/` with `facility.yaml` (copy `facilities/template/facility.yaml`
    and fill in the `FILL IN` parts; `facilities/aic-turku/facility.yaml` is a complete, commented
    example) and an empty `inbox.txt` (GitHub: *Add file → Create new file*, type the path).
-3. `aic-pubs check-facility --facility <your-facility>` shows what was loaded and warns about
+3. `facility-pubs check-facility --facility <your-facility>` shows what was loaded and warns about
    template placeholders left. For DSpace, set `doi_fields` to where your repository keeps DOIs.
 4. Paste the papers you already know into `inbox.txt` on GitHub and commit: the Action files them.
    They are the benchmark and the seed set of the check list.

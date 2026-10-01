@@ -6,7 +6,7 @@ no full text, abstracts, author names or e-mail addresses.
 
 New papers are pasted into facilities/<facility>/inbox.txt (one DOI per line, optionally
 followed by the reporting year; DOI URLs and surrounding text are fine) and filed by
-`aic-pubs add-papers`, which a GitHub Action runs on every change to an inbox:
+`facility-pubs add-papers`, which a GitHub Action runs on every change to an inbox:
 metadata is fetched, each paper goes to its year file, duplicates are merged, files are
 sorted, and the inbox is emptied (lines it could not resolve stay, with a note).
 """
@@ -28,7 +28,7 @@ INBOX_HEADER = """\
 # the reporting year, e.g.
 #   10.1038/s41467-024-46868-7 2024
 #   https://doi.org/10.1016/j.celrep.2024.114430
-# Commit the file. The "add papers" GitHub Action (or `aic-pubs add-papers`) fetches the
+# Commit the file. The "add papers" GitHub Action (or `facility-pubs add-papers`) fetches the
 # metadata, files each paper under papers/<year>.yaml, merges duplicates, sorts the files
 # and empties this inbox. Lines it cannot resolve stay here with a note.
 """
@@ -83,7 +83,7 @@ def write_papers(papers: list[dict], facility: str | None = None) -> None:
         body = yaml.safe_dump(rows, sort_keys=False, allow_unicode=True, width=200)
         (folder / f"{year}.yaml").write_text(
             f"# {name}: confirmed papers, {year} ({len(rows)}).\n"
-            f"# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.\n" + body,
+            f"# Maintained by `facility-pubs add-papers`: paste new DOIs into ../inbox.txt.\n" + body,
             encoding="utf-8")
 
 

@@ -33,7 +33,7 @@ def prepare_sheet(gc, year: int, top_n: int = 100, folder_id: str | None = None,
                   progress: Callable[[str], None] = print) -> str:
     """Rank the year and create or refresh its validation Sheet. Returns the Sheet's URL."""
     if year not in swept_years():
-        raise SystemExit(f"{year} is not built yet: run notebook 1 (aic-pubs sweep --year {year}) first")
+        raise SystemExit(f"{year} is not built yet: run notebook 1 (facility-pubs sweep --year {year}) first")
     for s in _rank(gc, [year], progress):
         if s["year"] == year:
             progress(embeddings.format_summary(s))

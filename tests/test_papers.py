@@ -2,8 +2,8 @@ import re
 
 import yaml
 
-from aic_pubs import papers
-from aic_pubs.config import FACILITIES, load
+from facility_pubs import papers
+from facility_pubs.config import FACILITIES, load
 
 
 def fake_fetch(dois):

@@ -1,6 +1,6 @@
 """The validation workbook of a year: what staff check, and the facility papers with contacts.
 
-Tabs (plain data here; gsheets.py writes them to a Google Sheet, `aic-pubs sheet` to CSV):
+Tabs (plain data here; gsheets.py writes them to a Google Sheet, `facility-pubs sheet` to CSV):
 
   Validate         candidates to check, with the reason and evidence, and a verdict
                    (yes / likely / no) and note to fill in:
@@ -40,7 +40,7 @@ WHY_EARLIER = "earlier verdict (no longer a candidate)"
 
 
 def _ranked(year):
-    """{doi: rank} from data/<year>/embedding_ranked.csv (written by `aic-pubs embed`)."""
+    """{doi: rank} from data/<year>/embedding_ranked.csv (written by `facility-pubs embed`)."""
     path = data_root() / str(year) / "embedding_ranked.csv"
     if not path.exists():
         return {}

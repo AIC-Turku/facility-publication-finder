@@ -1,5 +1,5 @@
 # Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2022 (47).
-# Maintained by `aic-pubs add-papers`: paste new DOIs into ../inbox.txt.
+# Maintained by `facility-pubs add-papers`: paste new DOIs into ../inbox.txt.
 - doi: 10.1002/jbm.b.35111
   title: Epithelial cell attachment and adhesion protein expression on novel in sol TiO2 coated zirconia and titanium alloy surfaces
   journal: 'Journal of Biomedical Materials Research Part B: Applied Biomaterials'
