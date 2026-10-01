@@ -16,12 +16,30 @@ def _source(path):
 
 def test_the_two_notebooks_run_the_canonical_steps():
     one, two = (_source(p) for p in NOTEBOOKS)
-    assert "facility-pubs sweep --year {y}" in one and "facility-pubs embed --years {SWEPT_ARG}" in one
-    assert "facility-pubs rescreen --year {YEAR}" in two and "workflow.prepare(YEAR" in two
-    assert "review.start(YEAR, at_once=AT_ONCE, revisit=REVISIT)" in two and "workflow.collect(YEAR" in two
-    assert "workflow.learn(YEAR" in two and "workflow.issue_link(REPO, FACILITY" in two
-    assert "workflow.feedback()" in two
-    assert "YEARS = [2025, 2024, 2023, 2022]" in one and "TOP_N = 200" in two
+    assert "cli.main(['sweep', '--year', str(y)])" in one and "cli.main(['embed', '--years'" in one
+    assert "ui.Settings(CODE / 'facilities', kind='build')" in one
+    assert "ui.Settings(CODE / 'facilities', kind='review')" in two
+    assert "cli.main(['rescreen', '--year', str(cfg['year'])])" in two and "workflow.prepare(cfg['year']" in two
+    assert "review.start(cfg['year'], at_once=cfg['at_once'], revisit=cfg['revisit'])" in two
+    assert "workflow.collect(cfg['year']" in two and "workflow.learn(cfg['year']" in two
+    assert "workflow.issue_link(REPO, cfg['facility']" in two and "workflow.feedback()" in two
+
+
+def test_install_then_drive_then_settings():
+    for p in NOTEBOOKS:
+        titles = [("".join(c["source"]).splitlines() or [""])[0] for c in _nb(p)["cells"] if c["cell_type"] == "code"]
+        assert titles[:3] == ["# @title 1. Install the code", "# @title 2. Connect your Google Drive (Colab)",
+                              "# @title 3. Choose the settings"], p
+        assert all(t.startswith("# @title ") for t in titles), p          # a header in Colab
+
+
+def test_colab_only_code_is_guarded():
+    """Mounting Drive, uploads and the Colab install run only in Colab, so the notebooks also run locally."""
+    for p in NOTEBOOKS:
+        for cell in _nb(p)["cells"]:
+            body = "".join(cell["source"])
+            if cell["cell_type"] == "code" and "google.colab" in body.replace("'google.colab' in sys.modules", ""):
+                assert "ui.in_colab()" in body or "'google.colab' in sys.modules" in body, body[:60]
 
 
 def test_notebooks_hold_no_algorithms():
@@ -31,11 +49,11 @@ def test_notebooks_hold_no_algorithms():
         assert "glob" not in code and "embeddings.run" not in code and "set_verdict" not in code
 
 
-def test_data_lives_in_drive_and_code_on_the_temporary_disk():
+def test_code_on_the_temporary_disk_and_settings_before_use():
     for p in NOTEBOOKS:
         src = _source(p)
-        assert "os.environ['PUBS_DATA'] = DATA" in src and "/content/drive/MyDrive/" in src
-        assert "CODE = '/content/code'" in src and "reset" not in src
+        assert "CODE = Path('/content/code')" in src and "drive.mount('/content/drive')" in src
+        assert "PUBS_DATA" not in src            # set by ui.Settings, the one place
 
 
 def test_no_secrets_or_google_logins_needed():
@@ -74,7 +92,8 @@ def test_variables_are_defined_before_use():
     for p in NOTEBOOKS:
         code = ["".join(c["source"]) for c in _nb(p)["cells"] if c["cell_type"] == "code"]
         src = "\n".join(re.sub(r"#.*", "", line) for cell in code for line in cell.splitlines())
-        for name in {NOTEBOOKS[0]: ("SWEPT_ARG",), NOTEBOOKS[1]: ("review", "workflow")}[p]:
+        for name in {NOTEBOOKS[0]: ("settings", "cfg", "ui", "cli", "CODE"),
+                     NOTEBOOKS[1]: ("settings", "cfg", "ui", "cli", "review", "workflow", "CODE", "REPO")}[p]:
             uses = [m.start() for m in re.finditer(rf"\b{name}\b", src)]
             defs = [m.start() for m in re.finditer(rf"\b{name}\s*=|import [\w, ]*\b{name}\b", src)]
             if uses:

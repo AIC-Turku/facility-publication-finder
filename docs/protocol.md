@@ -62,7 +62,7 @@ anything private.
 | 5. contacts | notebook 2 | `workflow.collect` | `contacts.csv` (one row per e-mail address) + the new "yes" DOIs |
 | 6. file | GitHub | an *Add papers* issue with the DOIs (link printed by step 5), ask a coding agent to file it (e.g. assign it to Copilot); merge the pull request once *check papers* is green | `papers/<year>.yaml`, `source: staff-reviewed` |
 | 7. learn | notebook 2 | `workflow.learn`: re-rank the other years ("yes" positives, "no" negatives); `workflow.feedback` | better check lists; `feedback.txt` |
-| 8. improve the rules | maintainer | `feedback.txt`: "no" reasons → a test + a pattern fix in `facility.yaml`; papers only the check list found → new patterns; yes rate by rank → `TOP_N` | next year's run |
+| 8. improve the rules | maintainer | `feedback.txt`: "no" reasons → a test + a pattern fix in `facility.yaml`; papers only the check list found → new patterns; yes rate by rank → how many check-list papers to review | next year's run |
 
 E-mail blast: `contacts.csv` lists the corresponding authors of every confirmed paper of the year
 and of those validated yes or likely, one row per address, with their papers and whether each
@@ -120,7 +120,7 @@ a 95 % Wilson interval.
    template placeholders left. For DSpace, set `doi_fields` to where your repository keeps DOIs.
 4. File the papers you already know in an *Add papers* issue (ask a coding agent to file it, merge).
    They are the benchmark and the seed set of the check list.
-5. Set `FACILITY`, `REPO` and `DATA` at the top of both notebooks and run them.
+5. Set `REPO` in step 1 of both notebooks to your fork, and run them (the facility is chosen in step 3).
 6. Still AIC-specific in the code (optional parts): the OpenIRIS bookings import (resource map in
    `facility.yaml` `openiris_resources`) and the facility-website importer (`import-website`, a
    WordPress page).

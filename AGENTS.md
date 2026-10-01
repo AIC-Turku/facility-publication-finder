@@ -19,9 +19,12 @@ and the traps.
   one place, at the edge, never deep inside logic.
 * **Avoid heavyweight dependencies unless they provide demonstrated value.** Core: PyYAML and
   PyMuPDF (deposited PDFs). Extras: `embed` (fastembed, scikit-learn; earned its place on held-out
-  years) and `openiris` (openpyxl, for the private bookings import).
+  years), `openiris` (openpyxl, for the private bookings import) and `notebook` (ipywidgets, for
+  the notebooks outside Colab; never installed in Colab, which ships its own).
 * **Notebooks consume package APIs; they are never homes for production algorithms.** A notebook
-  cell sets parameters, calls a package function or CLI command, and shows the result.
+  cell calls a package function or CLI command and shows the result. They run in Colab and in
+  local Jupyter: a `# @title` first line, Colab-only code behind `ui.in_colab()`, ipywidgets (never
+  Colab forms) for choices, settings through `ui.Settings` (steps: install, Drive, settings).
 * **Make the smallest coherent change needed for the task.** No drive-by refactors; one concern
   per commit, with tests.
 
@@ -48,7 +51,7 @@ and the traps.
 | check list | `embeddings.py` |
 | validation | `sheet.py` (validate / contacts / search-misses CSV), `review.py` (notebook review widget), `contacts.py`, `validation.py` (recall, feedback) |
 | reports | `report.py` (review table, techniques), `provenance.py` (rules version, intervals) |
-| notebook steps | `workflow.py` (what notebook 2 calls) |
+| notebook steps | `workflow.py` (what notebook 2 calls), `ui.py` (settings form, folder browser: ipywidgets, Colab and local) |
 | optional | `bookings.py` (private OpenIRIS import), `coverage.py` (rules vs the instrument database) |
 | entry points | `cli.py` (`facility-pubs`), `notebooks/1_build_corpus.ipynb`, `notebooks/2_find_and_validate.ipynb` |
 

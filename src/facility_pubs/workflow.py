@@ -11,9 +11,10 @@ from . import embeddings, sheet
 from .config import data_root
 
 
-def swept_years() -> list[int]:
-    """Years with screening results in the working-data folder."""
-    return sorted(int(p.parent.name) for p in data_root().glob("*/screened.jsonl") if p.parent.name.isdigit())
+def swept_years(folder: Path | None = None) -> list[int]:
+    """Years with screening results (built by notebook 1) in `folder` (default: the working-data folder)."""
+    folder = data_root() if folder is None else folder
+    return sorted(int(p.parent.name) for p in folder.glob("*/screened.jsonl") if p.parent.name.isdigit())
 
 
 def _rank(years: list[int], progress: Callable[[str], None]) -> list[dict]:

@@ -16,7 +16,9 @@ in a notebook, and the confirmed DOIs are filed in this repository through a pul
 
 ## First time
 
-* `DATA` (top of each notebook) is a folder in your Google Drive; share it with the colleagues
+* Each notebook starts with the same three steps: **1. install** the code, **2. connect** Google
+  Drive, **3. choose the settings** in a form (facility, the working-data folder, browsed by
+  clicking, and the years). The working-data folder is a folder in your Google Drive; share it with the colleagues
   who run the notebooks. Colab asks once per session for access to Drive; nothing else needs a
   login.
 * Papers are filed by a coding agent you ask on GitHub (e.g. assign the issue to Copilot, with
@@ -44,7 +46,7 @@ in a notebook, and the confirmed DOIs are filed in this repository through a pul
    nothing but public metadata); **merge it** and the issue closes.
 5. **Notebook 2, learn**: re-ranks the other years with the decisions ("yes" as examples, "no"
    as counter-examples) and writes `feedback.txt`: how often each kind of candidate was a
-   facility paper, how far down the check list papers were still found (to choose `TOP_N`), why
+   facility paper, how far down the check list papers were still found (to choose how many check-list papers to review), why
    papers were not facility use, and the papers only the check list found. A maintainer turns
    it into rule fixes (a test, then a pattern).
 
@@ -102,7 +104,7 @@ facility-pubs coverage                    # rules still cover every instrument i
 3. `facility-pubs check-facility --facility <your-facility>` (warns about placeholders left).
 4. File the papers you already know in an *Add papers* issue: they are the benchmark and the
    seed set.
-5. Set `FACILITY`, `REPO` and `DATA` at the top of both notebooks.
+5. Set `REPO` (step 1 of both notebooks) to your fork; your facility then appears in the settings form.
 
 A repository platform other than DSpace 7 or Pure OAI-PMH needs one small adapter in `sources.py`.
 

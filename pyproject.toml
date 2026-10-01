@@ -14,6 +14,7 @@ dependencies = ["pyyaml", "pymupdf"]
 [project.optional-dependencies]
 embed = ["fastembed", "scikit-learn"]        # the embedding check list
 openiris = ["openpyxl"]                      # private OpenIRIS admin export import
+notebook = ["ipywidgets"]                    # the notebooks outside Colab (Colab has it)
 test = ["pytest", "numpy", "scikit-learn", "openpyxl", "ruff", "ipywidgets"]
 
 [project.scripts]
