@@ -17,10 +17,9 @@ in a notebook, and the confirmed DOIs are filed in this repository through a pul
 * `DATA` (top of each notebook) is a folder in your Google Drive; share it with the colleagues
   who run the notebooks. Colab asks once per session for access to Drive; nothing else needs a
   login.
-* To file papers, the repository needs the [Claude GitHub App](https://github.com/apps/claude)
-  installed and one secret (*Settings → Secrets and variables → Actions*):
-  `CLAUDE_CODE_OAUTH_TOKEN` (a Claude subscription: `claude setup-token`) or `ANTHROPIC_API_KEY`
-  (API, paid per run). Whoever files papers needs write access to the repository.
+* Papers are filed by a coding agent you ask on GitHub (e.g. assign the issue to Copilot, with
+  Claude or another model; any agent that reads `AGENTS.md` works). Whoever files papers needs
+  write access to the repository.
 
 ## The loop
 
@@ -37,7 +36,7 @@ in a notebook, and the confirmed DOIs are filed in this repository through a pul
 4. **Notebook 2, contacts and filing**: writes `<year>/contacts.csv`, the corresponding authors of
    the confirmed papers and of those marked yes or likely, one row per e-mail address, for an
    e-mail blast. Prints a link to a new **Add papers** issue with the new "yes" DOIs filled in:
-   submit it and comment **`@claude file these`**. The agent files them under
+   submit it and **ask a coding agent to file it** (e.g. assign the issue to Copilot). The agent files them under
    `papers/<year>.yaml` with their public metadata, marked `source: staff-reviewed`, and opens
    a pull request; its **check papers** check confirms every new DOI resolves (and the files hold
    nothing but public metadata); **merge it** and the issue closes.
@@ -94,8 +93,7 @@ facility-pubs coverage                    # rules still cover every instrument i
 
 ## Adapting to another facility
 
-1. Fork this repository; in the fork enable Actions, install the
-   [Claude GitHub App](https://github.com/apps/claude) and add the secret (see *First time*).
+1. Fork this repository and enable Actions in the fork.
 2. Create `facilities/<your-facility>/facility.yaml` from `facilities/template/facility.yaml` (fill
    in the `FILL IN` parts; `facilities/aic-turku/` is a complete example), and set your facility
    as the default in `.github/ISSUE_TEMPLATE/add-papers.yml`.

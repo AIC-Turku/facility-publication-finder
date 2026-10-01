@@ -6,8 +6,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        Paste the DOIs of papers the staff have reviewed and confirmed. Then comment `@claude file these`:
-        the agent checks every DOI, files them and opens a pull request. The pull request's check confirms
+        Paste the DOIs of papers the staff have reviewed and confirmed. Then ask a coding agent to file
+        them (e.g. assign the issue to Copilot, with any model): it follows AGENTS.md, files the DOIs and
+        opens a pull request. The pull request's check confirms
         that every DOI resolves; merge it and this issue closes.
 
         **This issue is public.** Paste DOIs only (optionally followed by the reporting year).

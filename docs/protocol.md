@@ -60,7 +60,7 @@ anything private.
 | 3. rank | notebook 2 | `workflow.prepare` (top 200 of the check list) | `validate.csv`, most likely first: acknowledged, instrument, check list by rank |
 | 4. review | notebook 2 | `review.start`: links to the published version and an open copy; yes (filed), likely (not filed; ask the authors), no, skip; optional reason and note; saved per click, resumable | decisions in `validate.csv` |
 | 5. contacts | notebook 2 | `workflow.collect` | `contacts.csv` (one row per e-mail address) + the new "yes" DOIs |
-| 6. file | GitHub | an *Add papers* issue with the DOIs (link printed by step 5), comment `@claude file these`; merge the pull request once *check papers* is green | `papers/<year>.yaml`, `source: staff-reviewed` |
+| 6. file | GitHub | an *Add papers* issue with the DOIs (link printed by step 5), ask a coding agent to file it (e.g. assign it to Copilot); merge the pull request once *check papers* is green | `papers/<year>.yaml`, `source: staff-reviewed` |
 | 7. learn | notebook 2 | `workflow.learn`: re-rank the other years ("yes" positives, "no" negatives); `workflow.feedback` | better check lists; `feedback.txt` |
 | 8. improve the rules | maintainer | `feedback.txt`: "no" reasons → a test + a pattern fix in `facility.yaml`; papers only the check list found → new patterns; yes rate by rank → `TOP_N` | next year's run |
 
@@ -112,15 +112,13 @@ a 95 % Wilson interval.
 ## 5. Adapting to another facility
 
 1. **Fork** the public repository (your facility folder and papers live in your fork; send code
-   improvements back as pull requests). In the fork: *Actions* → enable workflows; install the
-   Claude GitHub App and add `CLAUDE_CODE_OAUTH_TOKEN` or `ANTHROPIC_API_KEY` as a repository
-   secret (the agent that files papers).
+   improvements back as pull requests). In the fork: *Actions* → enable workflows.
 2. Create `facilities/<your-facility>/` with `facility.yaml` (copy `facilities/template/facility.yaml`
    and fill in the `FILL IN` parts; `facilities/aic-turku/facility.yaml` is a complete, commented
    example); set it as the default in `.github/ISSUE_TEMPLATE/add-papers.yml`.
 3. `facility-pubs check-facility --facility <your-facility>` shows what was loaded and warns about
    template placeholders left. For DSpace, set `doi_fields` to where your repository keeps DOIs.
-4. File the papers you already know in an *Add papers* issue (`@claude file these`, merge).
+4. File the papers you already know in an *Add papers* issue (ask a coding agent to file it, merge).
    They are the benchmark and the seed set of the check list.
 5. Set `FACILITY`, `REPO` and `DATA` at the top of both notebooks and run them.
 6. Still AIC-specific in the code (optional parts): the OpenIRIS bookings import (resource map in

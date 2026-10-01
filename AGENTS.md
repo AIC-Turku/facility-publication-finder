@@ -68,7 +68,8 @@ said it is out of budget is not asked again during the run).
 ## Filing papers from an issue
 
 An *Add papers* issue (`.github/ISSUE_TEMPLATE/add-papers.yml`) holds DOIs the facility staff
-have already reviewed and confirmed. When asked to file them (`@claude file these`):
+have already reviewed and confirmed. When asked to file them (any agent or model; GitHub's coding
+agent gets the package from `.github/workflows/copilot-setup-steps.yml`, elsewhere `pip install -e .`):
 
 1. Copy the issue's *DOIs* field into a file outside the repository (e.g. `/tmp/issue-<n>.txt`).
    The *Facility* field names the folder under `facilities/`.
