@@ -1,5 +1,5 @@
 # Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2013 (35).
-# Maintained by `facility-pubs add-papers`: paste new DOIs into ../inbox.txt.
+# Maintained by `facility-pubs add-papers` (an Add papers issue); do not edit by hand.
 - doi: 10.1002/ppul.22837
   title: Delay in rat lung alveolarization after the combined exposure of maternal hyperglycemia and postnatal hyperoxia
   journal: Pediatric Pulmonology

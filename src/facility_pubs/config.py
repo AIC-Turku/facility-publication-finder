@@ -1,7 +1,7 @@
 """Load facilities/<facility>/facility.yaml into compiled patterns.
 
 Everything facility-specific lives in one folder, facilities/<facility>/: the rules
-(facility.yaml), the confirmed papers (papers/<year>.yaml) and the inbox for new ones.
+(facility.yaml), the confirmed papers (papers/<year>.yaml).
 Another facility copies facilities/template/ and sets PUBS_FACILITY (a folder name under
 facilities/, or a path).
 """

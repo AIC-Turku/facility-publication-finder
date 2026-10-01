@@ -1,5 +1,3 @@
-import json
-
 from facility_pubs import contacts, papers, sheet
 
 # fictitious people and addresses only
@@ -56,108 +54,61 @@ def _setup_year(monkeypatch, tmp_path):
     return fake
 
 
-def test_workbook_tabs_reasons_contacts_and_carried_verdicts(monkeypatch, tmp_path):
+def test_tables_most_likely_first_contacts_and_carried_verdicts(monkeypatch, tmp_path):
     fake_contacts = _setup_year(monkeypatch, tmp_path)
-    previous = [{"doi": "10.1000/sim", "verdict": "Yes", "note": "imaged on the LSM880"},
+    previous = [{"doi": "10.1000/sim", "verdict": "Yes", "reason": "staff know the project", "note": "LSM880"},
                 {"doi": "10.1000/gone", "verdict": "no", "note": "not ours"}]
-    tabs, inbox = sheet.build(2024, previous=previous, contacts=fake_contacts)
-    v = {r["doi"]: r for r in tabs["Validate"]}
+    tables, to_file = sheet.build(2024, previous=previous, contacts=fake_contacts)
+    v = {r["doi"]: r for r in tables["validate"]}
+    assert [r["doi"] for r in tables["validate"]] == ["10.1000/ack", "10.1000/instr", "10.1000/sim", "10.1000/gone"]
     assert v["10.1000/ack"]["why"] == sheet.WHY_ACK and v["10.1000/instr"]["why"] == sheet.WHY_INSTRUMENT
     assert v["10.1000/sim"]["why"].startswith(sheet.WHY_SIMILAR) and v["10.1000/sim"]["verdict"] == "yes"
+    assert v["10.1000/sim"]["reason"] == "staff know the project"
     assert v["10.1000/gone"]["why"] == sheet.WHY_EARLIER and v["10.1000/gone"]["note"] == "not ours"
     assert "10.1000/known" not in v                              # confirmed papers are not re-validated
     assert "email" not in v["10.1000/ack"]                       # contacts only for facility papers
-    p = {r["doi"]: r for r in tabs["Facility papers"]}
-    assert set(p) == {"10.1000/known", "10.1000/sim"}               # confirmed + validated yes
-    assert p["10.1000/known"]["confirmed_by"] == "website" and p["10.1000/sim"]["grant_cited"] == "yes"
-    assert p["10.1000/sim"]["email"] == "bo@uni.example.org" and p["10.1000/sim"]["other_contacts"] == ""
-    assert inbox == "10.1000/sim 2024"
-    assert [m["doi"] for m in tabs["Search misses"]] == ["10.1000/known"]
+    (c,) = tables["contacts"]                                    # one row per address, both papers
+    assert c["email"] == "bo@uni.example.org" and c["papers"] == 2 and c["status"] == "confirmed"
+    assert c["dois"] == "10.1000/known; 10.1000/sim" and c["grant_cited"] == "yes; yes"
+    assert to_file == "10.1000/sim 2024"
+    assert [m["doi"] for m in tables["search_misses"]] == ["10.1000/known"]
 
 
-def test_csv_round_trip_keeps_verdicts(monkeypatch, tmp_path):
+def test_candidates_within_a_group_follow_the_embedding_rank(monkeypatch, tmp_path):
     fake_contacts = _setup_year(monkeypatch, tmp_path)
-    tabs, _ = sheet.build(2024, contacts=fake_contacts)
-    for r in tabs["Validate"]:
-        if r["doi"] == "10.1000/instr":
-            r["verdict"], r["note"] = "likely", "ask the authors"
-    sheet.write_csv(2024, tabs)
-    again, _ = sheet.build(2024, previous=sheet.read_csv_validate(2024), contacts=fake_contacts)
-    assert {r["doi"]: r["verdict"] for r in again["Validate"]}["10.1000/instr"] == "likely"
-    assert "10.1000/instr" in {r["doi"] for r in again["Facility papers"]}
+    from facility_pubs import validation
+    monkeypatch.setattr(validation, "year_summary", lambda year: {
+        "new_report": ["10.1000/instr", "10.1000/ack"], "new_check": [], "missed": {}})
+    monkeypatch.setattr(sheet, "_ranked", lambda year: {"10.1000/ack": 3, "10.1000/sim": 2})
+    tables, _ = sheet.build(2024, contacts=fake_contacts)
+    assert [r["doi"] for r in tables["validate"]][:2] == ["10.1000/ack", "10.1000/instr"]   # unranked last
 
 
-class FakeWorksheet:
-    def __init__(self, title, rows=0, cols=0):
-        self.title, self.id, self.values = title, abs(hash(title)) % 1000, []
-
-    def get_all_values(self):
-        return self.values
-
-    def clear(self):
-        self.values = []
-
-    def resize(self, rows, cols):
-        pass
-
-    def update(self, range_name, values):
-        self.values = values
-
-
-class FakeSpreadsheet:
-    id, url = "sheet-id", "https://docs.google.com/spreadsheets/d/sheet-id"
-
-    def __init__(self):
-        self.tabs, self.requests = {"Taulukko1": FakeWorksheet("Taulukko1")}, []   # Finnish default tab
-
-    def worksheet(self, name):
-        if name not in self.tabs:
-            raise KeyError(name)
-        return self.tabs[name]
-
-    def add_worksheet(self, title, rows, cols):
-        self.tabs[title] = FakeWorksheet(title)
-        return self.tabs[title]
-
-    def del_worksheet(self, ws):
-        self.tabs.pop(ws.title)
-
-    def worksheets(self):
-        return list(self.tabs.values())
-
-    def batch_update(self, body):
-        self.requests += body["requests"]
-
-
-class FakeClient:
-    def __init__(self):
-        self.sh = FakeSpreadsheet()
-
-    def create(self, title, folder_id=None):
-        return self.sh
-
-    def open_by_key(self, key):
-        return self.sh
-
-
-def test_google_sheet_sync_creates_tabs_with_a_dropdown_and_keeps_verdicts(monkeypatch, tmp_path):
-    from facility_pubs import gsheets
+def test_verdicts_saved_one_by_one_survive_a_rebuild(monkeypatch, tmp_path):
     fake_contacts = _setup_year(monkeypatch, tmp_path)
-    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
-    gc = FakeClient()
-    url, inbox = gsheets.sync(gc, 2024, contacts=fake_contacts)
-    assert set(gc.sh.tabs) == set(sheet.TABS) and inbox == ""
-    assert any("setDataValidation" in r for r in gc.sh.requests)
-    assert json.loads((tmp_path / "2024" / "sheet.json").read_text())["id"] == "sheet-id"
-    ws = gc.sh.tabs["Validate"]                                   # staff fill a verdict
-    header = ws.values[0]
-    for row in ws.values[1:]:
-        if row[header.index("doi")] == "10.1000/ack":
-            row[header.index("verdict")] = "yes"
-    url, inbox = gsheets.sync(gc, 2024, contacts=fake_contacts)
-    assert inbox == "10.1000/ack 2024"
-    assert "10.1000/ack" in [r[0] for r in gc.sh.tabs["Facility papers"].values[1:]]
-    assert gsheets.validated_dois(gc, [2024]) == [{"doi": "10.1000/ack", "year": 2024}]
+    tables, _ = sheet.build(2024, contacts=fake_contacts)
+    sheet.write_tables(2024, tables)
+    sheet.set_verdict(2024, "10.1000/instr", "Likely", "instrument matches, not credited", "ask the authors")
+    again, to_file = sheet.build(2024, previous=sheet.read_validate(2024), contacts=fake_contacts)
+    row = {r["doi"]: r for r in again["validate"]}["10.1000/instr"]
+    assert (row["verdict"], row["reason"], row["note"]) == ("likely", "instrument matches, not credited",
+                                                             "ask the authors")
+    assert "10.1000/instr" in again["contacts"][0]["dois"] and to_file == ""     # likely: contact, not filed
+    assert sheet.decisions([2024]) == [{"year": 2024, "doi": "10.1000/instr", "why": sheet.WHY_INSTRUMENT,
+                                        "embedding_rank": "", "verdict": "likely",
+                                        "reason": "instrument matches, not credited", "note": "ask the authors"}]
+
+
+def test_set_verdict_refuses_unknown_verdicts_and_papers(monkeypatch, tmp_path):
+    import pytest
+    fake_contacts = _setup_year(monkeypatch, tmp_path)
+    sheet.write_tables(2024, sheet.build(2024, contacts=fake_contacts)[0])
+    with pytest.raises(ValueError, match="not one of"):
+        sheet.set_verdict(2024, "10.1000/ack", "maybe")
+    with pytest.raises(ValueError, match="is not in"):
+        sheet.set_verdict(2024, "10.1000/elsewhere", "yes")
+    with pytest.raises(ValueError, match="not one of"):
+        sheet.build(2024, previous=[{"doi": "10.1000/ack", "verdict": "perhaps"}], contacts=fake_contacts)
 
 
 def test_contacts_are_only_looked_up_for_facility_papers(monkeypatch, tmp_path):
@@ -166,27 +117,18 @@ def test_contacts_are_only_looked_up_for_facility_papers(monkeypatch, tmp_path):
     assert sorted(fake_contacts.asked) == ["10.1000/known", "10.1000/sim"]   # not the candidates
 
 
-def test_notes_typed_in_facility_papers_survive_a_refresh(monkeypatch, tmp_path):
-    fake_contacts = _setup_year(monkeypatch, tmp_path)
-    tabs, _ = sheet.build(2024, contacts=fake_contacts,
-                          previous_papers=[{"doi": "10.1000/known", "verdict": "", "note": "e-mailed 1.10."}])
-    assert {r["doi"]: r["note"] for r in tabs["Facility papers"]}["10.1000/known"] == "e-mailed 1.10."
-
-
-def test_a_recorded_sheet_that_cannot_be_opened_is_never_replaced(monkeypatch, tmp_path):
-    import pytest
-    from facility_pubs import gsheets
-    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
-    (tmp_path / "2024").mkdir()
-    (tmp_path / "2024" / "sheet.json").write_text(json.dumps({"id": "gone", "url": "https://x"}))
-
-    class NoAccess(FakeClient):
-        def open_by_key(self, key):
-            raise PermissionError("403")
-    with pytest.raises(SystemExit, match="Share it"):
-        gsheets.open_or_create(NoAccess(), 2024)
-    assert json.loads((tmp_path / "2024" / "sheet.json").read_text())["id"] == "gone"
-    assert gsheets.open_or_create(FakeClient(), 2023, create=False) is None
+def test_contact_rows_one_per_address_and_a_row_for_papers_without_one():
+    p = lambda doi, status, contacts: {"doi": doi, "title": doi.upper(), "status": status,
+                                       "acknowledges_facility": "yes", "grant_cited": "", "contacts": contacts}
+    rows = sheet.contact_rows([
+        p("10.1000/a", "likely", [{"name": "Bo Sample", "email": "Bo@uni.example.org"},
+                                  {"name": "Ada Example", "email": "ada@lab.example.edu"}]),
+        p("10.1000/b", "confirmed", [{"name": "", "email": "bo@uni.example.org"}]),
+        p("10.1000/c", "confirmed", []),
+    ])
+    assert [(r["email"], r["status"], r["papers"]) for r in rows] == [
+        ("Bo@uni.example.org", "confirmed", 2), ("ada@lab.example.edu", "likely", 1), ("", "confirmed", 1)]
+    assert rows[0]["name"] == "Bo Sample" and rows[0]["dois"] == "10.1000/a; 10.1000/b"
 
 
 def test_marker_words_and_institutions_are_never_taken_for_names():

@@ -1,4 +1,4 @@
-"""Small shared helpers: which rules produced a sheet, and honest intervals for small counts."""
+"""Small shared helpers: which rules produced a list, and honest intervals for small counts."""
 from pathlib import Path
 import hashlib
 import subprocess
@@ -7,8 +7,8 @@ from .config import config_path
 
 
 def rules_version(path: Path | None = None) -> str:
-    """'config <sha256[:12]> / code <git short hash>' - stamped on every sheet for review,
-    so staff verdicts can be tied to the rules that produced the sheet."""
+    """'config <sha256[:12]> / code <git short hash>' - stamped on every check list,
+    so staff verdicts can be tied to the rules that produced the list."""
     path = path or config_path()
     cfg = hashlib.sha256(path.read_bytes()).hexdigest()[:12]
     try:

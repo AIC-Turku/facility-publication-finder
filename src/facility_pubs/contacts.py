@@ -1,9 +1,9 @@
-"""Corresponding authors and their e-mail addresses, for the facility's validation Sheet.
+"""Corresponding authors and their e-mail addresses, for the facility's contacts.csv.
 
 Used only to contact the authors of validated papers (thanks, acknowledgement reminders).
-The result goes into the Google Sheet in the facility's Drive, never into the repository.
+The result goes into contacts.csv in the facility's Drive, never into the repository.
 Heuristic: e-mail addresses printed in the paper, ranked by closeness to a correspondence
-marker, matched to the author list for the name. Staff can correct the Sheet.
+marker, matched to the author list for the name. Staff can correct a copy of the file.
 """
 from collections.abc import Iterable
 import re

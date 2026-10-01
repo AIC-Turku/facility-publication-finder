@@ -1,5 +1,5 @@
 # Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2016 (44).
-# Maintained by `facility-pubs add-papers`: paste new DOIs into ../inbox.txt.
+# Maintained by `facility-pubs add-papers` (an Add papers issue); do not edit by hand.
 - doi: 10.1002/ijc.30285
   title: Leukocyte trafficking is not affected by multikinase inhibitors sunitinib or sorafenib in mice
   journal: International Journal of Cancer

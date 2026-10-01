@@ -187,13 +187,14 @@ def resolve_text(paper: dict, openalex_api_key: str | None = None) -> TextResult
     """Resolve searchable text for one DOI-bearing paper."""
     if paper.get("utupub_uuid"):
         text = sources.utupub_text(paper["utupub_uuid"], paper.get("dspace_base"))
-        if _usable(text, paper):
-            return TextResult(text, "utupub")
+        if _usable(text, paper):   # the repository's item page: the open copy staff can read
+            base = (paper.get("dspace_base") or sources.UTUPUB).removesuffix("/server/api")
+            return TextResult(text, "utupub", url=f"{base}/items/{paper['utupub_uuid']}")
 
     if paper.get("abo_files"):
         text = sources.abo_text(paper["abo_files"])
         if _usable(text, paper):
-            return TextResult(text, "abo")
+            return TextResult(text, "abo", url=paper["abo_files"][0])
 
     pmcid, ppr = paper.get("pmcid"), paper.get("epmc_id")
     if not (pmcid or ppr) and paper.get("doi"):

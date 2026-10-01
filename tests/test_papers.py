@@ -16,8 +16,8 @@ def fake_fetch(dois):
     return {d: known[d] for d in dois if d in known}
 
 
-def test_inbox_accepts_dois_links_years_and_junk():
-    parsed = papers.parse_inbox("# a comment\n10.1000/A 2023\nhttps://doi.org/10.1000/b\n"
+def test_pasted_text_accepts_dois_links_years_and_junk():
+    parsed = papers.parse_dois("# a comment\n10.1000/A 2023\nhttps://doi.org/10.1000/b\n"
                                 "see doi:10.1000/c, thanks\nno doi here\n\n")
     assert [(d, y) for _, d, y in parsed] == [("10.1000/a", 2023), ("10.1000/b", None),
                                               ("10.1000/c", None), (None, None)]
@@ -41,15 +41,6 @@ def test_a_year_given_with_a_filed_doi_moves_it(empty_confirmed_papers):
     assert summary["moved"] == ["10.1000/a"]
     assert [p["year"] for p in papers.load_papers()] == [2023]
     assert not (empty_confirmed_papers / "2024.yaml").exists()
-
-
-def test_process_inbox_empties_the_inbox_but_keeps_its_instructions(empty_confirmed_papers):
-    inbox = papers.inbox_path()
-    inbox.write_text(papers.INBOX_HEADER + "10.1000/b\n10.1000/unknown\n")
-    s = papers.process_inbox(fetch=fake_fetch)
-    text = inbox.read_text()
-    assert s["added"] == ["10.1000/b"] and text.startswith(papers.INBOX_HEADER)
-    assert "10.1000/b" not in text.replace(papers.INBOX_HEADER, "") and "10.1000/unknown" in text
 
 
 def test_known_dois_are_the_confirmed_papers_of_the_year(empty_confirmed_papers):
@@ -82,7 +73,7 @@ def test_an_unresolved_line_keeps_one_note(empty_confirmed_papers):
 
 
 def test_several_dois_per_line_and_only_a_year_right_after_its_doi(empty_confirmed_papers):
-    parsed = papers.parse_inbox("10.1000/a 10.1000/b 2025\nSmith et al. 2023, Nature, https://doi.org/10.1000/c\n"
+    parsed = papers.parse_dois("10.1000/a 10.1000/b 2025\nSmith et al. 2023, Nature, https://doi.org/10.1000/c\n"
                                 "10.1038/a 10.1016/j.x.2024.01.002")
     assert [(d, y) for _, d, y in parsed] == [("10.1000/a", None), ("10.1000/b", 2025), ("10.1000/c", None),
                                               ("10.1038/a", None), ("10.1016/j.x.2024.01.002", None)]
@@ -104,11 +95,6 @@ def test_website_import_never_moves_a_filed_paper(empty_confirmed_papers):
     papers.add_papers("10.1000/a 2023", fetch=fake_fetch, source="staff-reviewed")
     s, _ = papers.add_papers("10.1000/a 2024", fetch=fake_fetch, source="website", allow_moves=False)
     assert s["moved"] == [] and papers.load_papers()[0]["year"] == 2023
-
-
-def test_inboxes_never_hold_e_mail_addresses():
-    for inbox in FACILITIES.glob("*/inbox.txt"):
-        assert not re.search(r"[\w.+-]+@[\w-]+\.[\w.]+", inbox.read_text()), inbox
 
 
 def test_facility_yaml_errors_name_the_problem(tmp_path):
@@ -145,14 +131,12 @@ def test_check_papers_refuses_anything_but_public_metadata(empty_confirmed_paper
     assert "10.1000/z: new paper without a source (how it was confirmed)" in text
 
 
-def test_add_papers_from_a_file_leaves_the_inbox_alone(empty_confirmed_papers, tmp_path, monkeypatch, capsys):
+def test_add_papers_files_the_dois_of_a_text_file(empty_confirmed_papers, tmp_path, monkeypatch, capsys):
     from facility_pubs import cli
     monkeypatch.setattr(papers, "metadata", fake_fetch)
-    papers.inbox_path().write_text(papers.INBOX_HEADER + "10.1000/a\n")
     issue = tmp_path / "issue.txt"
     issue.write_text("Reviewed by staff:\nhttps://doi.org/10.1000/b\n10.1000/zzz\n")
-    cli.main(["add-papers", "--from", str(issue)])
+    cli.main(["add-papers", str(issue)])
     out = capsys.readouterr().out
-    assert "+ 10.1000/b" in out and "! 10.1000/zzz    # not found in Crossref" in out
+    assert "+ 10.1000/b" in out and "! 10.1000/zzz    # not found in Crossref" in out and "1 not filed" in out
     assert [p["doi"] for p in papers.load_papers()] == ["10.1000/b"]
-    assert papers.inbox_path().read_text().endswith("10.1000/a\n")

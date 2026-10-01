@@ -14,7 +14,7 @@ dependencies = ["pyyaml", "pymupdf"]
 [project.optional-dependencies]
 embed = ["fastembed", "scikit-learn"]        # the embedding check list
 openiris = ["openpyxl"]                      # private OpenIRIS admin export import
-test = ["pytest", "numpy", "scikit-learn", "openpyxl", "ruff"]
+test = ["pytest", "numpy", "scikit-learn", "openpyxl", "ruff", "ipywidgets"]
 
 [project.scripts]
 facility-pubs = "facility_pubs.cli:main"

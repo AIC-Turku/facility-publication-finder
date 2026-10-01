@@ -4,13 +4,11 @@ The public record of the project and the seed set of the embedding check list. O
 per year, one entry per DOI, sorted, with public metadata only (Crossref / Europe PMC):
 no full text, abstracts, author names or e-mail addresses.
 
-New papers come from an "Add papers" issue (an agent files them with `facility-pubs
-add-papers --from <file>` and opens a pull request) or from facilities/<facility>/inbox.txt
-(a GitHub Action files them on every change to an inbox). Either way: DOIs (DOI URLs and
-surrounding text are fine, optionally followed by the reporting year) get their metadata,
-each paper goes to its year file, duplicates are merged and files are sorted.
-`check_papers` is the pull-request check: well-formed files, nothing but public metadata,
-every new DOI resolves.
+New papers come from an "Add papers" issue: an agent files them with `facility-pubs
+add-papers <file>` and opens a pull request. DOIs (DOI URLs and surrounding text are fine,
+optionally followed by the reporting year) get their metadata, each paper goes to its year
+file, duplicates are merged and files are sorted. `check_papers` is the pull-request check:
+well-formed files, nothing but public metadata, every new DOI resolves.
 """
 from collections.abc import Callable, Iterable
 from pathlib import Path
@@ -25,25 +23,12 @@ from .sources import _norm_doi
 
 FIELDS = ["doi", "title", "journal", "published", "type", "pmid", "pmcid", "europepmc_id",
           "source", "added"]
-INBOX_HEADER = """\
-# Paste confirmed papers below, one per line: a DOI (or DOI link), optionally followed by
-# the reporting year, e.g.
-#   10.1038/s41467-024-46868-7 2024
-#   https://doi.org/10.1016/j.celrep.2024.114430
-# Commit the file. The "add papers" GitHub Action (or `facility-pubs add-papers`) fetches the
-# metadata, files each paper under papers/<year>.yaml, merges duplicates, sorts the files
-# and empties this inbox. Lines it cannot resolve stay here with a note.
-"""
 _DOI = re.compile(r"10\.\d{4,9}/[^\s,;<>\"']+", re.I)
 _YEAR = re.compile(r"\b(19[89]\d|20\d\d)\b")
 
 
 def papers_dir(facility: str | None = None) -> Path:
     return facility_dir(facility) / "papers"
-
-
-def inbox_path(facility: str | None = None) -> Path:
-    return facility_dir(facility) / "inbox.txt"
 
 
 def load_papers(facility: str | None = None) -> list[dict]:
@@ -85,7 +70,7 @@ def write_papers(papers: list[dict], facility: str | None = None) -> None:
         body = yaml.safe_dump(rows, sort_keys=False, allow_unicode=True, width=200)
         (folder / f"{year}.yaml").write_text(
             f"# {name}: confirmed papers, {year} ({len(rows)}).\n"
-            f"# Maintained by `facility-pubs add-papers`: paste new DOIs into ../inbox.txt.\n" + body,
+            f"# Maintained by `facility-pubs add-papers` (an Add papers issue); do not edit by hand.\n" + body,
             encoding="utf-8")
 
 
@@ -97,8 +82,8 @@ def _facility_name(facility=None):
         return facility_dir(facility).name
 
 
-def parse_inbox(text: str) -> list[tuple[str, str | None, int | None]]:
-    """[(line, doi or None, year or None)] for the non-comment lines of an inbox: one entry per
+def parse_dois(text: str) -> list[tuple[str, str | None, int | None]]:
+    """[(line, doi or None, year or None)] for the non-comment lines of a pasted text: one entry per
     DOI (a line may hold several), the year only when it directly follows its DOI
     ("10.1000/x 2024"), so a citation year elsewhere on the line is never taken."""
     out = []
@@ -141,16 +126,16 @@ def metadata(dois: Iterable[str]) -> dict[str, dict]:
 def add_papers(lines: str, source: str = "staff-reviewed", facility: str | None = None,
                fetch: Callable[[set[str]], dict[str, dict]] | None = None, today: str | None = None,
                allow_moves: bool = True) -> tuple[dict, list[str]]:
-    """File new confirmed papers. `lines`: inbox text. Returns (summary, leftover lines).
+    """File new confirmed papers. `lines`: pasted text. Returns (summary, lines not filed).
 
     A DOI already filed is kept where it is, unless a year is given with it (a correction: it
-    moves; not with allow_moves=False). A DOI Crossref does not know stays in the inbox with a
-    note. Lines without a DOI are dropped (only DOIs and years are ever kept in the inbox,
-    which is public)."""
+    moves; not with allow_moves=False). A DOI Crossref does not know is not filed: it comes
+    back with a note. Lines without a DOI are dropped (only DOIs and years are ever repeated,
+    as issues are public)."""
     today = today or datetime.date.today().isoformat()
     fetch = fetch or metadata
     papers = {p["doi"]: p for p in load_papers(facility)}
-    parsed = parse_inbox(lines)
+    parsed = parse_dois(lines)
     todo = {d for _, d, _ in parsed if d and d not in papers}
     meta = fetch(todo) if todo else {}
     added, moved, already, leftover, dropped = [], [], [], [], 0
@@ -178,19 +163,9 @@ def add_papers(lines: str, source: str = "staff-reviewed", facility: str | None 
                        "year": y, "source": source, "added": today}
         added.append(doi)
     write_papers(list(papers.values()), facility)
-    summary = {"added": added, "moved": moved, "already_filed": already, "left_in_inbox": len(leftover),
+    summary = {"added": added, "moved": moved, "already_filed": already, "not_filed": len(leftover),
                "dropped_lines": dropped, "total": len(papers)}
     return summary, leftover
-
-
-def process_inbox(facility: str | None = None, source: str = "staff-reviewed",
-                  fetch: Callable[[set[str]], dict[str, dict]] | None = None) -> dict:
-    """Run add_papers on the facility's inbox and rewrite it (header + unresolved lines)."""
-    path = inbox_path(facility)
-    text = path.read_text(encoding="utf-8") if path.exists() else ""
-    summary, leftover = add_papers(text, source=source, facility=facility, fetch=fetch)
-    path.write_text(INBOX_HEADER + "".join(f"{l}\n" for l in leftover), encoding="utf-8")
-    return summary
 
 
 _EMAIL = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")

@@ -235,8 +235,8 @@ def build_known(embedder, progress: Callable[[str], None] = print, batch: int = 
     from .papers import load_papers
     known = load_papers() if known is None else known
     if not known:
-        progress("no confirmed papers yet (facilities/<facility>/papers/): no check list. Paste the papers "
-                 "you know into inbox.txt; the rules-based candidates are still listed.")
+        progress("no confirmed papers yet (facilities/<facility>/papers/): no check list. File the papers "
+                 "you know (an Add papers issue); the rules-based candidates are still listed.")
         return {}
     path = store_path("known", embedder.model_name)
     store = _load_store("known", embedder.model_name)
@@ -337,8 +337,9 @@ SHEET_COLUMNS = ["rank", "doi", "link", "title", "embedding_score", "tfidf_score
                  "confirmed", "priority", "category", "microscopy_terms", "model", "rules_version"]
 
 
-def rank_year(year, known_store, known_rows, other_years=(), out=None, model=None):
-    """Write data/<year>/embedding_ranked.csv; return a summary for the held-out year."""
+def rank_year(year, known_store, known_rows, other_years=(), out=None, model=None, rejected=()):
+    """Write data/<year>/embedding_ranked.csv; return a summary for the held-out year.
+    rejected: DOIs staff judged "no": negatives even when the rules flagged them."""
     from .provenance import rules_version
     if not model:
         raise ValueError("rank_year needs the model name of the stores (Embedder.model_name)")
@@ -348,15 +349,16 @@ def rank_year(year, known_store, known_rows, other_years=(), out=None, model=Non
         if y != year:
             other_stores.update(_load_store(str(y), model))
             other_flagged |= {r["doi"] for r in load_screened(y) if r.get("priority") in ("report", "check")}
+    other_flagged -= set(rejected)
     scores, method = score_year(year, known_store, year_store, known_rows, other_stores, other_flagged)
     out = out or data_root() / str(year) / "embedding_ranked.csv"
-    if not scores:  # nothing to rank: leave an existing sheet (and its verdicts) alone
+    if not scores:  # nothing to rank: leave an existing check list alone
         return {"year": year, "method": method, "papers": 0, "known_with_text": 0,
                 "rules_flagged_known": 0, "path": f"{out} (not rewritten: nothing to rank)",
                 "top": {n: {"embedding": 0, "tfidf": 0, "microscopy_terms": 0,
                             "embedding_new_unflagged": 0} for n in (50, 100, 200, 300, 500)}}
     rows = {r["doi"]: r for r in load_screened(year)}
-    listed = {r["doi"] for r in known_rows if str(r.get("year")) == str(year)}   # confirmed (+ Sheet "yes")
+    listed = {r["doi"] for r in known_rows if str(r.get("year")) == str(year)}   # confirmed (+ validated "yes")
     order = sorted(scores, key=lambda d: (-scores[d][0], d))
     tf_order = sorted(scores, key=lambda d: (-scores[d][1], d))
     tf_rank = {d: i for i, d in enumerate(tf_order, 1)}
@@ -396,11 +398,12 @@ def format_summary(s: dict) -> str:
 
 
 def run(years: Iterable[int], model: str = DEFAULT_MODEL, embedder=None,
-        progress: Callable[[str], None] = print, extra_known: Iterable[dict] = ()) -> list[dict]:
+        progress: Callable[[str], None] = print, extra_known: Iterable[dict] = (),
+        rejected: Iterable[str] = ()) -> list[dict]:
     """Embed the known papers and every swept year, then rank each year held-out.
 
-    extra_known: [{doi, year}] validated "yes" in the Sheets but not yet in the repository,
-    so the ranking learns from them straight away."""
+    extra_known: [{doi, year}] validated "yes" but not yet in the repository, so the ranking
+    learns from them straight away; rejected: DOIs validated "no" (used as negatives)."""
     from .papers import load_papers
     embedder = embedder or Embedder(model, backend=_existing_backend(model) or "auto")
     known_rows = load_papers()
@@ -419,5 +422,6 @@ def run(years: Iterable[int], model: str = DEFAULT_MODEL, embedder=None,
         else:
             progress(f"{y}: no cached full text here (data/cache/{y}/) - run `facility-pubs sweep --year {y}` "
                      f"in this folder first; skipped")
-    return [rank_year(y, known_store, known_rows, other_years=ready, model=embedder.model_name)
-            for y in ready]
+    rejected = set(rejected)
+    return [rank_year(y, known_store, known_rows, other_years=ready, model=embedder.model_name,
+                      rejected=rejected) for y in ready]

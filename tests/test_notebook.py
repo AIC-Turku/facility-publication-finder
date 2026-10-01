@@ -17,15 +17,18 @@ def _source(path):
 def test_the_two_notebooks_run_the_canonical_steps():
     one, two = (_source(p) for p in NOTEBOOKS)
     assert "facility-pubs sweep --year {y}" in one and "facility-pubs embed --years {SWEPT_ARG}" in one
-    assert "facility-pubs rescreen --year {YEAR}" in two and "workflow.prepare_sheet(gc, YEAR" in two
-    assert "workflow.collect(gc, YEAR" in two and "workflow.learn(gc, YEAR" in two and "workflow.issue_link(REPO, FACILITY" in two
+    assert "facility-pubs rescreen --year {YEAR}" in two and "workflow.prepare(YEAR" in two
+    assert "review.start(YEAR, at_once=AT_ONCE)" in two and "workflow.collect(YEAR" in two
+    assert "workflow.learn(YEAR" in two and "workflow.issue_link(REPO, FACILITY" in two
+    assert "workflow.feedback()" in two
+    assert "YEARS = [2025, 2024, 2023, 2022]" in one and "TOP_N = 200" in two
 
 
 def test_notebooks_hold_no_algorithms():
     """Cells set parameters and call package functions or commands: no loops over data, no globbing."""
     for p in NOTEBOOKS:
         code = "\n".join("".join(c["source"]) for c in _nb(p)["cells"] if c["cell_type"] == "code")
-        assert "glob" not in code and "embeddings.run" not in code and "gsheets." not in code
+        assert "glob" not in code and "embeddings.run" not in code and "set_verdict" not in code
 
 
 def test_data_lives_in_drive_and_code_on_the_temporary_disk():
@@ -35,9 +38,10 @@ def test_data_lives_in_drive_and_code_on_the_temporary_disk():
         assert "CODE = '/content/code'" in src and "reset" not in src
 
 
-def test_no_secrets_needed_for_the_public_repository():
+def test_no_secrets_or_google_logins_needed():
     for p in NOTEBOOKS:
         src = _source(p)
+        assert "authenticate_user" not in src and "gspread" not in src
         assert "GITHUB_TOKEN" not in src and "https://github.com/AIC-Turku/facility-publication-finder" in src
 
 
@@ -70,7 +74,7 @@ def test_variables_are_defined_before_use():
     for p in NOTEBOOKS:
         code = ["".join(c["source"]) for c in _nb(p)["cells"] if c["cell_type"] == "code"]
         src = "\n".join(re.sub(r"#.*", "", line) for cell in code for line in cell.splitlines())
-        for name in {NOTEBOOKS[0]: ("SWEPT_ARG",), NOTEBOOKS[1]: ("gc", "workflow")}[p]:
+        for name in {NOTEBOOKS[0]: ("SWEPT_ARG",), NOTEBOOKS[1]: ("review", "workflow")}[p]:
             uses = [m.start() for m in re.finditer(rf"\b{name}\b", src)]
             defs = [m.start() for m in re.finditer(rf"\b{name}\s*=|import [\w, ]*\b{name}\b", src)]
             if uses:

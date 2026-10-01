@@ -1,5 +1,5 @@
 # Advanced Imaging Core (AIC), Turku Bioscience Centre: confirmed papers, 2019 (42).
-# Maintained by `facility-pubs add-papers`: paste new DOIs into ../inbox.txt.
+# Maintained by `facility-pubs add-papers` (an Add papers issue); do not edit by hand.
 - doi: 10.1002/jbmr.3680
   title: Mesenchymal Cell-Derived Juxtacrine Wnt1 Signaling Regulates Osteoblast Activity and Osteoclast Differentiation
   journal: Journal of Bone and Mineral Research

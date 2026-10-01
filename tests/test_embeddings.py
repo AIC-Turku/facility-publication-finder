@@ -217,3 +217,14 @@ def test_existing_stores_decide_the_backend():
     E._save(E.store_path("2024", f"{model}|fastembed"), {"a": (_unit(1, 0, 0), "t")}, f"{model}|fastembed")
     assert E._existing_backend(model) == "fastembed"
     assert E._existing_backend("other/model") is None
+
+
+def test_papers_staff_rejected_become_negatives_even_when_the_rules_flagged_them(monkeypatch, tmp_path):
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
+    flagged = [{"doi": "x", "priority": "check"}, {"doi": "y", "priority": "report"}]
+    monkeypatch.setattr(E, "load_screened", lambda year: flagged if str(year) == "2023" else [])
+    monkeypatch.setattr(E, "_load_store", lambda year, model: {})
+    seen = {}
+    monkeypatch.setattr(E, "score_year", lambda *a: seen.update(other_flagged=a[5]) or ({}, "none"))
+    E.rank_year(2024, {}, [], other_years=[2023], model="fake|test", rejected={"x"})
+    assert seen["other_flagged"] == {"y"}

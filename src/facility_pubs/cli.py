@@ -44,7 +44,7 @@ def cmd_check_facility(a) -> None:
     if todo:
         print(f"  WARNING: {todo} template placeholders left (FILL IN / example.edu / Example City)")
     if not papers:
-        print("  no confirmed papers yet: paste the ones you know into inbox.txt "
+        print("  no confirmed papers yet: file the ones you know in an Add papers issue "
               "(they are the benchmark and the seed set of the check list)")
 
 
@@ -90,26 +90,21 @@ def cmd_embed(a) -> None:
         print(format_summary(summary))
 
 
-def cmd_sheet(a) -> None:
-    from .sheet import build, read_csv_validate, write_csv
+def cmd_tables(a) -> None:
+    from .sheet import build, read_validate, write_tables
     _require_swept([a.year])
-    tabs, inbox = build(a.year, previous=read_csv_validate(a.year), top_n=a.top)
-    for path in write_csv(a.year, tabs):
+    tables, to_file = build(a.year, previous=read_validate(a.year), top_n=a.top)
+    for path in write_tables(a.year, tables):
         print("wrote", path)
-    print("\nconfirmed (verdict yes), to paste into the inbox:\n" + (inbox or "  none yet"))
+    print("\nconfirmed (verdict yes), to file in an Add papers issue:\n" + (to_file or "  none yet"))
 
 
 def cmd_add_papers(a) -> None:
     from pathlib import Path
-    from .papers import add_papers, inbox_path, process_inbox
-    if a.from_file:                       # e.g. the DOIs of an "Add papers" issue; the inbox is untouched
-        s, left = add_papers(Path(a.from_file).read_text(encoding="utf-8"), source=a.source)
-        where, kept = a.from_file, "not filed"
-    else:
-        s, left = process_inbox(source=a.source), []
-        where, kept = inbox_path(), "left in the inbox"
-    print(f"{where}: {len(s['added'])} added, {len(s['moved'])} moved to another year, "
-          f"{len(s['already_filed'])} already filed, {s['left_in_inbox']} {kept}, "
+    from .papers import add_papers
+    s, left = add_papers(Path(a.file).read_text(encoding="utf-8"), source=a.source)
+    print(f"{a.file}: {len(s['added'])} added, {len(s['moved'])} moved to another year, "
+          f"{len(s['already_filed'])} already filed, {s['not_filed']} not filed, "
           f"{s['dropped_lines']} lines without a DOI dropped; {s['total']} confirmed papers")
     for d in s["added"]:
         print(f"  + {d}")
@@ -175,11 +170,11 @@ def parser() -> argparse.ArgumentParser:
     p = add("embed", cmd_embed, "embedding check list of swept years (rank several together)")
     p.add_argument("--years", type=int, nargs="+", required=True)
     p.add_argument("--model", help="sentence-embedding model (default BAAI/bge-small-en-v1.5)")
-    p = add("sheet", cmd_sheet, "the validation workbook of a year as CSV (the notebook writes a Google Sheet)")
+    p = add("tables", cmd_tables, "the validation tables of a year (validate, contacts, search misses) as CSV")
     p.add_argument("--year", type=int, required=True)
-    p.add_argument("--top", type=int, default=100, help="check-list papers to include (default 100)")
-    p = add("add-papers", cmd_add_papers, "file the DOIs pasted into the facility's inbox.txt (or --from a file)")
-    p.add_argument("--from", dest="from_file", help="read the DOIs from this file instead of the inbox")
+    p.add_argument("--top", type=int, default=200, help="check-list papers to include (default 200)")
+    p = add("add-papers", cmd_add_papers, "file the confirmed DOIs listed in a text file")
+    p.add_argument("file", help="text with the DOIs (links and other text are fine; a year after a DOI sets it)")
     p.add_argument("--source", default="staff-reviewed", help="how they were confirmed (default: staff-reviewed)")
     add("check-papers", cmd_check_papers, "pull-request check of papers/*.yaml (new DOIs resolve)").add_argument(
         "--base", help="the facility folder before the change (its DOIs are not re-checked)")

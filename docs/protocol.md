@@ -21,20 +21,21 @@ anything private.
 * **Three places.**
   * **Public repository**: the code, the notebooks, the protocol, and one folder per facility
     (`facilities/<facility>/`) with the rules (`facility.yaml`), the **confirmed papers**
-    (`papers/<year>.yaml`: DOI and public metadata only) and the inbox for new ones.
+    (`papers/<year>.yaml`: DOI and public metadata only).
   * **The facility's Google Drive** (`PUBS_DATA`): candidate sets, screening results, full text,
-    embeddings, and the validation Sheets with corresponding-author e-mail addresses.
+    embeddings, and per year the decisions (`validate.csv`) and the corresponding-author
+    e-mail addresses (`contacts.csv`).
   * **Temporary Colab disk** (`PUBS_PRIVATE`): private inputs (bookings export, staff list) and
     everything derived from them; never in Drive or git.
 * **Never in the repository**: full text, text excerpts, e-mail addresses, author names of
   candidate papers, private inputs, rejected candidates, or which papers did not acknowledge
   the facility. Tests and code comments use synthetic text and synthetic DOIs (only confirmed
-  papers may be named). The inbox and the *Add papers* issues keep only DOIs and years.
+  papers may be named). The *Add papers* issues keep only DOIs and years.
 * **Contacts, minimally**: corresponding authors and e-mail addresses are looked up only for
-  confirmed and validated papers, and exist only in the facility's Sheet, for writing to the
+  confirmed and validated papers, and exist only in the facility's Drive (`contacts.csv`), for writing to the
   authors about their own paper (thanks, acknowledgement reminders). The addresses were not given
   by the authors: the first message says where the address comes from, why, and how to opt out;
-  keep a do-not-contact list; delete the contact columns after a campaign.
+  keep a do-not-contact list; delete the file after a campaign.
 * **Transferable**: everything facility-specific is YAML in `facilities/<facility>/` (search words,
   instruments, techniques, institutional repositories, e-mail domains, postal patterns). Another
   facility copies `facilities/template/` and sets `PUBS_FACILITY`.
@@ -56,15 +57,16 @@ anything private.
 |---|---|---|---|
 | 1. build the corpus | notebook 1 (once per year, slow, resumable) | `facility-pubs sweep --year Y`, `facility-pubs embed --years ...` | candidates, full text, screening, embeddings (Drive) |
 | 2. search | notebook 2 | `facility-pubs rescreen --year Y`, `facility-pubs validate --years Y` | the year screened with the current rules |
-| 3. rank + Sheet | notebook 2 | `workflow.prepare_sheet` | the year's Google Sheet: Validate, Facility papers, Search misses |
-| 4. validate | the Sheet | staff fill `verdict`: yes (filed), likely (not filed; ask the authors, then yes), no | verdicts |
-| 5. collect | notebook 2 | `workflow.collect` | refreshed Sheet + the new "yes" DOIs |
-| 6. file | GitHub | an *Add papers* issue with the DOIs (link printed by step 5), comment `@claude file these`; merge the pull request once *check papers* is green (no agent: paste into `inbox.txt`, commit) | `papers/<year>.yaml`, `source: staff-reviewed` |
-| 7. learn | notebook 2 | `workflow.learn`: re-rank the other years | better check lists everywhere |
-| 8. improve the rules | developer | "no" verdicts → a test + a pattern fix in `facility.yaml`; misses → why | next year's run |
+| 3. rank | notebook 2 | `workflow.prepare` (top 200 of the check list) | `validate.csv`, most likely first: acknowledged, instrument, check list by rank |
+| 4. review | notebook 2 | `review.start`: links to the published version and an open copy; yes (filed), likely (not filed; ask the authors), no, skip; optional reason and note; saved per click, resumable | decisions in `validate.csv` |
+| 5. contacts | notebook 2 | `workflow.collect` | `contacts.csv` (one row per e-mail address) + the new "yes" DOIs |
+| 6. file | GitHub | an *Add papers* issue with the DOIs (link printed by step 5), comment `@claude file these`; merge the pull request once *check papers* is green | `papers/<year>.yaml`, `source: staff-reviewed` |
+| 7. learn | notebook 2 | `workflow.learn`: re-rank the other years ("yes" positives, "no" negatives); `workflow.feedback` | better check lists; `feedback.txt` |
+| 8. improve the rules | maintainer | `feedback.txt`: "no" reasons → a test + a pattern fix in `facility.yaml`; papers only the check list found → new patterns; yes rate by rank → `TOP_N` | next year's run |
 
-Mail merge: the *Facility papers* tab lists every confirmed and validated paper of the year with
-corresponding author, e-mail, and whether the facility and the grant are acknowledged.
+E-mail blast: `contacts.csv` lists the corresponding authors of every confirmed paper of the year
+and of those validated yes or likely, one row per address, with their papers and whether each
+acknowledges the facility and cites the grant.
 
 ## 4. Pipeline (what the code does)
 
@@ -90,35 +92,35 @@ corresponding author, e-mail, and whether the facility and the grant are acknowl
    other swept year, mean cosine to the 5 nearest confirmed papers. A TF-IDF score is a second
    column. A year's own confirmed papers are never used to score it (held out); near-duplicates
    (cosine > 0.97, a preprint and its journal version) are left out of training. Saves are atomic
-   and resumable; papers validated "yes" in a Sheet count straight away (`extra_known`).
-6. **Workbook** (`sheet.py`, `gsheets.py`, `contacts.py`): see §3. Verdicts are always carried
+   and resumable; papers validated "yes" count straight away (`extra_known`), and papers validated
+   "no" are negatives even when the rules flagged them (`rejected`).
+6. **Validation tables** (`sheet.py`, `review.py`, `contacts.py`): see §3. Verdicts are always carried
    over, also for papers that leave the list. Corresponding authors: addresses printed in the
    paper near a correspondence marker, named from the Crossref and local author lists;
    publisher addresses dropped; ambiguous names left blank for staff to fill.
 7. **Confirmed papers** (`papers.py`): `add-papers` parses pasted DOIs (links, years, junk lines
    tolerated), fetches metadata (Crossref, Europe PMC), files by year (a year given after the
-   DOI wins; it also moves an already-filed paper), merges duplicates, sorts, empties the inbox;
-   unresolved lines stay with a note (`--from <file>` reads an issue's DOIs instead and leaves
-   the inbox alone). `check-papers` is the pull-request check: files well formed, only the public
+   DOI wins; it also moves an already-filed paper), merges duplicates, sorts; unresolved DOIs
+   are reported, not filed. `check-papers` is the pull-request check: files well formed, only the public
    fields (nothing about whether a paper acknowledged the facility, no notes, no e-mail
    addresses), every new DOI resolves in Crossref. A filed paper says only that the staff
    reviewed it (`source: staff-reviewed`).
 
-Every sheet carries `rules_version` (config sha256 + code commit). `validate` prints recall with
+Every check list carries `rules_version` (config sha256 + code commit). `validate` prints recall with
 a 95 % Wilson interval.
 
 ## 5. Adapting to another facility
 
-1. **Fork** the public repository (your facility folder, papers and inbox live in your fork; send
-   code improvements back as pull requests). In the fork: *Actions* → enable workflows, and
-   *Settings → Actions → General → Workflow permissions* → *Read and write* (the inbox Action
-   commits the filed papers).
+1. **Fork** the public repository (your facility folder and papers live in your fork; send code
+   improvements back as pull requests). In the fork: *Actions* → enable workflows; install the
+   Claude GitHub App and add `CLAUDE_CODE_OAUTH_TOKEN` or `ANTHROPIC_API_KEY` as a repository
+   secret (the agent that files papers).
 2. Create `facilities/<your-facility>/` with `facility.yaml` (copy `facilities/template/facility.yaml`
    and fill in the `FILL IN` parts; `facilities/aic-turku/facility.yaml` is a complete, commented
-   example) and an empty `inbox.txt` (GitHub: *Add file → Create new file*, type the path).
+   example); set it as the default in `.github/ISSUE_TEMPLATE/add-papers.yml`.
 3. `facility-pubs check-facility --facility <your-facility>` shows what was loaded and warns about
    template placeholders left. For DSpace, set `doi_fields` to where your repository keeps DOIs.
-4. Paste the papers you already know into `inbox.txt` on GitHub and commit: the Action files them.
+4. File the papers you already know in an *Add papers* issue (`@claude file these`, merge).
    They are the benchmark and the seed set of the check list.
 5. Set `FACILITY`, `REPO` and `DATA` at the top of both notebooks and run them.
 6. Still AIC-specific in the code (optional parts): the OpenIRIS bookings import (resource map in
@@ -184,4 +186,4 @@ Text matching:
 4. Learn the score weights from the accumulated verdicts; embedding and TF-IDF scores as features.
 5. A public "what we recognise" page generated from `facility.yaml`, for acknowledgement campaigns.
 6. Scopus / Web of Science funding-text search for paywalled papers.
-7. Active-learning review order with a stopping rule (as in ASReview), using the Sheet verdicts.
+7. Active-learning review order with a stopping rule (as in ASReview), using the verdicts in `validate.csv`.

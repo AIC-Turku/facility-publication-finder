@@ -45,3 +45,18 @@ def test_cli_requires_its_arguments():
     from facility_pubs import cli
     with pytest.raises(SystemExit):
         cli.main(["sheet"])                    # --year is required
+
+
+def test_feedback_counts_groups_rank_bands_reasons_and_rule_misses():
+    d = lambda why, v, rank="", reason="": {"year": 2025, "doi": f"10.1000/{why[:3]}{rank}{v}", "why": why,
+                                            "embedding_rank": rank, "verdict": v, "reason": reason}
+    f = validation.feedback([d("new: acknowledges the facility", "yes"),
+                             d("new: facility instrument, no acknowledgement", "no", reason="imaging done elsewhere"),
+                             d("reads like facility papers (rank 3)", "yes", 3, "staff know the project"),
+                             d("reads like facility papers (rank 150)", "no", 150)])
+    assert f["groups"]["instrument"] == {"yes": 0, "likely": 0, "no": 1}
+    assert f["bands"] == {"1-50": {"reviewed": 1, "yes": 1}, "101-200": {"reviewed": 1, "yes": 0}}
+    assert f["no_reasons"] == {"instrument": {"imaging done elsewhere": 1}, "check list": {"(no reason given)": 1}}
+    assert [m["rank"] for m in f["rules_missed"]] == [3]
+    text = validation.format_feedback(f)
+    assert "rank 1-50" in text and "found only by the check list" in text
