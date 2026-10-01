@@ -95,6 +95,13 @@ facility-pubs validate --years 2024       # recall against the confirmed papers,
 facility-pubs coverage                    # rules still cover every instrument in the instrument database?
 ```
 
+## Desktop app (LabConstrictor)
+
+`notebooks/requirements.yaml` lists the pinned dependencies for packaging the two notebooks with
+[LabConstrictor](https://github.com/CellMigrationLab/LabConstrictor) (copy `src/facility_pubs/`
+into its `src/`). The installed app needs no clone: step 1 downloads the latest rules and
+confirmed papers from this repository at each start.
+
 ## Adapting to another facility
 
 1. Fork this repository and enable Actions in the fork.

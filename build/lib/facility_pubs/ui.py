@@ -8,7 +8,7 @@ forms, no native dialogs). The notebooks call these; no logic lives in notebooks
 
 `Settings` lets the user pick the facility, browse to the working-data folder (their Google
 Drive in Colab) and choose the years; "Use these settings" checks them and sets PUBS_DATA and
-PUBS_FACILITY for the rest of the session (the one place the notebooks set the environment).
+PUBS_FACILITY / PUBS_PRIVATE for the rest of the session (the one place the notebooks set the environment).
 """
 from collections.abc import Callable
 from pathlib import Path
@@ -240,6 +240,8 @@ class Settings:
             return None
         os.environ["PUBS_DATA"] = str(folder)
         os.environ["PUBS_FACILITY"] = str(values["facility_dir"])
+        values["private"] = self.private_folder()
+        os.environ["PUBS_PRIVATE"] = str(values["private"])
         self._values = values
         lines = ["✅ Settings saved: run the next cells."] + [f"⚠️ {html.escape(x)}" for x in warnings]
         self.message.value = "<br>".join(lines)
@@ -248,6 +250,13 @@ class Settings:
             from .cli import main
             main(["check-facility"])
         return values
+
+    def private_folder(self) -> Path:
+        """Private inputs and what is derived from them: Colab's temporary disk, else next to the
+        facilities (a clone's git-ignored private/, or ~/.facility_pubs/private); never in DATA."""
+        folder = Path("/content/private") if self.colab else self.facilities.parent / "private"
+        folder.mkdir(parents=True, exist_ok=True)
+        return folder
 
     def require(self) -> dict:
         """The confirmed values, or a clear error if "Use these settings" was not clicked."""
