@@ -58,7 +58,7 @@ def institutional_universe(year, science_only=True, institutional_sources=None):
                     },
                     name,
                 )
-        else:
+        else:  # config.load already rejects unknown adapters; this guards direct callers
             raise ValueError(f"institutional source {name!r}: unknown adapter {adapter!r} "
                              f"(dspace7 or pure_oai; add one in sources.py)")
     return papers

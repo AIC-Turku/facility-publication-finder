@@ -4,7 +4,6 @@ text, screen, and append one JSON line per paper to data/<year>/screened.jsonl.
 Re-running skips DOIs already in that file, so an interrupted run (e.g. a
 Colab disconnect) resumes where it stopped.
 """
-import os
 import gzip
 import hashlib
 import json
@@ -14,14 +13,11 @@ from pathlib import Path
 
 from . import sources
 from . import candidates
-from .config import load
+from .config import data_root, load, private_root
 from .bookings import load_bookings, load_staff
 from .screen import screen
 from .fulltext import resolve_text
 
-# Working data (candidate sets, screening results, full-text cache, embeddings, sheets).
-# Default: data/ in the checkout; the notebooks set PUBS_DATA to a Google Drive folder.
-DATA = Path(os.environ.get("PUBS_DATA") or Path(__file__).resolve().parents[2] / "data")
 
 
 def _log(*a):
@@ -50,11 +46,11 @@ def collect(year, cfg):
     return papers
 
 def _cache_path(year, doi):
-    return DATA / "cache" / str(year) / (hashlib.sha1(doi.encode()).hexdigest() + ".txt.gz")
+    return data_root() / "cache" / str(year) / (hashlib.sha1(doi.encode()).hexdigest() + ".txt.gz")
 
 
 def _cache_meta_path(year, doi):
-    return DATA / "cache" / str(year) / (hashlib.sha1(doi.encode()).hexdigest() + ".meta.json")
+    return data_root() / "cache" / str(year) / (hashlib.sha1(doi.encode()).hexdigest() + ".meta.json")
 
 
 def cached_text_metadata(year, doi):
@@ -68,7 +64,7 @@ def cached_text_metadata(year, doi):
         return {}
 
 
-def cached_text(year, doi):
+def cached_text(year: int | str, doi: str) -> tuple[str | None, str | None]:
     """(text, source) from the local full-text cache, or (None, None)."""
     path = _cache_path(year, doi)
     if not path.exists():
@@ -103,7 +99,7 @@ def cache_is_reusable(year, doi):
     scope = meta.get("scope")
     if scope == "partial":
         return False
-    from .pipeline.validators import validate_article_text
+    from .text import validate_article_text
     accepted, _, _ = validate_article_text(text)
     if not accepted:
         return False
@@ -141,9 +137,10 @@ def completed_dois(path, year=None):
     return {doi for doi in complete if cache_is_reusable(year, doi)}
 
 
-def run(year, config_path=None, workers=4, limit=None, openalex_api_key=None):
+def run(year: int, config_path: Path | None = None, workers: int = 4, limit: int | None = None,
+        openalex_api_key: str | None = None) -> None:
     cfg = load(config_path) if config_path else load()
-    out_dir = DATA / str(year)
+    out_dir = data_root() / str(year)
     out_dir.mkdir(parents=True, exist_ok=True)
     out = out_dir / "screened.jsonl"
     done = completed_dois(out, year=year)
@@ -154,7 +151,7 @@ def run(year, config_path=None, workers=4, limit=None, openalex_api_key=None):
     (out_dir / "universe.json").write_text(json.dumps(sorted(papers), indent=0), encoding="utf-8")
     previous = {r["doi"]: r for r in load_screened(year)} if out.exists() else {}
 
-    history = acknowledging_authors(exclude_year=year)
+    history = _acknowledging_authors(exclude_year=year)
     private = {"bookings": load_bookings(), "staff": load_staff()}
 
     def work(p):
@@ -213,12 +210,11 @@ def run(year, config_path=None, workers=4, limit=None, openalex_api_key=None):
     return out
 
 
-def private_dir(year):
+def private_dir(year: int) -> Path:
     """Folder for anything derived from private inputs: next to the private inputs themselves
     ($PUBS_PRIVATE, the temporary Colab disk in the notebooks; private/ otherwise), never in
     the working-data folder in Drive."""
-    from .bookings import PRIVATE
-    d = PRIVATE / "derived" / str(year)
+    d = private_root() / "derived" / str(year)
     d.mkdir(parents=True, exist_ok=True)
     return d
 
@@ -231,7 +227,7 @@ def _split_private(row):
 
 def load_private(year):
     """{doi: {"score", "priority", "reasons"}} from the private sidecar, or {}."""
-    path = DATA / str(year) / "private" / "scores.jsonl"
+    path = private_dir(year) / "scores.jsonl"
     out = {}
     if path.exists():
         for line in path.open(encoding="utf-8"):
@@ -241,10 +237,10 @@ def load_private(year):
     return out
 
 
-def acknowledging_authors(exclude_year):
+def _acknowledging_authors(exclude_year):
     """UTU authors of acknowledging papers in every other screened year."""
     names = set()
-    for f in DATA.glob("*/screened.jsonl"):
+    for f in data_root().glob("*/screened.jsonl"):
         if f.parent.name == str(exclude_year):
             continue
         for line in f.open(encoding="utf-8"):
@@ -277,15 +273,16 @@ def _rescreen_one(args):
                              meta={**base, "history": history, **private})}, True
 
 
-def rescreen(year, config_path=None, processes=None, fresh=None):
+def rescreen(year: int, config_path: Path | None = None, processes: int | None = None,
+             fresh: dict | None = None) -> None:
     """Re-apply the rules to every paper using cached full text (no downloads).
 
     Papers whose text is not cached keep their previous result.
     """
     from multiprocessing import Pool
-    path = DATA / str(year) / "screened.jsonl"
+    path = data_root() / str(year) / "screened.jsonl"
     rows = load_screened(year)
-    history = acknowledging_authors(exclude_year=year)
+    history = _acknowledging_authors(exclude_year=year)
     private = {"bookings": load_bookings(), "staff": load_staff()}
     with Pool(processes) as pool:
         res = pool.map(_rescreen_one,
@@ -305,14 +302,14 @@ def rescreen(year, config_path=None, processes=None, fresh=None):
     return path
 
 
-def load_screened(year):
+def load_screened(year: int) -> list[dict]:
     """Current screened rows for a year.
 
     * Later rows win, except that a row without text never replaces one with text.
     * When a DOI universe snapshot exists (written by `sweep`), rows outside it are
       dropped (stale DOIs from older harvests or parsers).
     """
-    path = DATA / str(year) / "screened.jsonl"
+    path = data_root() / str(year) / "screened.jsonl"
     rows = {}
     for line in path.open(encoding="utf-8"):
         if line.strip():
@@ -321,7 +318,7 @@ def load_screened(year):
             if old and old.get("has_text") and not r.get("has_text"):
                 continue
             rows[r["doi"]] = r
-    universe = DATA / str(year) / "universe.json"
+    universe = data_root() / str(year) / "universe.json"
     if universe.exists():
         keep = set(json.loads(universe.read_text(encoding="utf-8")))
         rows = {d: r for d, r in rows.items() if d in keep}

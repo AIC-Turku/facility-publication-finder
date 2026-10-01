@@ -10,6 +10,8 @@ followed by the reporting year; DOI URLs and surrounding text are fine) and file
 metadata is fetched, each paper goes to its year file, duplicates are merged, files are
 sorted, and the inbox is emptied (lines it could not resolve stay, with a note).
 """
+from collections.abc import Callable, Iterable
+from pathlib import Path
 import datetime
 import re
 from concurrent.futures import ThreadPoolExecutor
@@ -34,15 +36,15 @@ _DOI = re.compile(r"10\.\d{4,9}/[^\s,;<>\"']+", re.I)
 _YEAR = re.compile(r"\b(19[89]\d|20\d\d)\b")
 
 
-def papers_dir(facility=None):
+def papers_dir(facility: str | None = None) -> Path:
     return facility_dir(facility) / "papers"
 
 
-def inbox_path(facility=None):
+def inbox_path(facility: str | None = None) -> Path:
     return facility_dir(facility) / "inbox.txt"
 
 
-def load_papers(facility=None):
+def load_papers(facility: str | None = None) -> list[dict]:
     """Every confirmed paper, as dicts with a `year` key, sorted by year then DOI."""
     out = []
     folder = papers_dir(facility)
@@ -56,20 +58,12 @@ def load_papers(facility=None):
     return out
 
 
-def known_dois(year, facility=None, data=None):
-    """Confirmed DOIs of a year: papers/<year>.yaml plus, for older data folders, the
-    website list in <data>/<year>/facility_list.json when there is one."""
-    import json
-    if data is None:
-        from .sweep import DATA as data
-    dois = {p["doi"] for p in load_papers(facility) if p["year"] == int(year)}
-    legacy = data / str(year) / "facility_list.json"
-    if legacy.exists():
-        dois |= set(json.loads(legacy.read_text()))
-    return dois
+def known_dois(year: int, facility: str | None = None) -> set[str]:
+    """Confirmed DOIs of a year (papers/<year>.yaml)."""
+    return {p["doi"] for p in load_papers(facility) if p["year"] == int(year)}
 
 
-def write_papers(papers, facility=None):
+def write_papers(papers: list[dict], facility: str | None = None) -> None:
     """Rewrite the year files from a list of entries (with `year`): one entry per DOI,
     sorted by DOI, empty keys dropped. Years without papers lose their file."""
     folder = papers_dir(facility)
@@ -101,7 +95,7 @@ def _facility_name(facility=None):
         return facility_dir(facility).name
 
 
-def parse_inbox(text):
+def parse_inbox(text: str) -> list[tuple[str, str | None, int | None]]:
     """[(line, doi or None, year or None)] for the non-comment lines of an inbox: one entry per
     DOI (a line may hold several), the year only when it directly follows its DOI
     ("10.1000/x 2024"), so a citation year elsewhere on the line is never taken."""
@@ -120,12 +114,13 @@ def parse_inbox(text):
     return out
 
 
-def metadata(dois):
+def metadata(dois: Iterable[str]) -> dict[str, dict]:
     """{doi: public metadata} from Crossref (bibliographic) and Europe PMC (identifiers)."""
-    from .known import crossref_record, europepmc_records
+    from .known import bibliographic, europepmc_records
+    from .sources import crossref_work
     dois = sorted(set(dois))
     with ThreadPoolExecutor(max_workers=8) as pool:
-        cross = dict(zip(dois, pool.map(crossref_record, dois)))
+        cross = {d: bibliographic(w) for d, w in zip(dois, pool.map(crossref_work, dois))}
     epmc = europepmc_records(dois) if dois else {}
     out = {}
     for d in dois:
@@ -141,7 +136,9 @@ def metadata(dois):
     return out
 
 
-def add_papers(lines, source="validated", facility=None, fetch=metadata, today=None, allow_moves=True):
+def add_papers(lines: str, source: str = "validated", facility: str | None = None,
+               fetch: Callable[[set[str]], dict[str, dict]] = metadata, today: str | None = None,
+               allow_moves: bool = True) -> tuple[dict, list[str]]:
     """File new confirmed papers. `lines`: inbox text. Returns (summary, leftover lines).
 
     A DOI already filed is kept where it is, unless a year is given with it (a correction: it
@@ -183,7 +180,8 @@ def add_papers(lines, source="validated", facility=None, fetch=metadata, today=N
     return summary, leftover
 
 
-def process_inbox(facility=None, source="validated", fetch=metadata):
+def process_inbox(facility: str | None = None, source: str = "validated",
+                  fetch: Callable[[set[str]], dict[str, dict]] = metadata) -> dict:
     """Run add_papers on the facility's inbox and rewrite it (header + unresolved lines)."""
     path = inbox_path(facility)
     text = path.read_text(encoding="utf-8") if path.exists() else ""

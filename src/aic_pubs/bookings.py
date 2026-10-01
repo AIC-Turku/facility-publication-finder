@@ -12,15 +12,10 @@ private/staff.csv
     name           "Lastname, Firstname"
 """
 import csv
-import os
 import re
 import unicodedata
 from pathlib import Path
 
-# Private inputs: $PUBS_PRIVATE (the notebooks: the temporary Colab disk), else private/ in the checkout.
-PRIVATE = Path(os.environ.get("PUBS_PRIVATE") or Path(__file__).resolve().parents[2] / "private")
-BOOKINGS = PRIVATE / "bookings.csv"
-STAFF = PRIVATE / "staff.csv"
 WINDOW_YEARS = 3  # a booking counts for papers published in the same or the next 3 years ...
 GRACE_YEARS = 1   # ... and for papers published up to 1 year before it (user still active)
 
@@ -38,12 +33,14 @@ def name_key(name):
     return last, first[:1]
 
 
-def load_bookings(path=BOOKINGS):
+def load_bookings(path=None):
     """{name_key: [(year, instrument), ...]} or {} when there is no export.
 
     group_leader may be any person linked to a booking (trainee or group head)."""
+    from .config import private_root
+    path = Path(path or private_root() / "bookings.csv")
     out = {}
-    if not Path(path).exists():
+    if not path.exists():
         return out
     with open(path, newline="", encoding="utf-8-sig") as f:
         for r in csv.DictReader(f):
@@ -55,7 +52,9 @@ def load_bookings(path=BOOKINGS):
     return out
 
 
-def load_staff(path=STAFF):
+def load_staff(path=None):
+    from .config import private_root
+    path = Path(path or private_root() / "staff.csv")
     if not Path(path).exists():
         return set()
     with open(path, newline="", encoding="utf-8-sig") as f:
@@ -77,26 +76,29 @@ def booking_match(local_authors, paper_year, instruments_found, bookings):
     return group, same_instrument
 
 
-def openiris_resources():
-    """[(resource-name substring, instrument_id)] from facility.yaml `openiris_resources`."""
+def _openiris_resources():
+    """[(resource-name substring, instrument_id)] from facility.yaml `_openiris_resources`."""
     from .config import load
-    return [(str(k).lower(), v) for k, v in (load().raw.get("openiris_resources") or {}).items()]
+    return [(str(k).lower(), v) for k, v in (load().raw.get("_openiris_resources") or {}).items()]
 
 
-def openiris_resource_id(resource, mapping=None):
+def _openiris_resource_id(resource, mapping=None):
     r = (resource or "").strip().lower()
-    mapping = openiris_resources() if mapping is None else mapping
+    mapping = _openiris_resources() if mapping is None else mapping
     return next((iid for key, iid in mapping if key in r), r)
 
 
-def import_openiris(xlsx, out_dir=PRIVATE):
+def import_openiris(xlsx, out_dir=None):
     """Convert an OpenIRIS admin export (sheets 'Users', 'Training Requests') into
     private/bookings.csv and private/users.csv. Returns counts; prints no personal data.
 
     Each completed training gives a row for the trainee and for the head(s) of the
     trainee's group; each user's 'Latest use' gives a row without an instrument.
     """
-    import openpyxl
+    try:
+        import openpyxl
+    except ImportError:
+        raise SystemExit('the OpenIRIS import needs openpyxl: pip install "aic-pubs[openiris]"') from None
     wb = openpyxl.load_workbook(xlsx, read_only=True)
 
     def sheet(name):
@@ -104,7 +106,7 @@ def import_openiris(xlsx, out_dir=PRIVATE):
         return [dict(zip(rows[0], r)) for r in rows[1:]] if rows else []
 
     users, trainings = sheet("Users"), sheet("Training Requests")
-    mapping = openiris_resources()
+    mapping = _openiris_resources()
     split = lambda s: [x.strip() for x in str(s or "").split(",") if x.strip()]
     heads_of_group = {}
     for u in users:
@@ -119,7 +121,7 @@ def import_openiris(xlsx, out_dir=PRIVATE):
         if t.get("Training request status") != "Completed":
             continue
         date = str(t.get("Training request created") or "")[:10]
-        inst = openiris_resource_id(t.get("Resource"), mapping)
+        inst = _openiris_resource_id(t.get("Resource"), mapping)
         who = person(t.get("First name"), t.get("Last name"))
         rows.append((who, inst, date))
         people.add(who)
@@ -135,7 +137,8 @@ def import_openiris(xlsx, out_dir=PRIVATE):
             rows.append((head, "", date))
             people.add(head)
 
-    out_dir = Path(out_dir)
+    from .config import private_root
+    out_dir = Path(out_dir or private_root())
     out_dir.mkdir(parents=True, exist_ok=True)
     with (out_dir / "bookings.csv").open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)

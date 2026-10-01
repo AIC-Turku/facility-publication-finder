@@ -20,18 +20,19 @@ papers with little or no explicit facility evidence can still be checked, most A
 Embeddings and chunks are derived from full text: they live under data/embeddings/
 (git-ignored). The ranked sheet holds titles and scores only.
 """
+from collections.abc import Callable, Iterable
+from pathlib import Path
 import csv
-import json
 import re
 import time
 from functools import lru_cache
 
 import numpy as np
 
-from .sweep import DATA, cached_text, load_screened
+from .config import data_root
+from .sweep import cached_text, load_screened
 from .text import normalise, sentences
 
-EMB = DATA / "embeddings"
 DEFAULT_MODEL = "BAAI/bge-small-en-v1.5"
 CHUNK_CHARS = 500
 CHUNKS_PER_PAPER = 6
@@ -52,7 +53,8 @@ def _terms_for(path):
     return load(path).facility_terms
 
 
-def chunks(text, n=CHUNKS_PER_PAPER, size=CHUNK_CHARS, drop=None):
+def chunks(text: str, n: int = CHUNKS_PER_PAPER, size: int = CHUNK_CHARS,
+           drop: re.Pattern | None = None) -> list[str]:
     """The n most imaging-heavy ~size-character chunks, without facility/thanks sentences
     (facility.yaml `facility_name_terms`)."""
     drop = drop or _facility_terms()
@@ -100,7 +102,7 @@ class Embedder:
         return np.asarray(self._embed(list(texts)), dtype=np.float32)
 
 
-def paper_vectors(texts, embedder):
+def paper_vectors(texts: dict[str, str], embedder) -> dict[str, tuple[np.ndarray, str]]:
     """{doi: (unit vector, chunk text)}: mean of the chunk embeddings of each paper."""
     items = [(d, chunks(t)) for d, t in texts.items()]
     items = [(d, c) for d, c in items if c]
@@ -121,23 +123,25 @@ def _existing_backend(model):
     on another runtime type (GPU vs CPU) reuses them instead of re-embedding every year."""
     best = (0, None)
     for backend in ("sentence-transformers", "fastembed"):
-        n = sum(len(_load(p, f"{model}|{backend}")) for p in EMB.glob(f"*__*{re.sub(r'[^A-Za-z0-9.-]+', '-', backend)}*.npz"))
+        n = sum(len(_load(p, f"{model}|{backend}")) for p in _emb_dir().glob(f"*__*{re.sub(r'[^A-Za-z0-9.-]+', '-', backend)}*.npz"))
         best = max(best, (n, backend), key=lambda x: x[0])
     return best[1]
 
 
-def store_path(name, model):
+def _emb_dir():
+    return data_root() / "embeddings"
+
+
+def store_path(name: str, model: str) -> Path:
     """data/embeddings/<name>__<model>.npz: one file per model and backend, so switching between
     the GPU and the CPU (or trying another model) never throws the other's vectors away."""
     import hashlib
     slug = re.sub(r"[^A-Za-z0-9.-]+", "-", model).strip("-")[:60]
-    return EMB / f"{name}__{slug}-{hashlib.sha1(model.encode()).hexdigest()[:8]}.npz"
+    return _emb_dir() / f"{name}__{slug}-{hashlib.sha1(model.encode()).hexdigest()[:8]}.npz"
 
 
 def _load_store(name, model):
-    """The store for `name`, migrating the older one-file-per-name layout (`<name>.npz`)."""
-    store = _load(store_path(name, model), model)
-    return store or _load(EMB / f"{name}.npz", model)
+    return _load(store_path(name, model), model)
 
 
 def _replace(path, write):
@@ -151,7 +155,6 @@ def _replace(path, write):
 
 
 def _save(path, store, model):
-    import gzip
     path.parent.mkdir(parents=True, exist_ok=True)
     dois = sorted(store)
     _replace(path, lambda f: np.savez_compressed(
@@ -207,13 +210,13 @@ def _known_text(r):
             if not _EXHAUSTED:  # a host out of budget is not evidence that there is no text
                 none.touch()
             return None
-        _replace(kpath, lambda f: f.write(gzip.compress(f"{res.source}\n{res.text}".encode("utf-8"))))
+        _replace(kpath, lambda f: f.write(gzip.compress(f"{res.source}\n{res.text}".encode())))
         return res.text
     except Exception:  # noqa: BLE001 - truncated cache file, network error, ...
         return None
 
 
-def known_texts(known, progress=print, workers=8):
+def _known_texts(known, progress=print, workers=8):
     """{doi: full text} for the known papers that have reachable text."""
     from concurrent.futures import ThreadPoolExecutor
     out = {}
@@ -226,7 +229,8 @@ def known_texts(known, progress=print, workers=8):
     return out
 
 
-def build_known(embedder, progress=print, batch=100, known=None):
+def build_known(embedder, progress: Callable[[str], None] = print, batch: int = 100,
+                known: list[dict] | None = None) -> dict:
     """Embed the known papers; saved every `batch` papers, so an interrupted run resumes."""
     from .papers import load_papers
     known = load_papers() if known is None else known
@@ -242,13 +246,13 @@ def build_known(embedder, progress=print, batch=100, known=None):
     if store and not path.exists():  # migrated from the older layout: save under the new name
         _save(path, store, embedder.model_name)
     for i in range(0, len(todo), batch):
-        store.update(paper_vectors(known_texts(todo[i:i + batch], progress), embedder))
+        store.update(paper_vectors(_known_texts(todo[i:i + batch], progress), embedder))
         _save(path, store, embedder.model_name)
     progress(f"known papers embedded: {len(store)}/{len(known)} (the rest have no reachable full text)")
     return store
 
 
-def build_year(year, embedder, progress=print, batch=200):
+def build_year(year: int, embedder, progress: Callable[[str], None] = print, batch: int = 200) -> dict:
     """Embed every paper of a swept year that has cached text; saved every `batch` papers."""
     path = store_path(str(year), embedder.model_name)
     store = _load_store(str(year), embedder.model_name)
@@ -330,8 +334,7 @@ def score_year(year, known_store, year_store, known_rows, other_stores=None, oth
 
 
 SHEET_COLUMNS = ["rank", "doi", "link", "title", "embedding_score", "tfidf_score", "tfidf_rank",
-                 "on_website_list", "priority", "category", "microscopy_terms", "model",
-                 "rules_version", "your_verdict", "your_note"]
+                 "confirmed", "priority", "category", "microscopy_terms", "model", "rules_version"]
 
 
 def rank_year(year, known_store, known_rows, other_years=(), out=None, model=None):
@@ -346,7 +349,7 @@ def rank_year(year, known_store, known_rows, other_years=(), out=None, model=Non
             other_stores.update(_load_store(str(y), model))
             other_flagged |= {r["doi"] for r in load_screened(y) if r.get("priority") in ("report", "check")}
     scores, method = score_year(year, known_store, year_store, known_rows, other_stores, other_flagged)
-    out = out or DATA / str(year) / "embedding_ranked.csv"
+    out = out or data_root() / str(year) / "embedding_ranked.csv"
     if not scores:  # nothing to rank: leave an existing sheet (and its verdicts) alone
         return {"year": year, "method": method, "papers": 0, "known_with_text": 0,
                 "rules_flagged_known": 0, "path": f"{out} (not rewritten: nothing to rank)",
@@ -354,15 +357,10 @@ def rank_year(year, known_store, known_rows, other_years=(), out=None, model=Non
                             "embedding_new_unflagged": 0} for n in (50, 100, 200, 300, 500)}}
     rows = {r["doi"]: r for r in load_screened(year)}
     listed = {r["doi"] for r in known_rows if str(r.get("year")) == str(year)}   # confirmed (+ Sheet "yes")
-    legacy = DATA / str(year) / "facility_list.json"
-    if legacy.exists():
-        listed |= set(json.loads(legacy.read_text()))
     order = sorted(scores, key=lambda d: (-scores[d][0], d))
     tf_order = sorted(scores, key=lambda d: (-scores[d][1], d))
     tf_rank = {d: i for i, d in enumerate(tf_order, 1)}
     version = rules_version()
-    from .provenance import previous_verdicts
-    kept = previous_verdicts(out)
     with open(out, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(SHEET_COLUMNS)
@@ -370,13 +368,7 @@ def rank_year(year, known_store, known_rows, other_years=(), out=None, model=Non
             r = rows.get(d, {})
             w.writerow([i, d, f"https://doi.org/{d}", r.get("title", ""), round(scores[d][0], 4),
                         round(scores[d][1], 4), tf_rank[d], d in listed, r.get("priority", ""),
-                        r.get("category", ""), r.get("microscopy_terms", ""), model or "", version,
-                        *kept.get(d, ("", ""))])
-        for d in sorted(set(kept) - set(order)):  # verdicts on papers no longer ranked are kept
-            r = rows.get(d, {})
-            w.writerow(["", d, f"https://doi.org/{d}", r.get("title", ""), "", "", "", d in listed,
-                        r.get("priority", ""), r.get("category", ""), r.get("microscopy_terms", ""),
-                        model, version, *kept[d]])
+                        r.get("category", ""), r.get("microscopy_terms", ""), model or "", version])
     flagged = {d for d, r in rows.items() if r.get("priority") in ("report", "check")}
     terms_order = sorted(scores, key=lambda d: (-(rows.get(d, {}).get("microscopy_terms") or 0), d))
     known_here = set(order) & listed
@@ -391,7 +383,7 @@ def rank_year(year, known_store, known_rows, other_years=(), out=None, model=Non
     return summary
 
 
-def format_summary(s):
+def format_summary(s: dict) -> str:
     lines = [f"{s['year']}: {s['papers']} papers with text, {s['known_with_text']} of them confirmed "
              f"(the rules flag {s['rules_flagged_known']}); {s['method']}",
              f"  known papers in the top N by:  {'embedding':>9}  {'TF-IDF':>6}  {'microscopy terms':>16}"
@@ -403,7 +395,8 @@ def format_summary(s):
     return "\n".join(lines)
 
 
-def run(years, model=DEFAULT_MODEL, embedder=None, progress=print, extra_known=()):
+def run(years: Iterable[int], model: str = DEFAULT_MODEL, embedder=None,
+        progress: Callable[[str], None] = print, extra_known: Iterable[dict] = ()) -> list[dict]:
     """Embed the known papers and every swept year, then rank each year held-out.
 
     extra_known: [{doi, year}] validated "yes" in the Sheets but not yet in the repository,
@@ -416,7 +409,7 @@ def run(years, model=DEFAULT_MODEL, embedder=None, progress=print, extra_known=(
     known_store = build_known(embedder, progress, known=known_rows)
     if not known_store:
         return []
-    swept = [y for y in years if (DATA / str(y) / "screened.jsonl").exists()]
+    swept = [y for y in years if (data_root() / str(y) / "screened.jsonl").exists()]
     for y in sorted(set(years) - set(swept)):
         progress(f"{y}: not swept yet (no data/{y}/screened.jsonl) - skipped")
     ready = []

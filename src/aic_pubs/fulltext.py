@@ -17,11 +17,10 @@ import re
 import urllib.parse
 from dataclasses import dataclass
 
-from . import discovery, sources
+from . import sources
 from .http import fetch_result, get_json
 from .text import pdf_text
 
-CROSSREF = "https://api.crossref.org/works"
 OPENALEX = "https://api.openalex.org/works"
 
 
@@ -55,7 +54,7 @@ def _html_text(value):
     return value.strip() or None
 
 
-def download_text(url, timeout=90):
+def _download_text(url, timeout=90):
     """Download and validate article-like text with explicit failure provenance."""
     fetched = fetch_result(url, timeout=timeout)
     if not fetched.ok:
@@ -76,7 +75,7 @@ def download_text(url, timeout=90):
             fetched.content_type,
             "parse_empty",
         )
-    from .pipeline.validators import validate_article_text
+    from .text import validate_article_text
     accepted, _, reason = validate_article_text(text)
     if not accepted:
         return DownloadTextResult(
@@ -97,23 +96,17 @@ def download_text(url, timeout=90):
 
 def _download_text(url):
     """Compatibility wrapper returning only validated text."""
-    return download_text(url).text
-
-
-def crossref_record(doi):
-    url = f"{CROSSREF}/{urllib.parse.quote(sources._norm_doi(doi), safe='')}"
-    data = get_json(url, timeout=60) or {}
-    return data.get("message") or {}
+    return _download_text(url).text
 
 
 def crossref_landing_url(doi):
     """Publisher landing URL deposited in Crossref metadata."""
-    return (crossref_record(doi).get("URL") or "").strip() or None
+    return (sources.crossref_work(doi).get("URL") or "").strip() or None
 
 
 def crossref_text_links(doi):
     """Unique full-text/TDM links deposited by the publisher in Crossref metadata."""
-    record = crossref_record(doi)
+    record = sources.crossref_work(doi)
     out = []
     seen = set()
     for link in record.get("link") or []:
@@ -183,14 +176,14 @@ def _usable(text, paper=None):
     """Repository text is only accepted when it looks like an article: UTUPub serves
     whitespace-only TEXT files for some items (10.1016/j.matdes.2025.114920 was 12
     newlines), which used to stop resolution before the ÅA PDF was tried."""
-    from .pipeline.validators import validate_article_text
+    from .text import validate_article_text
     from .text import matches_paper
     if not (text and text.strip()) or not validate_article_text(text)[0]:
         return False
     return paper is None or matches_paper(text, paper.get("doi"), paper.get("title"))
 
 
-def resolve_text(paper, openalex_api_key=None):
+def resolve_text(paper: dict, openalex_api_key: str | None = None) -> TextResult:
     """Resolve searchable text for one DOI-bearing paper."""
     if paper.get("utupub_uuid"):
         text = sources.utupub_text(paper["utupub_uuid"], paper.get("dspace_base"))
@@ -204,7 +197,7 @@ def resolve_text(paper, openalex_api_key=None):
 
     pmcid, ppr = paper.get("pmcid"), paper.get("epmc_id")
     if not (pmcid or ppr) and paper.get("doi"):
-        match = discovery.europepmc_lookup_doi(paper["doi"]) or {}
+        match = sources.europepmc_lookup_doi(paper["doi"]) or {}
         pmcid, ppr = match.get("pmcid"), match.get("epmc_id")
     for epmc in (pmcid, ppr):  # journal version first, then the preprint (PPR…) full text
         if epmc:

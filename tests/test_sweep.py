@@ -26,7 +26,7 @@ def test_latest_row_wins_for_refresh_state(tmp_path):
 
 
 def test_cache_sidecar_preserves_provenance(monkeypatch, tmp_path):
-    monkeypatch.setattr(sweep, "DATA", tmp_path)
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     sweep._store(
         2025,
         "10.1000/x",
@@ -50,7 +50,7 @@ def test_cache_sidecar_preserves_provenance(monkeypatch, tmp_path):
 
 
 def test_legacy_cache_without_sidecar_still_loads(monkeypatch, tmp_path):
-    monkeypatch.setattr(sweep, "DATA", tmp_path)
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     path = sweep._cache_path(2025, "10.1000/legacy")
     path.parent.mkdir(parents=True, exist_ok=True)
     import gzip
@@ -61,7 +61,7 @@ def test_legacy_cache_without_sidecar_still_loads(monkeypatch, tmp_path):
 
 
 def test_completed_dois_with_year_requires_reusable_cache(monkeypatch, tmp_path):
-    monkeypatch.setattr(sweep, "DATA", tmp_path)
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     screened = tmp_path / "2025" / "screened.jsonl"
     screened.parent.mkdir(parents=True, exist_ok=True)
     rows = [
@@ -100,7 +100,7 @@ def test_completed_dois_with_year_requires_reusable_cache(monkeypatch, tmp_path)
 
 
 def test_legacy_trusted_full_source_can_be_reused(monkeypatch, tmp_path):
-    monkeypatch.setattr(sweep, "DATA", tmp_path)
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     path = sweep._cache_path(2025, "10.1000/legacy-full")
     path.parent.mkdir(parents=True, exist_ok=True)
     import gzip
@@ -116,7 +116,7 @@ ARTICLE = ("Images were acquired on a Zeiss LSM880. We thank the Cell Imaging an
 def _fake_run(monkeypatch, tmp_path, papers, resolve):
     """Run sweep.run offline: fixed candidate list, fake resolver, no network."""
     from aic_pubs.fulltext import TextResult
-    monkeypatch.setattr(sweep, "DATA", tmp_path)
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     monkeypatch.setattr(sweep, "collect", lambda year, cfg: {p["doi"]: dict(p) for p in papers})
     monkeypatch.setattr(sweep, "resolve_text", lambda p, **k: TextResult(*resolve(p)))
     monkeypatch.setattr(sweep, "load_bookings", lambda: {})

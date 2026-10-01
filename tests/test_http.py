@@ -111,7 +111,7 @@ def test_openalex_is_not_called_without_a_key(monkeypatch):
     from aic_pubs import fulltext
 
     monkeypatch.delenv("OPENALEX_API_KEY", raising=False)
-    monkeypatch.setattr(fulltext.discovery, "europepmc_lookup_doi", lambda doi: None)
+    monkeypatch.setattr(fulltext.sources, "europepmc_lookup_doi", lambda doi: None)
     monkeypatch.setattr(fulltext, "crossref_text_links", lambda doi: [])
     monkeypatch.setattr(fulltext, "openalex_oa_locations",
                         lambda *a, **k: (_ for _ in ()).throw(AssertionError("OpenAlex called")))

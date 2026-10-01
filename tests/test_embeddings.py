@@ -1,5 +1,4 @@
 import csv
-import json
 
 import numpy as np
 import pytest
@@ -76,10 +75,9 @@ def test_near_duplicate_known_papers_are_not_used_for_training():
 
 
 def test_known_paper_without_text_is_not_fetched_again(monkeypatch, tmp_path):
-    monkeypatch.setattr(E, "DATA", tmp_path)
-    import aic_pubs.sweep as sweep
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     import aic_pubs.fulltext as fulltext
-    monkeypatch.setattr(sweep, "DATA", tmp_path)
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     monkeypatch.setattr(E, "cached_text", lambda year, doi: (None, None))
     calls = []
 
@@ -127,17 +125,15 @@ def test_score_year_ranks_aic_like_papers_first_with_both_scores():
 
 
 def test_rank_year_writes_the_check_list(monkeypatch, tmp_path):
-    monkeypatch.setattr(E, "DATA", tmp_path)
-    monkeypatch.setattr(E, "EMB", tmp_path / "embeddings")
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     rows = [{"doi": "a", "title": "A", "priority": "low", "category": "F", "microscopy_terms": 9, "has_text": True},
             {"doi": "b", "title": "B", "priority": "report", "category": "A", "microscopy_terms": 2, "has_text": True}]
     monkeypatch.setattr(E, "load_screened", lambda year: rows)
     (tmp_path / "2024").mkdir()
-    (tmp_path / "2024" / "facility_list.json").write_text(json.dumps(["b"]))
     E._save(E.store_path("2024", "fake|test"),
             {"a": (_unit(1, 0.5, 0.4), "confocal imaging microscope"), "b": (_unit(0, 1, 0), "mass spectrometry")},
             "fake|test")
-    known_rows = [{"doi": "k", "year": "2023"}]
+    known_rows = [{"doi": "k", "year": "2023"}, {"doi": "b", "year": "2024"}]   # b: confirmed in 2024
     known_store = {"k": (_unit(1, 0.1, 0), "confocal imaging microscope airyscan")}
     s = E.rank_year(2024, known_store, known_rows, model="fake|test")
     with open(s["path"], newline="") as f:
@@ -148,19 +144,11 @@ def test_rank_year_writes_the_check_list(monkeypatch, tmp_path):
     assert s["known_with_text"] == 1 and s["rules_flagged_known"] == 1
     assert s["top"][50]["embedding_new_unflagged"] == 1
     assert "top 50" in E.format_summary(s)
-    # staff verdicts survive a re-run
-    rows_ = list(csv.DictReader(open(s["path"], newline="")))
-    rows_[1]["your_verdict"], rows_[1]["your_note"] = "yes", "checked"
-    with open(s["path"], "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=E.SHEET_COLUMNS); w.writeheader(); w.writerows(rows_)
-    E.rank_year(2024, known_store, known_rows, model="fake|test")
-    again = {r["doi"]: r for r in csv.DictReader(open(s["path"], newline=""))}
-    assert (again["b"]["your_verdict"], again["b"]["your_note"]) == ("yes", "checked")
+    assert sheet[1]["confirmed"] == "True"
 
 
 def test_run_skips_years_that_were_not_swept(monkeypatch, tmp_path):
-    monkeypatch.setattr(E, "DATA", tmp_path)
-    monkeypatch.setattr(E, "EMB", tmp_path / "embeddings")
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     monkeypatch.setattr(E, "build_known", lambda embedder, progress, **kw: {"k": (_unit(1, 0, 0), "t")})
     import aic_pubs.papers as known
     monkeypatch.setattr(known, "load_papers", lambda: [])
@@ -170,8 +158,7 @@ def test_run_skips_years_that_were_not_swept(monkeypatch, tmp_path):
 
 
 def test_run_skips_swept_years_without_cached_text(monkeypatch, tmp_path):
-    monkeypatch.setattr(E, "DATA", tmp_path)
-    monkeypatch.setattr(E, "EMB", tmp_path / "embeddings")
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     monkeypatch.setattr(E, "build_known", lambda embedder, progress, **kw: {"k": (_unit(1, 0, 0), "t")})
     monkeypatch.setattr(E, "build_year", lambda year, embedder, progress: {})
     import aic_pubs.papers as known
@@ -183,17 +170,12 @@ def test_run_skips_swept_years_without_cached_text(monkeypatch, tmp_path):
     assert any("no cached full text" in s for s in said)
 
 
-def test_store_names_never_collide_and_old_layout_is_migrated(monkeypatch, tmp_path):
+def test_store_names_never_collide():
     assert E.store_path("2024", "a/b|x") != E.store_path("2024", "a-b|x")
-    monkeypatch.setattr(E, "EMB", tmp_path)
-    E._save(tmp_path / "2024.npz", {"a": (_unit(1, 0, 0), "t")}, "m|cpu")   # older layout
-    assert set(E._load_store("2024", "m|cpu")) == {"a"}
-    assert E._load_store("2024", "other|cpu") == {}
 
 
 def test_rank_year_leaves_an_existing_sheet_alone_when_there_is_nothing_to_rank(monkeypatch, tmp_path):
-    monkeypatch.setattr(E, "DATA", tmp_path)
-    monkeypatch.setattr(E, "EMB", tmp_path / "embeddings")
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     monkeypatch.setattr(E, "load_screened", lambda year: [])
     (tmp_path / "2024").mkdir()
     sheet = tmp_path / "2024" / "embedding_ranked.csv"
@@ -205,10 +187,9 @@ def test_rank_year_leaves_an_existing_sheet_alone_when_there_is_nothing_to_rank(
 
 
 def test_no_text_marker_is_not_written_when_a_host_is_out_of_budget(monkeypatch, tmp_path):
-    import aic_pubs.sweep as sweep
     import aic_pubs.fulltext as fulltext
     import aic_pubs.http as http
-    monkeypatch.setattr(sweep, "DATA", tmp_path)
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     monkeypatch.setattr(E, "cached_text", lambda year, doi: (None, None))
     calls = []
 
@@ -223,8 +204,7 @@ def test_no_text_marker_is_not_written_when_a_host_is_out_of_budget(monkeypatch,
 
 
 def test_no_confirmed_papers_gives_no_check_list_but_no_crash(monkeypatch, tmp_path):
-    monkeypatch.setattr(E, "DATA", tmp_path)
-    monkeypatch.setattr(E, "EMB", tmp_path / "embeddings")
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     import aic_pubs.papers as known
     monkeypatch.setattr(known, "load_papers", lambda: [])
     said = []
@@ -232,8 +212,7 @@ def test_no_confirmed_papers_gives_no_check_list_but_no_crash(monkeypatch, tmp_p
     assert any("no confirmed papers" in s for s in said)
 
 
-def test_existing_stores_decide_the_backend(monkeypatch, tmp_path):
-    monkeypatch.setattr(E, "EMB", tmp_path)
+def test_existing_stores_decide_the_backend():
     model = "BAAI/bge-small-en-v1.5"
     E._save(E.store_path("2024", f"{model}|fastembed"), {"a": (_unit(1, 0, 0), "t")}, f"{model}|fastembed")
     assert E._existing_backend(model) == "fastembed"

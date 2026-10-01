@@ -9,15 +9,23 @@ description = "Find publications that used a core imaging facility, starting fro
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
-dependencies = ["pyyaml", "pymupdf", "openpyxl"]
+dependencies = ["pyyaml", "pymupdf"]
 
 [project.optional-dependencies]
-llm = ["torch", "transformers>=4.45", "accelerate", "bitsandbytes; platform_system == 'Linux'"]
-embed = ["fastembed", "scikit-learn"]
-test = ["pytest", "numpy", "scikit-learn"]
+embed = ["fastembed", "scikit-learn"]        # the embedding check list
+openiris = ["openpyxl"]                      # private OpenIRIS admin export import
+test = ["pytest", "numpy", "scikit-learn", "openpyxl", "ruff"]
 
 [project.scripts]
 aic-pubs = "aic_pubs.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["F", "E9", "B", "UP", "SIM"]
+ignore = ["UP006", "UP035", "B905", "B904", "B007", "SIM102", "SIM105", "SIM108", "SIM115"]

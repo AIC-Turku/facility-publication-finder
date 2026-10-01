@@ -31,7 +31,7 @@ def database_path(path_or_url):
     return tmp
 
 
-def instrument_capabilities(db):
+def _instrument_capabilities(db):
     out = {}
     for f in sorted(Path(db, "instruments").glob("*.yaml")):
         d = yaml.safe_load(f.read_text(encoding="utf-8"))
@@ -45,7 +45,7 @@ def instrument_capabilities(db):
 
 
 def report(cfg, db):
-    inst = instrument_capabilities(db)
+    inst = _instrument_capabilities(db)
     known_inst = {i.id for i in cfg.instruments}
     known_tech = {t.id for t in cfg.techniques}
     lines = []

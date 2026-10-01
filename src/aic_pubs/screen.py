@@ -17,7 +17,7 @@ LEADS = "ABCDE"  # categories a person (or the LLM) should look at
 MICROSCOPY_MIN = 5  # generic microscopy-term hits to count as a microscopy paper
 
 
-def screen(text, cfg, local=True, meta=None):
+def screen(text: str | None, cfg, local: bool = True, meta: dict | None = None) -> dict:
     """Screen one paper's full text.
 
     local: the paper has UTU/ÅA authors (true for everything from the repositories).

@@ -56,6 +56,11 @@ def _norm_doi(value):
 
 
 # --------------------------------------------------------------------- UTUPub
+def _values(metadata: dict, key: str) -> list[str]:
+    """The values of one DSpace metadata field."""
+    return [v["value"] for v in metadata.get(key, [])]
+
+
 def utupub_items(year, base_url=UTUPUB, query="dc.year.issued:{year} AND dc.relation.doi:[* TO *]",
                  doi_fields=("dc.relation.doi", "dc.identifier.doi")):
     """All items of a DSpace 7 repository with a DOI issued in `year` (metadata only).
@@ -72,7 +77,7 @@ def utupub_items(year, base_url=UTUPUB, query="dc.year.issued:{year} AND dc.rela
         for o in res["_embedded"]["objects"]:
             it = o["_embedded"]["indexableObject"]
             m = it["metadata"]
-            g = lambda k: [v["value"] for v in m.get(k, [])]
+            g = lambda k, m=m: _values(m, k)
             items.append({
                 "doi": next((d for f in doi_fields for d in map(_norm_doi, g(f)) if d), ""),
                 "title": (g("dc.title") or [""])[0],
@@ -241,6 +246,40 @@ def europepmc_text(pmcid):
     x = fetch(f"{EPMC}/{pmcid}/fullTextXML")
     import html  # entities such as "Cell Imaging &amp; Cytometry Core" must be decoded
     return html.unescape(re.sub(r"<[^>]+>", " ", x)) if x else None
+
+
+def europepmc_lookup_doi(doi):
+    """Resolve a DOI to a Europe PMC record/PMCID even when it was not found by
+    the acknowledgement search.
+    """
+    q = urllib.parse.urlencode({
+        "query": f'DOI:"{_norm_doi(doi)}"',
+        "format": "json",
+        "pageSize": 5,
+        "resultType": "lite",
+    })
+    data = get_json(f"{EPMC}/search?{q}", timeout=60) or {}
+    hits = data.get("resultList", {}).get("result", [])
+    if not hits:
+        return None
+    hit = hits[0]
+    return {
+        "doi": _norm_doi(hit.get("doi") or doi),
+        "pmcid": hit.get("pmcid"),
+        "epmc_id": hit.get("id") if hit.get("source") == "PPR" else None,
+        "title": hit.get("title", ""),
+        "journal": hit.get("journalTitle", ""),
+    }
+
+
+# -------------------------------------------------------------------- Crossref
+CROSSREF = "https://api.crossref.org/works"
+
+
+def crossref_work(doi: str) -> dict:
+    """The Crossref record ("message") of a DOI, or {} when Crossref does not know it."""
+    url = f"{CROSSREF}/{urllib.parse.quote(_norm_doi(doi), safe='')}"
+    return (get_json(url, timeout=60) or {}).get("message") or {}
 
 
 # ------------------------------------------- facility website (benchmark only)

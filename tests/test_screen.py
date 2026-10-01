@@ -2,7 +2,6 @@
 import pytest
 
 from aic_pubs.config import load
-from aic_pubs.llm import parse
 from aic_pubs.report import match_users
 from aic_pubs.screen import screen
 
@@ -70,12 +69,6 @@ def test_no_text(cfg):
 def test_match_users_on_utupub_author_format():
     row = {"local_authors": ["Example, Erik", "Doe, Jane"]}
     assert match_users(row, ["Erik Example", "Tester, Anna"]) == ["Erik Example"]
-
-
-def test_parse_llm_json():
-    v = parse('Sure: {"used_facility": "Likely", "acknowledged": false, "confidence": 0.7, "reason": "x"}')
-    assert v["used_facility"] == "likely"
-    assert parse("no json here")["used_facility"] == "unparsed"
 
 
 def test_comma_variant_of_facility_name(cfg):
@@ -267,17 +260,6 @@ def test_old_booking_outside_window_does_not_count(cfg):
     assert not any("booked" in x for x in screen(LSM, cfg, meta=meta)["score_reasons"])
 
 
-def test_capture_recapture():
-    from aic_pubs.report import capture_recapture
-    rows = [{"doi": f"10.1000/d{i}", "priority": "report", "acknowledgement": ["x"] if i < 3 else []}
-            for i in range(10)]
-    rows.append({"doi": "10.1101/preprint", "priority": "report"})  # preprints are not counted
-    out = capture_recapture(1900, rows, {f"10.1000/d{i}" for i in range(5, 15)})
-    assert "list 10, sweep 10, both 5 -> Chapman 19" in out[0]
-    assert "not acknowledged" in " ".join(out)
-    assert "sources are not independent" in out[-1]
-
-
 def test_booking_alone_does_not_make_a_lead(cfg):
     # before this rule, 121 epidemiology/chemistry papers of groups that book the facility became "check"
     meta = {"local_authors": ["Doe, Jane"], "year": 2025, "bookings": {("doe", "j"): [(2024, "")]}}
@@ -357,14 +339,9 @@ def test_report_user_list_does_not_write_private_names(monkeypatch, tmp_path):
             "evidence": ["AIC acknowledged"],
         }],
     )
-    from aic_pubs import sweep
-    monkeypatch.setattr(sweep, "DATA", tmp_path)
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     path = tmp_path / "review.csv"
-    report.write_review_csv(
-        2025,
-        path=path,
-        users=["Erik Example"],
-    )
+    report.write_review_csv(2025, set(), users=["Erik Example"], path=path)
     public = path.read_text(encoding="utf-8")
     assert "known_user_match" not in public and "matched_users" not in public
     from aic_pubs.sweep import private_dir

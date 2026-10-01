@@ -16,12 +16,15 @@ Tabs (plain data here; gsheets.py writes them to a Google Sheet, `aic-pubs sheet
 Verdicts already given are always carried over (also for papers that left the list).
 E-mail addresses live only in the facility's Sheet / working-data folder, never in the repo.
 """
+from collections.abc import Callable, Iterable
+from pathlib import Path
 import csv
 import re
 from concurrent.futures import ThreadPoolExecutor
 
 from .config import load
-from .sweep import DATA, cached_text, load_screened
+from .config import data_root
+from .sweep import cached_text, load_screened
 
 VERDICTS = ["yes", "likely", "no"]
 VALIDATE_COLUMNS = ["why", "doi", "link", "title", "journal", "acknowledges_facility", "evidence",
@@ -38,7 +41,7 @@ WHY_EARLIER = "earlier verdict (no longer a candidate)"
 
 def _ranked(year):
     """{doi: rank} from data/<year>/embedding_ranked.csv (written by `aic-pubs embed`)."""
-    path = DATA / str(year) / "embedding_ranked.csv"
+    path = data_root() / str(year) / "embedding_ranked.csv"
     if not path.exists():
         return {}
     with path.open(newline="", encoding="utf-8") as f:
@@ -55,24 +58,25 @@ def _verdicts(rows):
     return out
 
 
-def paper_text(year, doi):
+def _paper_text(year, doi):
     """Full text from the year's sweep cache, else the confirmed-paper cache (which may fetch it
     once from Europe PMC / Crossref and keep it)."""
     from .embeddings import _known_text
     return cached_text(year, doi)[0] or _known_text({"doi": doi, "year": year})
 
 
-def default_contacts(year, workers=8):
+def _default_contacts(year, workers=8):
     """contacts(dois) -> {doi: [{"name", "email"}]} from the full text and the Crossref
     author list (network: one Crossref request per paper)."""
-    from .contacts import corresponding_contacts, crossref_authors
-    rows = {r["doi"]: r for r in load_screened(year)} if (DATA / str(year) / "screened.jsonl").exists() else {}
+    from .contacts import author_names, corresponding_contacts
+    from .sources import crossref_work
+    rows = {r["doi"]: r for r in load_screened(year)} if (data_root() / str(year) / "screened.jsonl").exists() else {}
 
     def one(doi):
-        text = paper_text(year, doi)
+        text = _paper_text(year, doi)
         if not text:
             return doi, []
-        authors = crossref_authors(doi) + list(rows.get(doi, {}).get("local_authors") or [])
+        authors = author_names(crossref_work(doi)) + list(rows.get(doi, {}).get("local_authors") or [])
         return doi, corresponding_contacts(text, authors)
 
     def contacts(dois):
@@ -81,14 +85,17 @@ def default_contacts(year, workers=8):
     return contacts
 
 
-def build(year, previous=(), top_n=100, contacts=None, confirmed=None, previous_papers=(), text=None):
+def build(year: int, previous: Iterable[dict] = (), top_n: int = 100,
+          contacts: Callable[[list[str]], dict[str, list[dict]]] | None = None,
+          confirmed: list[dict] | None = None, previous_papers: Iterable[dict] = (),
+          text: Callable[[str], str | None] | None = None) -> tuple[dict[str, list[dict]], str]:
     """{tab: [row dicts]} and the inbox block for `year`.
 
     previous: rows of the existing Validate tab (verdicts are carried over).
     previous_papers: rows of the existing Facility papers tab (its notes are carried over;
     the Validate tab wins where both have a verdict).
-    text: function(doi) -> full text or None (default: paper_text(year, doi)).
-    contacts: function(dois) -> {doi: [{"name", "email"}]} (default: default_contacts(year)).
+    text: function(doi) -> full text or None (default: _paper_text(year, doi)).
+    contacts: function(dois) -> {doi: [{"name", "email"}]} (default: _default_contacts(year)).
     confirmed: [{doi, year, source, title, journal}] (default: the facility's papers)."""
     from .papers import load_papers
     from .validation import year_summary
@@ -99,8 +106,8 @@ def build(year, previous=(), top_n=100, contacts=None, confirmed=None, previous_
     conf = {p["doi"]: p for p in confirmed if int(p["year"]) == int(year)}
     all_confirmed = {p["doi"] for p in confirmed}
     kept = {**_verdicts(previous_papers), **_verdicts(previous)}
-    text = text or (lambda d: paper_text(year, d))
-    summary = year_summary(year, write_sheet=False) if rows else {"new_report": [], "new_check": [], "missed": {}}
+    text = text or (lambda d: _paper_text(year, d))
+    summary = year_summary(year) if rows else {"new_report": [], "new_check": [], "missed": {}}
     flagged = {d for d, r in rows.items() if r.get("priority") in ("report", "check")}
     ranked = _ranked(year)
 
@@ -120,7 +127,7 @@ def build(year, previous=(), top_n=100, contacts=None, confirmed=None, previous_
         cand.append((WHY_EARLIER, d))
 
     validated = [d for d, (v, _) in kept.items() if v in ("yes", "likely") and d not in all_confirmed]
-    contacts = contacts or default_contacts(year)
+    contacts = contacts or _default_contacts(year)
     who = contacts(list(conf) + validated)          # contacts only for facility papers
     grants = [g for g in cfg.raw.get("europepmc_grant_numbers") or []]
     grant_rx = re.compile(r"\b(" + "|".join(map(re.escape, grants)) + r")\b") if grants else None
@@ -178,9 +185,9 @@ def build(year, previous=(), top_n=100, contacts=None, confirmed=None, previous_
     return {"Validate": validate, "Facility papers": papers, "Search misses": misses}, inbox
 
 
-def write_csv(year, tabs, folder=None):
+def write_csv(year: int, tabs: dict[str, list[dict]], folder: Path | None = None) -> list[Path]:
     """The tabs as CSV files in the working-data folder (data/<year>/sheet_*.csv)."""
-    folder = folder or DATA / str(year)
+    folder = folder or data_root() / str(year)
     folder.mkdir(parents=True, exist_ok=True)
     paths = []
     for name, rows in tabs.items():
@@ -193,8 +200,8 @@ def write_csv(year, tabs, folder=None):
     return paths
 
 
-def read_csv_validate(year, folder=None):
-    path = (folder or DATA / str(year)) / "sheet_validate.csv"
+def read_csv_validate(year: int, folder: Path | None = None) -> list[dict]:
+    path = (folder or data_root() / str(year)) / "sheet_validate.csv"
     if not path.exists():
         return []
     with path.open(newline="", encoding="utf-8-sig") as f:

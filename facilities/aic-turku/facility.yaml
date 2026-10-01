@@ -330,10 +330,3 @@ openiris_resources:
   "dm rb": scope-leica-dm-rb
   "dm irbe": scope-leica-dm-irbe
   "incucyte": unrecorded-incucyte-s3
-
-# Facility-specific notes for the optional LLM second opinion (`aic-pubs review`).
-llm_prompt_notes:
-  - "Historical/alternative facility names: Cell Imaging and Cytometry Core (CIC), Cell Imaging Core, Turku Bioimaging (umbrella), Euro-BioImaging node in Turku."
-  - "Local authors: University of Turku, Åbo Akademi, Turku Bioscience."
-  - "Only \"Flowing Software\" cited is not facility use; Abberior is also a reagent supplier; LSM 980 / Airyscan 2 is not the LSM 880."
-  - "Flow cytometry at the Cell Imaging and Cytometry Core counts as facility use (answer as for imaging) and set cytometry_only to true."

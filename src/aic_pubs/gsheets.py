@@ -10,19 +10,26 @@ those verdicts carried over, and writes it back: run it to create the Sheet, and
 validating to refresh the Facility papers tab and get the DOIs to paste into the repository.
 The Sheet's id is kept in <data>/<year>/sheet.json, so every run updates the same Sheet.
 """
+from collections.abc import Iterable
 import json
 
 from . import sheet
-from .sweep import DATA
+from .config import data_root
 
 VERDICT_COLUMN = "verdict"
 
 
 def _store(year):
-    return DATA / str(year) / "sheet.json"
+    return data_root() / str(year) / "sheet.json"
 
 
-def open_or_create(gc, year, title=None, folder_id=None, create=True):
+def has_sheet(year: int) -> bool:
+    """Whether a Sheet has been created for the year."""
+    return _store(year).exists()
+
+
+def open_or_create(gc, year: int, title: str | None = None, folder_id: str | None = None,
+                   create: bool = True):
     """The year's spreadsheet: reopened from sheet.json, else created (in folder_id if given).
 
     A Sheet recorded in sheet.json that cannot be opened is an error, never silently replaced
@@ -48,7 +55,7 @@ def open_or_create(gc, year, title=None, folder_id=None, create=True):
     return sh
 
 
-def read_tab(sh, name):
+def _read_tab(sh, name):
     """Rows of a tab as dicts (header row = keys), or [] when the tab does not exist yet."""
     try:
         ws = sh.worksheet(name)
@@ -61,7 +68,7 @@ def read_tab(sh, name):
     return [dict(zip(header, row + [""] * (len(header) - len(row)))) for row in values[1:]]
 
 
-def write_tab(sh, name, columns, rows):
+def _write_tab(sh, name, columns, rows):
     """Replace a tab's content; header bold and frozen; a yes/likely/no dropdown on `verdict`."""
     values = [columns] + [[_cell(r.get(c, "")) for c in columns] for r in rows]
     try:
@@ -95,20 +102,21 @@ def _cell(value):
     return text if len(text) < 49000 else text[:49000]   # Sheets limit: 50,000 characters per cell
 
 
-def sync(gc, year, top_n=100, folder_id=None, contacts=None):
+def sync(gc, year: int, top_n: int = 100, folder_id: str | None = None,
+         contacts=None) -> tuple[str, str]:
     """Create or refresh the year's Sheet. Returns (url, inbox block of new "yes" DOIs)."""
     sh = open_or_create(gc, year, folder_id=folder_id)
-    tabs, inbox = sheet.build(year, previous=read_tab(sh, "Validate"), top_n=top_n, contacts=contacts,
-                              previous_papers=read_tab(sh, "Facility papers"))
+    tabs, inbox = sheet.build(year, previous=_read_tab(sh, "Validate"), top_n=top_n, contacts=contacts,
+                              previous_papers=_read_tab(sh, "Facility papers"))
     for name, columns in sheet.TABS.items():
-        write_tab(sh, name, columns, tabs[name])
+        _write_tab(sh, name, columns, tabs[name])
     for ws in list(sh.worksheets()):  # the empty first tab of a new Sheet ("Sheet1", "Taulukko1", ...)
         if ws.title not in sheet.TABS and not ws.get_all_values():
             sh.del_worksheet(ws)
     return sh.url, inbox
 
 
-def validated_dois(gc, years):
+def validated_dois(gc, years: Iterable[int]) -> list[dict]:
     """[{doi, year}] marked "yes" in the Sheets of `years`: extra positives for `embed`
     before they reach the repository."""
     out = []
@@ -116,7 +124,7 @@ def validated_dois(gc, years):
         sh = open_or_create(gc, y, create=False)
         if sh is None:
             continue
-        for d, (v, _) in sheet._verdicts(read_tab(sh, "Validate")).items():
+        for d, (v, _) in sheet._verdicts(_read_tab(sh, "Validate")).items():
             if v == "yes":
                 out.append({"doi": d, "year": int(y)})
     return out

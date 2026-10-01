@@ -6,7 +6,7 @@ _SPACE = re.compile(r"\s+")
 _SENTENCE = re.compile(r"(?<=[.!?])\s+(?=[A-Z0-9(])")
 
 
-def normalise(text):
+def normalise(text: str) -> str:
     """Undo PDF line-break hyphenation ("Cell Imag- ing") and collapse whitespace.
 
     Joining every "x- y" also joins genuine compounds split at a line end
@@ -30,7 +30,7 @@ def pdf_text(data):
         return None
 
 
-def sentences(text):
+def sentences(text: str) -> list[str]:
     return _SENTENCE.split(text)
 
 
@@ -63,7 +63,8 @@ def evidence(text, patterns, max_sentences=14, max_chars=3500):
     return picked
 
 
-def matches_paper(text, doi=None, title=None, min_title_share=0.5):
+def matches_paper(text: str, doi: str | None = None, title: str | None = None,
+                  min_title_share: float = 0.5) -> bool:
     """False when the text is evidently another paper's: it contains neither the DOI
     nor at least half of the title's words. Unknown when there is no title (True).
 
@@ -79,3 +80,36 @@ def matches_paper(text, doi=None, title=None, min_title_share=0.5):
         return True
     body = set(re.findall(r"[a-z0-9]{4,}", text[:30000].lower()))
     return sum(w in body for w in words) / len(words) >= min_title_share
+
+
+# ------------------------------------------------------------- article check
+ACCESS_MARKERS = (
+    "institutional access",
+    "sign in to access",
+    "purchase this article",
+    "subscribe to access",
+    "access through your institution",
+    "you do not have access",
+    "enable javascript and cookies",
+)
+
+
+def validate_article_text(text: str | None, *, min_chars: int = 1500) -> tuple[bool, str | None, str | None]:
+    """Return (accepted, quality, reason) for candidate article text.
+
+    This is intentionally conservative. Short or obvious access/navigation pages
+    are not promoted to completed full text.
+    """
+    if not text:
+        return False, None, "empty"
+    compact = re.sub(r"\s+", " ", text).strip()
+    lower = compact.lower()
+    if any(marker in lower for marker in ACCESS_MARKERS) and len(compact) < 10000:
+        return False, None, "access_page"
+    if len(compact) < min_chars:
+        return False, None, "too_short"
+    words = re.findall(r"[A-Za-z]{3,}", compact)
+    if len(words) < 200:
+        return False, None, "low_text_density"
+    quality = "high" if len(compact) >= 10000 else "medium"
+    return True, quality, None

@@ -105,6 +105,5 @@ A repository platform other than DSpace 7 or Pure OAI-PMH needs one small adapte
   the pattern.
 * Repositories fill up with a delay: rebuild a year the following spring.
 
-[`docs/protocol.md`](docs/protocol.md) is the protocol (decisions, the loop, what was measured, traps); [`AGENTS.md`](AGENTS.md) the rules for contributing.
-Optional experiment tooling (plan runner, LLM second opinion) is in
-[`docs/experiments.md`](docs/experiments.md).
+[`docs/protocol.md`](docs/protocol.md) is the protocol (decisions, the loop, what was measured,
+traps); [`AGENTS.md`](AGENTS.md) holds the rules for contributing.

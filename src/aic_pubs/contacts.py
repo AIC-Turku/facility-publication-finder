@@ -5,6 +5,7 @@ The result goes into the Google Sheet in the facility's Drive, never into the re
 Heuristic: e-mail addresses printed in the paper, ranked by closeness to a correspondence
 marker, matched to the author list for the name. Staff can correct the Sheet.
 """
+from collections.abc import Iterable
 import re
 import unicodedata
 
@@ -55,7 +56,7 @@ def _name_for(email, authors):
     return best[0], best[2]
 
 
-def corresponding_contacts(text, authors=(), limit=3):
+def corresponding_contacts(text: str, authors: Iterable[str] = (), limit: int = 3) -> list[dict[str, str]]:
     """[{"name", "email"}] for the likely corresponding author(s), best first.
 
     authors: author names ("Firstname Lastname" or "Lastname, Firstname") to name the
@@ -100,10 +101,7 @@ def corresponding_contacts(text, authors=(), limit=3):
     return out
 
 
-def crossref_authors(doi):
-    """["Firstname Lastname", ...] from Crossref, or [] (network)."""
-    import urllib.parse
-    from .http import get_json
-    m = (get_json(f"https://api.crossref.org/works/{urllib.parse.quote(doi, safe='/')}") or {}).get("message") or {}
-    return [" ".join(x for x in (a.get("given"), a.get("family")) if x) for a in m.get("author") or []
+def author_names(work: dict) -> list[str]:
+    """["Firstname Lastname", ...] of a Crossref record."""
+    return [" ".join(x for x in (a.get("given"), a.get("family")) if x) for a in work.get("author") or []
             if a.get("family")]

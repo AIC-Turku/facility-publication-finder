@@ -38,8 +38,8 @@ anything private.
 * **Transferable**: everything facility-specific is YAML in `facilities/<facility>/` (search words,
   instruments, techniques, institutional repositories, e-mail domains, postal patterns). Another
   facility copies `facilities/template/` and sets `PUBS_FACILITY`.
-* **Rules are the core**; the embedding check list ranks what the rules rank low; an LLM is an
-  optional second opinion. Model output is never ground truth: staff verdicts are.
+* **Rules are the core**; the embedding check list ranks what the rules rank low. Model output is
+  never ground truth: staff verdicts are.
 * **The confirmed papers are the known set**: the benchmark for each year and the seed set of the
   embedding ranking. They grow with every validation round.
 * **Private inputs never change published or validated outputs**; they only add a private score
@@ -56,11 +56,11 @@ anything private.
 |---|---|---|---|
 | 1. build the corpus | notebook 1 (once per year, slow, resumable) | `aic-pubs sweep --year Y`, `aic-pubs embed --years ...` | candidates, full text, screening, embeddings (Drive) |
 | 2. search | notebook 2 | `aic-pubs rescreen --year Y`, `aic-pubs validate --years Y` | the year screened with the current rules |
-| 3. rank + Sheet | notebook 2 | `embeddings.run`, `gsheets.sync` | the year's Google Sheet: Validate, Facility papers, Search misses |
+| 3. rank + Sheet | notebook 2 | `workflow.prepare_sheet` | the year's Google Sheet: Validate, Facility papers, Search misses |
 | 4. validate | the Sheet | staff fill `verdict`: yes (filed), likely (not filed; ask the authors, then yes), no | verdicts |
-| 5. collect | notebook 2 | `gsheets.sync` again | refreshed Sheet + the new "yes" DOIs |
+| 5. collect | notebook 2 | `workflow.collect` | refreshed Sheet + the new "yes" DOIs |
 | 6. file | GitHub | paste into `facilities/<facility>/inbox.txt`, commit | the Action runs `aic-pubs add-papers` → `papers/<year>.yaml` |
-| 7. learn | notebook 2 | re-rank the other years | better check lists everywhere |
+| 7. learn | notebook 2 | `workflow.learn`: re-rank the other years | better check lists everywhere |
 | 8. improve the rules | developer | "no" verdicts → a test + a pattern fix in `facility.yaml`; misses → why | next year's run |
 
 Mail merge: the *Facility papers* tab lists every confirmed and validated paper of the year with
@@ -100,8 +100,8 @@ corresponding author, e-mail, and whether the facility and the grant are acknowl
    DOI wins; it also moves an already-filed paper), merges duplicates, sorts, empties the inbox;
    unresolved lines stay with a note.
 
-Every sheet carries `rules_version` (config sha256 + code commit). `validate` and `evaluate`
-print 95 % Wilson intervals.
+Every sheet carries `rules_version` (config sha256 + code commit). `validate` prints recall with
+a 95 % Wilson interval.
 
 ## 5. Adapting to another facility
 
@@ -118,8 +118,8 @@ print 95 % Wilson intervals.
    They are the benchmark and the seed set of the check list.
 5. Set `FACILITY`, `REPO` and `DATA` at the top of both notebooks and run them.
 6. Still AIC-specific in the code (optional parts): the OpenIRIS bookings import (resource map in
-   `facility.yaml` `openiris_resources`), the facility-website importer (`import-website`, a
-   WordPress page), the experimental ORCID tooling (`identity.py`).
+   `facility.yaml` `openiris_resources`) and the facility-website importer (`import-website`, a
+   WordPress page).
 7. A repository platform other than DSpace 7 or Pure OAI-PMH needs one adapter function in
    `sources.py` and a branch in `candidates.institutional_universe`.
 
@@ -136,7 +136,8 @@ print 95 % Wilson intervals.
 | Europe PMC acknowledgement search alone | 12 of 40 | third net, not a backbone |
 | Europe PMC methods search for host-institute names | 39 extra papers, none real (software citations) | not added |
 | embedding check list, held out | 2024: top 200 held 19 of 20 known papers with text (TF-IDF 20, term count 17), all 4 rule misses in the top 125; 2025: top 200 held 37 of 38, the 2 rule misses at 110 and 146 | **in the protocol** |
-| LLM second opinion (3B on CPU) | works; ~2.5 min per paper; says "yes" where rules say "likely" | optional, not benchmarked |
+| LLM second opinion (3B on CPU) | works; ~2.5 min per paper; says "yes" where rules say "likely" | removed (not benchmarked; heavy) |
+| plan runner, extra discovery channels (Crossref awards, DataCite, OpenAlex), ORCID user recall | no extra facility papers measured (OpenAlex untestable without a key) | removed |
 
 Rules on 2025: recall against the website list 36/40 = 0.90 (95 % CI 0.77–0.96); precision
 among flagged papers 0.98 (0.90–1.00) counting "likely" as use, 0.67 (0.53–0.78) counting only

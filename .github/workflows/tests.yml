@@ -19,5 +19,7 @@ jobs:
           cache: pip
       - name: Install
         run: pip install -e ".[test]"
+      - name: Lint
+        run: ruff check src tests
       - name: Test
         run: pytest -q

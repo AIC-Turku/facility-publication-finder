@@ -30,7 +30,7 @@ def test_lastname_firstname_lists_and_one_name_per_address():
 
 
 def _setup_year(monkeypatch, tmp_path):
-    monkeypatch.setattr(sheet, "DATA", tmp_path)
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     rows = [
         {"doi": "10.1000/ack", "title": "Acknowledges", "priority": "report", "category": "A", "has_text": True,
          "acknowledgement": ["We thank the facility"], "score_reasons": ["+10 acknowledgement"]},
@@ -41,7 +41,7 @@ def _setup_year(monkeypatch, tmp_path):
     monkeypatch.setattr(sheet, "load_screened", lambda year: rows)
     from aic_pubs import validation
     monkeypatch.setattr(validation, "load_screened", lambda year: rows)
-    monkeypatch.setattr(validation, "DATA", tmp_path)
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     monkeypatch.setattr(sheet, "cached_text", lambda year, doi: ("text with grant 359073", "x"))
     (tmp_path / "2024").mkdir()
     (tmp_path / "2024" / "embedding_ranked.csv").write_text(
@@ -143,7 +143,7 @@ class FakeClient:
 def test_google_sheet_sync_creates_tabs_with_a_dropdown_and_keeps_verdicts(monkeypatch, tmp_path):
     from aic_pubs import gsheets
     fake_contacts = _setup_year(monkeypatch, tmp_path)
-    monkeypatch.setattr(gsheets, "DATA", tmp_path)
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     gc = FakeClient()
     url, inbox = gsheets.sync(gc, 2024, contacts=fake_contacts)
     assert set(gc.sh.tabs) == set(sheet.TABS) and inbox == ""
@@ -176,7 +176,7 @@ def test_notes_typed_in_facility_papers_survive_a_refresh(monkeypatch, tmp_path)
 def test_a_recorded_sheet_that_cannot_be_opened_is_never_replaced(monkeypatch, tmp_path):
     import pytest
     from aic_pubs import gsheets
-    monkeypatch.setattr(gsheets, "DATA", tmp_path)
+    monkeypatch.setenv("PUBS_DATA", str(tmp_path))
     (tmp_path / "2024").mkdir()
     (tmp_path / "2024" / "sheet.json").write_text(json.dumps({"id": "gone", "url": "https://x"}))
 

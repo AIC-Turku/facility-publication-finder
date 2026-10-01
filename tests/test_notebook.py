@@ -17,8 +17,15 @@ def _source(path):
 def test_the_two_notebooks_run_the_canonical_steps():
     one, two = (_source(p) for p in NOTEBOOKS)
     assert "aic-pubs sweep --year {y}" in one and "aic-pubs embed --years {SWEPT_ARG}" in one
-    assert "aic-pubs rescreen --year {YEAR}" in two and "gsheets.sync(gc, YEAR" in two
-    assert "extra_known=extra" in two and "inbox.txt" in two
+    assert "aic-pubs rescreen --year {YEAR}" in two and "workflow.prepare_sheet(gc, YEAR" in two
+    assert "workflow.collect(gc, YEAR" in two and "workflow.learn(gc, YEAR" in two and "inbox.txt" in two
+
+
+def test_notebooks_hold_no_algorithms():
+    """Cells set parameters and call package functions or commands: no loops over data, no globbing."""
+    for p in NOTEBOOKS:
+        code = "\n".join("".join(c["source"]) for c in _nb(p)["cells"] if c["cell_type"] == "code")
+        assert "glob" not in code and "embeddings.run" not in code and "gsheets." not in code
 
 
 def test_data_lives_in_drive_and_code_on_the_temporary_disk():
@@ -63,8 +70,8 @@ def test_variables_are_defined_before_use():
     for p in NOTEBOOKS:
         code = ["".join(c["source"]) for c in _nb(p)["cells"] if c["cell_type"] == "code"]
         src = "\n".join(re.sub(r"#.*", "", line) for cell in code for line in cell.splitlines())
-        for name in ("YEARS_ARG", "SWEPT_ARG", "swept", "gc"):
+        for name in {NOTEBOOKS[0]: ("SWEPT_ARG",), NOTEBOOKS[1]: ("gc", "workflow")}[p]:
             uses = [m.start() for m in re.finditer(rf"\b{name}\b", src)]
-            defs = [m.start() for m in re.finditer(rf"\b{name}\s*=", src)]
+            defs = [m.start() for m in re.finditer(rf"\b{name}\s*=|import [\w, ]*\b{name}\b", src)]
             if uses:
                 assert defs and min(defs) <= min(uses), (p, name)

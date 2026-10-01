@@ -17,9 +17,9 @@ and the traps.
 * **Avoid hidden state and global configuration.** Pass the facility, data folder and config
   explicitly; environment variables (`PUBS_FACILITY`, `PUBS_DATA`, `PUBS_PRIVATE`) are read in
   one place, at the edge, never deep inside logic.
-* **Avoid heavyweight dependencies unless they provide demonstrated value.** Core: PyYAML,
-  PyMuPDF, openpyxl. The embedding extra (fastembed, scikit-learn) earned its place on held-out
-  years; the LLM extra stays optional.
+* **Avoid heavyweight dependencies unless they provide demonstrated value.** Core: PyYAML and
+  PyMuPDF (deposited PDFs). Extras: `embed` (fastembed, scikit-learn; earned its place on held-out
+  years) and `openiris` (openpyxl, for the private bookings import).
 * **Notebooks consume package APIs; they are never homes for production algorithms.** A notebook
   cell sets parameters, calls a package function or CLI command, and shows the result.
 * **Make the smallest coherent change needed for the task.** No drive-by refactors; one concern
@@ -48,8 +48,14 @@ and the traps.
 | check list | `embeddings.py` |
 | validation workbook | `sheet.py` (tables), `contacts.py`, `gsheets.py` (Google Sheets), `validation.py` |
 | reports and labels | `report.py`, `labelling.py`, `provenance.py` |
-| optional | `bookings.py` (private OpenIRIS import), `llm.py`, `coverage.py`, `pipeline/` (plan runner) |
+| notebook steps | `workflow.py` (what notebook 2 calls) |
+| optional | `bookings.py` (private OpenIRIS import), `coverage.py` (rules vs the instrument database) |
 | entry points | `cli.py` (`aic-pubs`), `notebooks/1_build_corpus.ipynb`, `notebooks/2_find_and_validate.ipynb` |
+
+Settings come from `config.py` only: `facility_dir()`, `data_root()`, `private_root()` read
+`PUBS_FACILITY`, `PUBS_DATA`, `PUBS_PRIVATE` at call time; `load()` validates `facility.yaml`.
+The one deliberate piece of process state is the HTTP circuit breaker in `http.py` (a host that
+said it is out of budget is not asked again during the run).
 
 ## Working
 

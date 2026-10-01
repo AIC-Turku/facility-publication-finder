@@ -52,11 +52,9 @@ def test_process_inbox_empties_the_inbox_but_keeps_its_instructions(empty_confir
     assert "10.1000/b" not in text.replace(papers.INBOX_HEADER, "") and "10.1000/unknown" in text
 
 
-def test_known_dois_merge_confirmed_papers_and_a_legacy_website_list(empty_confirmed_papers, tmp_path):
-    papers.write_papers([{"doi": "10.1000/a", "year": 2024}])
-    (tmp_path / "2024").mkdir()
-    (tmp_path / "2024" / "facility_list.json").write_text('["10.1000/old"]')
-    assert papers.known_dois(2024, data=tmp_path) == {"10.1000/a", "10.1000/old"}
+def test_known_dois_are_the_confirmed_papers_of_the_year(empty_confirmed_papers):
+    papers.write_papers([{"doi": "10.1000/a", "year": 2024}, {"doi": "10.1000/b", "year": 2023}])
+    assert papers.known_dois(2024) == {"10.1000/a"}
 
 
 def test_the_aic_papers_files_are_valid_and_unique():
@@ -113,13 +111,13 @@ def test_inboxes_never_hold_e_mail_addresses():
         assert not re.search(r"[\w.+-]+@[\w-]+\.[\w.]+", inbox.read_text()), inbox
 
 
-def test_export_is_from_head_allow_listed_and_scanned(tmp_path):
-    import subprocess
-    from aic_pubs import export
-    files = [p for p, _ in export.public_files()]
-    assert "AGENTS.md" in files and not any(f.startswith(("data/", "notes/", "private/")) for f in files)
-    assert not any(f.startswith("facilities/") and not export.FACILITY_FILE.match(f) for f in files)
-    assert ".github/workflows/live-probe.yml" not in files
-    real = "someone" + "@" + "uni.fi"           # built at runtime: the export scan reads this file too
-    (tmp_path / "x.md").write_text(f"write to {real} or a.b@uni.example.org")
-    assert export.scan(tmp_path) == [("x.md", real)]
+def test_facility_yaml_errors_name_the_problem(tmp_path):
+    import pytest
+    good = (FACILITIES / "template" / "facility.yaml").read_text()
+    for broken, message in ((good.replace("institutional_fields: all", "institutional_fields: scince"), "institutional_fields"),
+                            (good.replace("adapter: dspace7", "adapter: eprints"), "adapter"),
+                            (good.replace("local_email_domains:", "local_email_domainz:"), "missing local_email_domains")):
+        path = tmp_path / "facility.yaml"
+        path.write_text(broken)
+        with pytest.raises(ValueError, match=message):
+            load(path)

@@ -5,6 +5,7 @@
 (facilities/<facility>/papers/<year>.yaml, source "website"), with metadata from Crossref
 and Europe PMC. Only for facilities that keep such a page; the AIC page is WordPress.
 """
+from collections.abc import Callable, Iterable
 import re
 import urllib.parse
 
@@ -13,7 +14,7 @@ from .config import load
 from .http import get_json
 
 
-def clean_title(title):
+def _clean_title(title):
     """Crossref titles carry markup (<i>, <sub>, entities): plain text, single spaces."""
     import html
     return " ".join(html.unescape(re.sub(r"<[^>]+>", "", title or "")).split())
@@ -24,12 +25,12 @@ def _date(parts):
     return "-".join(f"{x:02d}" if i else str(x) for i, x in enumerate(p) if x) if p and p[0] else ""
 
 
-def crossref_record(doi):
-    m = (get_json(f"https://api.crossref.org/works/{urllib.parse.quote(doi, safe='/')}") or {}).get("message")
+def bibliographic(m: dict) -> dict:
+    """The public metadata of a Crossref record ({} for an empty record)."""
     if not m:
         return {}
     return {
-        "title": clean_title((m.get("title") or [""])[0]),
+        "title": _clean_title((m.get("title") or [""])[0]),
         "journal": (m.get("container-title") or [""])[0],
         "publisher": m.get("publisher", ""),
         "type": m.get("type", ""),
@@ -41,7 +42,7 @@ def crossref_record(doi):
     }
 
 
-def europepmc_records(dois, batch=20):
+def europepmc_records(dois: Iterable[str], batch: int = 20) -> dict[str, dict]:
     """{doi: {pmid, pmcid, europepmc_id, europepmc_open_full_text}} for the DOIs Europe PMC knows."""
     out = {}
     dois = list(dois)
@@ -59,7 +60,7 @@ def europepmc_records(dois, batch=20):
     return out
 
 
-def website_all_years(first=2009, last=None):
+def _website_all_years(first=2009, last=None):
     """{year: [doi, ...]} from the facility website, every year that has papers."""
     import datetime
     f = load().raw["facility"]
@@ -72,10 +73,11 @@ def website_all_years(first=2009, last=None):
     return years
 
 
-def import_website(first=2009, last=None, progress=print):
+def import_website(first: int = 2009, last: int | None = None,
+                   progress: Callable[[str], None] = print) -> dict:
     """Add the website lists of every year to the confirmed papers (source "website")."""
     from .papers import add_papers
-    years = website_all_years(first, last)
+    years = _website_all_years(first, last)
     if not years:
         progress("no papers on the website (facility.yaml website_publications)")
         return {}
