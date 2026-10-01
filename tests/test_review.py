@@ -18,6 +18,13 @@ def test_pending_keeps_the_order_and_skips_decided_rows():
     assert [r["doi"] for r in review.pending(rows)] == ["10.1000/b", "10.1000/c"]
 
 
+def test_revisit_brings_back_chosen_verdicts_and_refuses_unknown_ones():
+    rows = [{"doi": "10.1000/a", "verdict": "likely"}, {"doi": "10.1000/b", "verdict": "no"}, {"doi": "10.1000/c"}]
+    assert [r["doi"] for r in review.pending(rows, ["Likely"])] == ["10.1000/a", "10.1000/c"]
+    with pytest.raises(ValueError, match="revisit: maybe"):
+        review.pending(rows, ["maybe"])
+
+
 def test_every_reason_is_offered():
     assert set(review.REASON_OPTIONS) == {""} | {r for rs in sheet.REASONS.values() for r in rs}
 

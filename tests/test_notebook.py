@@ -18,7 +18,7 @@ def test_the_two_notebooks_run_the_canonical_steps():
     one, two = (_source(p) for p in NOTEBOOKS)
     assert "facility-pubs sweep --year {y}" in one and "facility-pubs embed --years {SWEPT_ARG}" in one
     assert "facility-pubs rescreen --year {YEAR}" in two and "workflow.prepare(YEAR" in two
-    assert "review.start(YEAR, at_once=AT_ONCE)" in two and "workflow.collect(YEAR" in two
+    assert "review.start(YEAR, at_once=AT_ONCE, revisit=REVISIT)" in two and "workflow.collect(YEAR" in two
     assert "workflow.learn(YEAR" in two and "workflow.issue_link(REPO, FACILITY" in two
     assert "workflow.feedback()" in two
     assert "YEARS = [2025, 2024, 2023, 2022]" in one and "TOP_N = 200" in two

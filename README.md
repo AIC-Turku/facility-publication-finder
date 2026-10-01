@@ -12,6 +12,8 @@ in a notebook, and the confirmed DOIs are filed in this repository through a pul
 | [1 · Build the corpus](notebooks/1_build_corpus.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AIC-Turku/facility-publication-finder/blob/main/notebooks/1_build_corpus.ipynb) | fetch every candidate paper of the chosen years, its full text, screen it, embed it (all in your Google Drive) | once per year; slow, resumable |
 | [2 · Find and validate](notebooks/2_find_and_validate.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AIC-Turku/facility-publication-finder/blob/main/notebooks/2_find_and_validate.ipynb) | search one year with the current rules, rank it, review the papers one by one, write the corresponding authors to a CSV, file the confirmed DOIs, learn | as often as needed; minutes plus the review |
 
+**New here? Follow the [step-by-step protocol](docs/user-guide.md).**
+
 ## First time
 
 * `DATA` (top of each notebook) is a folder in your Google Drive; share it with the colleagues
@@ -113,5 +115,5 @@ A repository platform other than DSpace 7 or Pure OAI-PMH needs one small adapte
   the pattern.
 * Repositories fill up with a delay: rebuild a year the following spring.
 
-[`docs/protocol.md`](docs/protocol.md) is the protocol (decisions, the loop, what was measured,
+[`docs/user-guide.md`](docs/user-guide.md) is the **step-by-step protocol for staff**; [`docs/protocol.md`](docs/protocol.md) is the method (decisions, the loop, what was measured,
 traps); [`AGENTS.md`](AGENTS.md) holds the rules for contributing.

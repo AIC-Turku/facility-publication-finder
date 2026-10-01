@@ -6,7 +6,7 @@ cell again continues with the papers that have no verdict yet.
     from facility_pubs import review
     review.start(2025, at_once=1)          # Colab / Jupyter (needs ipywidgets; Colab has it)
 """
-from collections.abc import Callable
+from collections.abc import Callable, Iterable
 import html
 
 from . import sheet
@@ -16,9 +16,14 @@ from . import sheet
 REASON_OPTIONS = [""] + list(dict.fromkeys(r for rs in sheet.REASONS.values() for r in rs))
 
 
-def pending(rows: list[dict]) -> list[dict]:
-    """The rows still to decide, in the table's order (most likely first)."""
-    return [r for r in rows if r.get("doi") and not str(r.get("verdict") or "").strip()]
+def pending(rows: list[dict], revisit: Iterable[str] = ()) -> list[dict]:
+    """The rows still to decide, in the table's order (most likely first), plus those whose
+    verdict is in `revisit` (e.g. ["likely"]: decide again once the authors have answered)."""
+    again = {v.strip().lower() for v in revisit}
+    unknown = again - set(sheet.VERDICTS)
+    if unknown:
+        raise ValueError(f"revisit: {', '.join(sorted(unknown))} is not one of {', '.join(sheet.VERDICTS)}")
+    return [r for r in rows if r.get("doi") and str(r.get("verdict") or "").strip().lower() in again | {""}]
 
 
 def links(doi: str, open_copy: str | None = None, pmcid: str | None = None,
@@ -54,6 +59,8 @@ def _card_html(row: dict, found: list[tuple[str, str]], n: int, total: int) -> s
     a = " &nbsp;·&nbsp; ".join(f'<a href="{e(u)}" target="_blank" rel="noopener">{e(label)}</a>'
                                for label, u in found)
     rank = f" · embedding rank {e(row.get('embedding_rank'))}" if row.get("embedding_rank") else ""
+    if row.get("verdict"):
+        rank += f" · <b>now: {e(row['verdict'])}</b> {e(row.get('reason'))} {e(row.get('note'))}"
     return (f"<div style='margin-top:8px'><b>{n} of {total} to review</b> · {e(row.get('why'))}{rank}<br>"
             f"<span style='font-size:1.1em'><b>{e(row.get('title'))}</b></span><br>"
             f"<i>{e(row.get('journal'))}</i> · {e(row.get('doi'))} · acknowledges the facility: "
@@ -61,9 +68,10 @@ def _card_html(row: dict, found: list[tuple[str, str]], n: int, total: int) -> s
             f"<small>{e(row.get('evidence'))[:600]}</small></div>")
 
 
-def start(year: int, at_once: int = 1,
+def start(year: int, at_once: int = 1, revisit: Iterable[str] = (),
           find_links: Callable[[int, str], list[tuple[str, str]]] = paper_links):
-    """The review widget for `year` (display it, or leave it as a cell's last line)."""
+    """The review widget for `year` (display it, or leave it as a cell's last line).
+    revisit: verdicts to decide again (e.g. ["likely"]); their current verdict is shown."""
     try:
         import ipywidgets as w
     except ImportError:
@@ -74,7 +82,7 @@ def start(year: int, at_once: int = 1,
     rows = sheet.read_validate(year)
     if not rows:
         raise SystemExit(f"no {sheet.table_path(year, 'validate')}: run the 'Rank' step for {year} first")
-    queue = pending(rows)
+    queue = pending(rows, revisit)
     total = len(queue)
     box, status = w.VBox(), w.HTML()
     state = {"done": 0}
